@@ -1,0 +1,59 @@
+\section{Introduction}
+\label{intro:sec}
+
+Software developers have to spend a
+significant portion~of their efforts in comprehending the code. An
+important aspect of program understanding
+%and comprehension
+is the names of the identifiers~used in the source
+code~\cite{sutton-fse15}. Meaningful identifiers help developers
+tremendously in quickly grasping the essence of the~code. Thus,
+naming conventions are strongly emphasized on prescribing how to
+choose meaningful variable names in coding
+standards~\cite{barr-codeconvention-fse14}.
+These principles also apply to Web development.
+
+%In modern Web development, program understanding plays an equally
+%important role. 
+Web technologies and programming languages require the exposure of
+source code to Web browsers in the client side to be executed
+there. To avoid such exposure, the source code such as JavaScript (JS)
+files are often obfuscated in which the variable names are minified,
+\ie the variable names are replaced with short, opaque, and
+meaningless names. The intention has two folds. First, it makes the JS
+files smaller and thus is quickly loaded for better performance.
+Second, minification diminishes code readability to hide business
+logics from the readers, while maintaining the program semantics.
+%
+%\textbf{would be better to focus on the reason of making files small. In Web,JS code is transfer over the Internet from server to client to be executed there. Due to the limit in the bandwidth or the memory capacity of the 
+%(mobile) device, JS code is normally minified to reduce its size. When being minified, the names are replaced ...}
+%
+
+Due to those reasons, there is a natural need to automatically recover
+the minified code with meaningful variable names. When the original
+code is not available, with such recovery, the minified JS code will
+be made accessible for code~compre-\\hension as well as other maintenance
+activities such as~code review, reuse, analysis, and
+enhancement. Recognizing that need, researchers have been introducing
+the automatically recovering tools for variable names in JS code.
+%
+JSNice~\cite{JSNice2015} is an automatic variable name recovery
+approach that represents the program properties and relations among
+program entities in a JS code as dependence graphs.
+%
+It leverages advanced machine learning (ML) to recover missing
+variable names.
+%Final
+%It leverages an advanced machine learning (ML) model named Conditional
+%Random Fields (CRF) to recover the variable names, which are modeled
+%as the missing information in a CRF.
+%
+%Final
+%With the same vein of
+Using also ML, JSNaughty~\cite{JSNaughty2017}
+formulates the variable name recovery problem for JS code as a
+%phrase-based
+statistical machine translation from minified code to the
+recovered code. Despite of their successes, both approaches still
+suffer low accuracy and scalability issues with the use of
+computationally expensive ML algorithms.
