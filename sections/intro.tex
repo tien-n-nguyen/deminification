@@ -23,29 +23,45 @@ code~\cite{barr-codeconvention-fse14}.
 
 In modern software development, some technologies require the exposure
 of source code, e.g., in Web programming languages, the JavaScript
-(JS) client code need to executed in the client side.
+(JS) client code need to executed in the client side. To avoid the
+exposure, the source code is obfuscated and/or minified such that the
+variable names are replaced with short, opaque, and meaningless names.
+The minification of the variable names hides the business logics from
+the readers while maintaining the essence of the code. For Web
+programming, the JS files are also more quickly loaded from the
+servers for better performance.
 
-Web technologies and programming languages require the exposure of
-source code to Web browsers in the client side to be executed
-there. To avoid such exposure, the source code such as JavaScript (JS)
-files are often obfuscated in which the variable names are minified,
-\ie the variable names are replaced with short, opaque, and
-meaningless names. The intention has two folds. First, it makes the JS
-files smaller and thus is quickly loaded for better performance.
-Second, minification diminishes code readability to hide business
-logics from the readers, while maintaining the program semantics.
+
+%Web technologies and programming languages require the exposure of
+%source code to Web browsers in the client side to be executed
+%there. To avoid such exposure, the source code such as JavaScript (JS)
+%files are often obfuscated in which the variable names are minified,
+%\ie the variable names are replaced with short, opaque, and
+%meaningless names. The intention has two folds. First, it makes the JS
+%files smaller and thus is quickly loaded for better performance.
+%Second, minification diminishes code readability to hide business
+%logics from the readers, while maintaining the program semantics.
 %
 %\textbf{would be better to focus on the reason of making files small. In Web,JS code is transfer over the Internet from server to client to be executed there. Due to the limit in the bandwidth or the memory capacity of the 
 %(mobile) device, JS code is normally minified to reduce its size. When being minified, the names are replaced ...}
 %
 
-Due to those reasons, there is a natural need to automatically recover
-the minified code with meaningful variable names. When the original
-code is not available, with such recovery, the minified JS code will
-be made accessible for code~compre-\\hension as well as other maintenance
-activities such as~code review, reuse, analysis, and
-enhancement. Recognizing that need, researchers have been introducing
-the automatically recovering tools for variable names in JS code.
+For better code readability and understandability, especially when the
+original source code is unavailable, there is a natural need to
+automatically recover the minified code with meaningful variable
+names. With the recovered names and types, the source code will be
+more comprehensible and accessible for maintenance activities such
+as code review, analysis, enhancement, and reuse.
+
+%Due to those reasons, there is a natural need to automatically recover
+%the minified code with meaningful variable names. When the original
+%code is not available, with such recovery, the minified JS code will
+%be made accessible for code~compre-\\hension as well as other maintenance
+%activities such as~code review, reuse, analysis, and
+%enhancement.
+
+Recognizing that need, researchers have been introducing the
+automatically recovering tools for variable names in JS code.
 %
 JSNice~\cite{JSNice2015} is an automatic variable name recovery
 approach that represents the program properties and relations among
