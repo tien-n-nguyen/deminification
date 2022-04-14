@@ -68,7 +68,7 @@ Several automated approaches have been proposed to automatically
 recover the names of the variables in the minified source code.  The
 approaches can be broadly classified into two directions: {\em
 information retrieval} and {\em machine learning}.
-JSNeat~\cite{icse19} follows an information retrieval approach to
+JSNeat~\cite{icse19} follows an information retrieval (IR) approach to
 recover names by searching for them in a large corpus of open-source
 JS code. JSNeat integrates three types of contexts to match a variable
 in given minified code against the corpus including 1) the context of
@@ -87,24 +87,22 @@ program dependency graph including variables and surrounding program
 entities. It formulates the problem of variable name recovery as the
 structured prediction via conditional random fields
 (CRFs)~\cite{JSNice2015}. Unfortunately, it still has low accuracy
-with its probabilistic, graphical model approach.
+with its probabilistic model (PM) approach.
 %
 In contrast, JSNaughty~\cite{JSNaughty2017} formulates the variable
 name recovery problem for source code as a {\em statistical machine
-translation} from minified code to the recovered
+translation} (SMT) from minified code to the recovered
 code. JSNaughty~\cite{JSNaughty2017}'s phrase-based translation
-approach cannot capture well the structure and relation among the
-variables that need to be recovered.
+approach cannot capture well the relations among the variables that
+need to be recovered.
 
+%We use multi-tasking framework to do the name prediction and the type
+%predicting at the same time.
 
-%Final
-%It leverages an advanced machine learning (ML) model named Conditional
-%Random Fields (CRF) to recover the variable names, which are modeled
-%as the missing information in a CRF.
-%
-%Final
-%With the same vein of
+%We consider the code structure among the code 
 
+%We consider the context (different types of relation) between
+%variables that need to be recovered => EGCN
 
-
-%with the use of computationally expensive ML algorithms.
+In this work, we present {\tool}, a deep learning (DL)-based variable
+name recovery approach. 
