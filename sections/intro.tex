@@ -83,11 +83,11 @@ JSNice~\cite{JSNice2015} is an automatic variable name recovery
 approach that represents the program properties and relations among
 program entities in a JS code as dependence
 graphs. JSNice~\cite{JSNice2015} uses a probabilistic model with the
-program dependency graph of variables and surrounding program
-entities. It infers the variable names as a problem of structured
-prediction with conditional random fields (CRFs)~\cite{JSNice2015}.
-JSNice~\cite{JSNice2015} still has low accuracy with its
-probabilistic, graphical model approach.
+program dependency graph including variables and surrounding program
+entities. It formulates the problem of variable name recovery as the
+structured prediction via conditional random fields
+(CRFs)~\cite{JSNice2015}. Unfortunately, it still has low accuracy
+with its probabilistic, graphical model approach.
 %
 In contrast, JSNaughty~\cite{JSNaughty2017} formulates the variable
 name recovery problem for source code as a {\em statistical machine
