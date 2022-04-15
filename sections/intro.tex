@@ -79,15 +79,15 @@ Despite its successes, due to the inherent limitation of the
 information retrieval direction, JSNeat {\em cannot generate a new
 variable name} that was not encountered in the corpus.
 
-JSNice~\cite{JSNice2015} is an automatic variable name recovery
-approach that represents the program properties and relations among
-program entities in a JS code as dependence
-graphs. JSNice~\cite{JSNice2015} uses a probabilistic model with the
-program dependency graph including variables and surrounding program
-entities. It formulates the problem of variable name recovery as the
-structured prediction via conditional random fields
-(CRFs)~\cite{JSNice2015}. Unfortunately, it still has low accuracy
-with its probabilistic model (PM) approach.
+JSNice~\cite{JSNice2015}, following a probabilistic model (PM)
+approach, is an automatic variable name recovery approach that
+represents the program properties and relations among program entities
+in a JS code as dependence graphs. JSNice~\cite{JSNice2015} uses a
+probabilistic model with the program dependency graph including
+variables and surrounding program entities. It formulates the problem
+of variable name recovery as the structured prediction via conditional
+random fields (CRFs)~\cite{JSNice2015}. Unfortunately, it still has
+low accuracy.
 %
 In contrast, JSNaughty~\cite{JSNaughty2017} formulates the variable
 name recovery problem for source code as a {\em statistical machine
@@ -105,4 +105,19 @@ need to be recovered.
 %variables that need to be recovered => EGCN
 
 In this work, we present {\tool}, a deep learning (DL)-based variable
-name recovery approach. 
+name recovery approach. We formulate the name recovery problem as the
+dual-task learning between the variable name prediction model and the
+type prediction model. Correct learning for one model can benefit for
+the learning in the other and vice versa. The rationale is that the
+name chosen for a variable in the code should be natural
+(unsurprising) with respect to the type of that variable. Moreover, if
+one knows the name of a variable, its type should be in accordance and
+follow naming conventions. Exploring this duality can provide useful
+constraints to predict both the variable names and their types.  To
+build the variable name prediction model and the type prediction
+model, we leverage a variant of the graph convolution network (GCN) to
+model different kinds of relationships not only among the variables
+but also among the types of the variables. Our models are
+expected to have better predictive power than the CRF in JSNice and
+SMT in JSNaughty, especially in modeling the relations among variables
+and among types.
