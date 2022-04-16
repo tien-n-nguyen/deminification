@@ -116,7 +116,7 @@ function is aimed to export/retrieve the selection from a document.
 In the minified code, all local variables were randomly renamed with
 short and meaningless names, \eg \code{root} becomes \code{w},
 \code{doc} becomes \code{b}, etc. by the minification tool,
-\eg UglifyJS~\cite{uglify}. This makes developers difficult to
+\eg UglifyJS~\cite{uglifyJS}. This makes developers difficult to
 comprehend it.
 
 
@@ -140,51 +140,79 @@ comprehend it.
 
 \subsection{Observations}
 
-Our goal is to assign meaningful names for the variables in the
-minified code. The name recovering process of variables in minified
-code is affected by multiple factors. Let us illustrate these factors
-through the following observations:
 
-\textbf{O1}. \textit{Each individual variable has certain properties
-  and plays particular roles in the code. Thus, the name of a variable
-  is intuitively affected by its properties and roles}. The properties
-are the method calls or field accesses to which a variable of a certain
-type can access.
-%
-%Due to the nature of naming, 
-If a method is called or a field is accessed
-by a variable, the name of the variable should be compatible with the
-method's or the field's name.
-%
-%the name of the variable should be compatible with the name of the
-%method being called or the name of the field being accessed.
-% Tien
-%
-%In a non-minified code, it is not expected for a random name to be the
-%name of a variable that calls certain method.
-%
-For example, in our experimental dataset,
-%(will be explained later),
-the number of candidates that can call method \texttt{getData()}
-(lines 6 and 14) is only 7 out of 31 variables names found in a
-function named \texttt{getClipboardContent}.
-%
-%, such as \texttt{dataTransfer} or \texttt{dataObj}.
-%
-Such number is down to a \textit{single} candidate if we additionally
-consider that it can also access the fields \texttt{getData} (line 5)
-and \texttt{types} (line 11). Thus, \texttt{r} could be named
-as \texttt{dataTransfer}, which is the same name in the
-original code in Figure~\ref{example_org}. For the variable \texttt{f}
-that is created and assigned as an element of the array
-\texttt{types[]} at line 13, there are 4 candidates for such
-variable that can be used as an argument of the method named
-\texttt{getData()} (line~14). The number of candidates for \texttt{i},
-which is the returned result of the call to \texttt{getData()} (line
-6) and also has a field with the name \texttt{length} (line 7), is
-only 7.
 
+We aim to recover the names of the variables in the minified
+code. Such process is not trivial and affected by multiple factors.
+Let us illustrate them via the following observations:
+
+
+%1) a) variable "range"
+
+%range.cloneRange(), range.toString()
+%range.startContainer, range.startOffset
+
+%b) variable "preSelectionRange"
+
+%preSelectionRange.selectNodeContents(...)
+%preSelectionRange.setEnd(...)
+
+\textbf{O1}.{\em The fields and methods of a variable are kept intact
+  after minification.} That is true if the names of the fields and
+methods were minified, the corresponding field accesses and method
+calls would not be valid anymore. For example, \code{cloneRange()} in
+\code{r.cloneRange()} at line 7 and \code{startContainer} in
+\code{r.startContainer} at line 9 in Figure~\ref{example_org} are
+unchanged in Figure~\ref{example_sim}. Due to that, a model can rely
+on the names of those properties of a variable/object to predict the
+variable's name.
 %
+Moreover, the actual variable name must be in accordance with the
+names of the accessed fields and called methods. For example, in the
+original code in Figure~\ref{example_org}, the variable name
+\code{range} makes a general sense in \code{range.startOffset} and
+\code{range.endOffset} because a range could have a start offset and
+an ending offset. The rationale is that in the orignal code, for easy
+code comprehension, developers tend to use the naming conventions and
+easy-to-remember names with respect to the surrounding names in the
+code. In other words, the predicted name of a variable and those of
+its properties (fields and methods) are in accordance. As another
+example, \code{preSelectionRange} and \code{setEnd} are in accordance
+in \code{preSelectionRange.setEnd} at line 9.
+
+%\textit{Each individual variable has certain properties and plays
+%  particular roles in the code. Thus, the name of a variable is
+%  intuitively affected by its properties and roles}. The properties
+%are the method calls or field accesses to which a variable of a
+%certain type can access. If a method is called or a field is accessed
+%by a variable, the name of the variable should be compatible with the
+%method's or the field's name. For example, in our experimental
+%dataset, the number of candidates that can call method
+%\texttt{getData()} (lines 6 and 14) is only 7 out of 31 variables
+%names found in a function named \texttt{getClipboardContent}. Such
+%number is down to a \textit{single} candidate if we additionally
+%consider that it can also access the fields \texttt{getData} (line 5)
+%and \texttt{types} (line 11). Thus, \texttt{r} could be named as
+%\texttt{dataTransfer}, which is the same name in the original code in
+%Figure~\ref{example_org}. For the variable \texttt{f} that is created
+%and assigned as an element of the array \texttt{types[]} at line 13,
+%there are 4 candidates for such variable that can be used as an
+%argument of the method named \texttt{getData()} (line~14). The number
+%of candidates for \texttt{i}, which is the returned result of the call
+%to \texttt{getData()} (line 6) and also has a field with the name
+%\texttt{length} (line 7), is only 7.
+
+%2)
+
+%range = selection.getRangeAt(0)
+%preSelectionRange = range.cloneRange()
+
+%trailingImageCount = this.getTrailingImageCount(...)
+
+%emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks (...)
+
+%Tien
+
 \textbf{O2}. \textit{In a function, a variable might collaborate with
   other variables to implement the function. Consequently, the
   recovering name for a variable might be influenced by the name of
