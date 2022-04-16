@@ -213,18 +213,35 @@ in \code{preSelectionRange.setEnd} at line 9.
 
 %Tien
 
-\textbf{O2}. \textit{In a function, a variable might collaborate with
-  other variables to implement the function. Consequently, the
-  recovering name for a variable might be influenced by the name of
-  others}. Intuitively, since the variables are used together, their
-names are often consistent with each other to achieve the
-common task in the function.
+
+
+\textbf{O2}. {\em The name of a variable can be affected by those of
+  the surrounding variables in a function.} For example, at line 7,
+the choice of the name \code{range} in the recovery process could be
+influenced by the choice of the variable \code{selection} as it calls
+\code{getRangeAt} (\code{range} = \code{selection.getRangeAt(0)}), and
+the choice of the name \code{preSelectionRange} could be affected by
+the choice of the variable \code{range} (\code{preSelectionRange} =
+\code{range.cloneRange()}).
 %
-In the example, in 28 possible pairs of candidates for \texttt{i} (7
-candidates) and \texttt{f} (4 candidates), there are only 2 pairs of
-candidates that are used to name two variables in the same function
-in our dataset. One of them is the correct pair, which is
-\texttt{legacyText} and \texttt{contentType}.
+Intuitively, because multiple variables are used together to achieve
+the common task in the function, their names are often consistent with
+one another.
+
+
+
+%\textit{In a function, a variable might collaborate with other
+%  variables to implement the function. Consequently, the recovering
+%  name for a variable might be influenced by the name of
+%  others}. Intuitively, since the variables are used together, their
+%names are often consistent with each other to achieve the common task
+%in the function.
+%
+%In the example, in 28 possible pairs of candidates for \texttt{i} (7
+%candidates) and \texttt{f} (4 candidates), there are only 2 pairs of
+%candidates that are used to name two variables in the same function
+%in our dataset. One of them is the correct pair, which is
+%\texttt{legacyText} and \texttt{contentType}.
 %
 %experimental
 
