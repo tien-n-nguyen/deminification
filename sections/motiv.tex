@@ -1,90 +1,149 @@
 \section{Motivation and Approach Overview}
 \label{example_section}
 
-Figures~\ref{example_org} and~\ref{example_sim} show the
-original and minified versions~of the JS function
-\texttt{get\-Clip\-board\-Content} in the \texttt{vue-medium-ed\-itor}
-project.
-%~The original version is shown in Figure~\ref{example_org}.
-%
-The function is to retrieve the content of~the~clipboard. In the minified code, all local variables~are
-randomly renamed with short and meaningless names, \eg
-\texttt{data\-Transfer} becomes \texttt{r}, \texttt{data} becomes
-\texttt{n}, by a minification tool, \eg UglifyJS \cite{uglify}. This
-makes developers difficult to comprehend~it.
 
-%\begin{figure*}
-%\begin{subfigure}[b]{.5\linewidth}
-%\centering\large 
-%\lstinputlisting[captionpos=b, numbers=left, stepnumber=1, numbersep=-6pt,
-    %frame=single, xleftmargin=4pt, xrightmargin=4pt]{example_simplified.js}
-%\caption{A subfigure}\label{fig:1a}
-%\end{subfigure}%
-%\begin{subfigure}[b]{.5\linewidth}
-%\centering\large 
-%\lstinputlisting[captionpos=b, numbers=left, stepnumber=1, numbersep=-6pt,
-    %frame=single, xleftmargin=4pt, xrightmargin=4pt]{example.js}
-%\caption{Another subfigure}\label{fig:1b}
-%\end{subfigure}
-%\caption{A figure}\label{fig:1}
-%\end{figure*}
-
-%\begin{figure}[t]
-%\begin{center}
-%\lstinputlisting[captionpos=b, numbers=left, stepnumber=1, numbersep=-6pt,
-    %frame=single, xleftmargin=4pt, xrightmargin=4pt]{example_simplified.js}
-%\caption{A minified code from a real-world example.}
-%\label{example_sim}
-%\end{center}
-%\end{figure}
 
 \begin{figure}[t]
-\begin{center}
-\lstinputlisting[captionpos=b, numbers=left, stepnumber=1, numbersep=-6pt,
-    frame=single, xleftmargin=4pt, xrightmargin=4pt]{example.js}
-%\caption{The Original Code of the Minified Code in Figure~\ref{example_sim}}
+	\centering
+	\lstset{
+		numbers=left,
+		numberstyle= \tiny,
+		keywordstyle= \color{blue!70},
+		commentstyle= \color{red!50!green!50!blue!50},
+		frame=shadowbox,
+		rulesepcolor= \color{red!20!green!20!blue!20} ,
+		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+		framexleftmargin=1.5em,
+                numbersep= 5pt,
+		language=Java,
+    basicstyle=\scriptsize\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
+    emphstyle=\bfseries,
+                moredelim=**[is][\color{red}]{@}{@},
+		escapeinside= {(*@}{@*)}
+	}
+	\begin{lstlisting}[]
+function exportSelection(root, doc) {
+  if (!root) {
+      return null;
+  }
+  var selectionState = null, selection = doc.getSelection();
+  if (selection.rangeCount > 0) {
+      var range = selection.getRangeAt(0), preSelectionRange = range.cloneRange(), start;
+      preSelectionRange.selectNodeContents(root);
+      preSelectionRange.setEnd(range.startContainer, range.startOffset);
+      start = preSelectionRange.toString().length;
+      selectionState = {
+          start: start,
+          end: start + range.toString().length
+      };
+      if (this.doesRangeStartWithImages(range, doc)) {
+          selectionState.startsWithImage = true;
+      }
+      var trailingImageCount = this.getTrailingImageCount(root, selectionState, range.endContainer, range.endOffset);
+      if (trailingImageCount) {
+        selectionState.trailingImageCount = trailingImageCount;
+      }
+      if (start !== 0) {
+        var emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks(doc, root, range.startContainer, range.startOffset);
+        if (emptyBlocksIndex !== -1) {
+          selectionState.emptyBlocksIndex = emptyBlocksIndex;
+        }...
+        \end{lstlisting}
+\vspace{-12pt}
 \caption{An Original Code from a Project in GitHub}
 \label{example_org}
-\end{center}
 \end{figure}
+
 
 \begin{figure}[t]
-\begin{center}
-\lstinputlisting[captionpos=b, numbers=left, stepnumber=1, numbersep=-6pt,
-    frame=single, xleftmargin=4pt, xrightmargin=4pt]{example_simplified.js}
-%\caption{A Minified Code from a Real-World Example}
+	\centering
+	\lstset{
+		numbers=left,
+		numberstyle= \tiny,
+		keywordstyle= \color{blue!70},
+		commentstyle= \color{red!50!green!50!blue!50},
+		frame=shadowbox,
+		rulesepcolor= \color{red!20!green!20!blue!20} ,
+		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+		framexleftmargin=1.5em,
+                numbersep= 5pt,
+		language=Java,
+    basicstyle=\scriptsize\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
+    emphstyle=\bfseries,
+                moredelim=**[is][\color{red}]{@}{@},
+		escapeinside= {(*@}{@*)}
+	}
+	\begin{lstlisting}[]
+function exportSelection(w, b) {
+  if (!w) {
+    return null;
+  }
+  var p = null, q = b.getSelection();
+  if (q.rangeCount > 0) {
+    var r = q.getRangeAt(0), d = r.cloneRange(), m;
+    d.selectNodeContents(w);
+    d.setEnd(r.startContainer, r.startOffset);
+    m = d.toString().length;
+    p = {
+          start: m,
+          end: m + r.toString().length
+        };
+    if (this.doesRangeStartWithImages(r, b)) {
+       p.startsWithImage = true;
+    }
+    var a = this.getTrailingImageCount(w, p, r.endContainer, r.endOffset);
+    if (a) {
+      p.trailingImageCount = a;
+    }
+    if (m !== 0) {
+      var y = this.getIndexRelativeToAdjacentEmptyBlocks(b, w, r.startContainer, r.startOffset);
+      if (y !== -1) {
+        p.emptyBlocksIndex = y;
+      }...
+\end{lstlisting}
+\vspace{-12pt}
 \caption{The Minified Code for the Code in Figure~\ref{example_org}}
 \label{example_sim}
-\end{center}
 \end{figure}
 
-
-
-Our goal is to assign meaningful names for the variables in the
-minified code.
+Let us start with a real-world example to motivate our approach.
+Figures~\ref{example_org} and~\ref{example_sim} show the original and
+minified versions~of the JS function \code{exportSelection}.  The
+function is aimed to export/retrieve the selection from a document.
 %
-The name chosen for a variable in the code should be {\em natural}
-(unsurprising) in the context~\cite{JSNaughty2017} and follow naming
-conventions~\cite{barr-codeconvention-fse14}, so that the de-minified
-code becomes easy to understand for developers.
+In the minified code, all local variables were randomly renamed with
+short and meaningless names, \eg \code{root} becomes \code{w},
+\code{doc} becomes \code{b}, etc. by the minification tool,
+\eg UglifyJS~\cite{uglify}. This makes developers difficult to
+comprehend it.
 
 
-To achieve this goal, we conjecture that the meaningful names of
-minified variables could be observed in a large corpus of existing
-source code. This motivates us to conform our approach to a {\em
-  data-driven direction}, where we learn the names from original source
-code to recover the names for variables in the minified code.
 %
-Indeed, for the minified code in Figure~\ref{example_sim}, all
-original names are found in our experimental dataset that contains
-322K JS files collected from 12K GitHub~projects.
+%The name chosen for a variable in the code should be {\em natural}
+%(unsurprising) in the context~\cite{JSNaughty2017} and follow naming
+%conventions~\cite{barr-codeconvention-fse14}, so that the de-minified
+%code becomes easy to understand for developers.
+
+
+%To achieve this goal, we conjecture that the meaningful names of
+%minified variables could be observed in a large corpus of existing
+%source code. This motivates us to conform our approach to a {\em
+%  data-driven direction}, where we learn the names from original source
+%code to recover the names for variables in the minified code.
+%
+%Indeed, for the minified code in Figure~\ref{example_sim}, all
+%original names are found in our experimental dataset that contains
+%322K JS files collected from 12K GitHub~projects.
 %
 
 \subsection{Observations}
 
-The name recovering process of variables in
-minified code is affected by multiple factors. Let us illustrate these
-factors through the following observations:
+Our goal is to assign meaningful names for the variables in the
+minified code. The name recovering process of variables in minified
+code is affected by multiple factors. Let us illustrate these factors
+through the following observations:
 
 \textbf{O1}. \textit{Each individual variable has certain properties
   and plays particular roles in the code. Thus, the name of a variable
