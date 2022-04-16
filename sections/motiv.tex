@@ -1,4 +1,4 @@
-\section{Motivation and Approach Overview}
+\section{Motivation}
 \label{example_section}
 
 
@@ -245,55 +245,44 @@ one another.
 %
 %experimental
 
-\textbf{O3.} \textit{Within a function, e.g.,
-  \texttt{getClipboardContent}, a variable name, e.g.,
-  \texttt{contentType} is affected by the specific task of the
-  function that is described by the function's
-  name~\cite{sutton-fse15}}.~This is intuitive because the names of
-variables are often~relevant~to the task that the variables are used
-in the code~to~achieve. Such task is typically described with a
-succinct function~name.
-%containing the variables.
-In Figure~\ref{example_org}, the task of~the function is to get the
-clipboard's content, thus, it is named
-\texttt{get\-ClipboardContent}. In our~dataset, there are 31
-names being used to specify~the variables in function
-\texttt{getClipboardContent}, \eg \texttt{data},
-\texttt{dataTransfer}, \texttt{contentType}.
-%\texttt{content}.
-Meanwhile, the variable names \texttt{students}
-or \texttt{salary} have never been used in the function with that
-name.
+%3) var emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks(...);
+%   if (emptyBlocksIndex !== -1) {
 
-%the variables named \texttt{salary} or \texttt{students} are never
-%used in a function with the name of \texttt{getClipboardContent}.
+%Tien
 
-Overall, these observations indicate that the names of the variables
-in a particular function not only depend on {\em the task} in which
-the variable is used to implement (called {\bf task-specific context}), but
-their names are also affected by {\em their own properties and roles} in the
-code (called {\bf single-variable usage context}) and on the {\em names of the
-other variables} in the same function (called {\bf multiple-variable usage
-  context}).
+\textbf{O3.} {\em The mutual impact between variable name learning and
+  variable type learning.} If a model learns correctly the type of a
+variable, it would help to learn better the name of the variable and
+vice versa. For example, at line 24 of Figure~\ref{example_sim},
+\code{if (y != -1)}, a model can derive that \code{y} is of the type
+of \code{int}. Together with the line 23, \code{var y =
+  this.getIndexRelativeToAdjacentEmptyBlocks(...)}, the predicted name
+of \code{y} could be relevant to {\em ``Index''}, especially after the
+verb {\em ``get''}. In contrast, if a model encounters many instances
+whose names are ended with {\em ``Index''} or {\em ``Count''}, it might
+be able to see the comparison similar to line 24 and to derive
+the type \code{int} for that variable. Therefore,
+correct learning of variable names can benefit for learning of
+variable types and vice versa.
 
-\subsection{Approach Overview}
+%\textit{Within a function, e.g., \texttt{getClipboardContent}, a
+%  variable name, e.g., \texttt{contentType} is affected by the
+%  specific task of the function that is described by the function's
+%  name~\cite{sutton-fse15}}.~This is intuitive because the names of
+%variables are often~relevant~to the task that the variables are used
+%in the code~to~achieve. Such task is typically described with a
+%succinct function~name. In Figure~\ref{example_org}, the task of~the
+%function is to get the clipboard's content, thus, it is named
+%\texttt{get\-ClipboardContent}. In our~dataset, there are 31 names
+%being used to specify~the variables in function
+%\texttt{getClipboardContent}, \eg \texttt{data},
+%\texttt{dataTransfer}, \texttt{contentType}. Meanwhile, the variable
+%names \texttt{students} or \texttt{salary} have never been used in the
+%function with that name.
 
-From the observations, we propose an IR-based, data-driven approach to
-recover the variables' names in a minified JS code based
-on the contextual information
-%of the variables
-including \textit{single-variable usage context} (SVC),
-\textit{multiple-variable usage context} (MVC), and
-\textit{task-specific context} (TSC).
-%
-We initially construct a database to store
-%the information about
-the variables' names and the corresponding context information
-extracted from a large corpus of JS code.
-%
-To recover the names, given a minified JS code, we first use
-the \textit{SVC} and \textit{TSC} information to find in our
-database the candidate names for each variable. Then, these candidates
-for each variable are ranked by the likelihood that they are used
-along with the candidates of other variables, in order to name the
-variables in the same function by using~\textit{MVC}.
+
+
+
+
+
+
