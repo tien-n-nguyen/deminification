@@ -1,10 +1,48 @@
 \subsection{Key Ideas}
 \label{key:sec}
 
-Overall, these observations indicate that the names of the variables
-in a particular function not only depend on {\em the task} in which
-the variable is used to implement (called {\bf task-specific context}), but
-their names are also affected by {\em their own properties and roles} in the
-code (called {\bf single-variable usage context}) and on the {\em names of the
-other variables} in the same function (called {\bf multiple-variable usage
-  context}).
+Based on the above observations, we design {\tool} with the following
+key ideas.
+
+
+
+%Overall, these observations indicate that the names of the variables
+%in a particular function not only depend on {\em the task} in which
+%the variable is used to implement (called {\bf task-specific context}), but
+%their names are also affected by {\em their own properties and roles} in the
+%code (called {\bf single-variable usage context}) and on the {\em names of the
+%other variables} in the same function (called {\bf multiple-variable usage
+%  context}).
+
+
+\noindent {\bf Key Idea 1.} {\em A variable name is in accordance with
+  the properties of the variable} including the names of the fields
+and the methods in field accesses and method calls from the variable.
+The names of the fields and methods are kept intact after
+minification, thus, a model can rely on those names to predict the
+names of the variables. For example, a model can be trained to learn
+from the variables that have the field accesses to
+\code{startContainer}, \code{endContainer}, \code{startOffset}, and
+\code{endOffset}, and have the method calls to \code{cloneRange()},
+and used to predict the variable name \code{range}.
+
+\noindent {\bf Key Idea 2.} {\em A variable name can be influenced by
+  the names or the properties of the other variables having the
+  relations with that variable}. For example, a model can be trained
+from the assignment \code{preSelectionRange} =
+\code{range.cloneRange()} to predict the variable name on the
+left-hand side of \code{X = range.cloneRange()}. In other cases, a
+model can learn the names that often appear together in several
+methods in the training corpus. For example, the variable names
+\code{selection}, \code{selectionState}, \code{range}, and
+\code{preSelectionRange}.
+
+\noindent {\bf Key Idea 3.} {\em We leverage the duality between the
+  learning to predict the variable names and the learning to predict
+  the variable types.} In the original code, the name of a variable
+should be natural (unsurprising) with respect to the type of that
+variable. Moreover, if one knows the name of a variable, its type
+should be in accordance and follow a naming convention.  For example,
+at line 24, as the model encounters \code{if (y!=-1)}, it is expected
+to learn that \code{y} is of the type \code{int} and cannot be used in
+the locations where a string is expected.
