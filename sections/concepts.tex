@@ -1,13 +1,18 @@
 \section{Important Concepts}
 \label{concepts:sec}
 
-\begin{definition}{\bf [Property Relation (PropRel)]}
-Property relation represents the relationships between a variable and
-its fields or methods to which the variable can access or call.
-%when implementing a certa in task in a function.
+\begin{definition}{\bf [Attributes and Behaviors]}
+The properties of a variable are not minified: its accessible fields
+representing the attributes and its accessible methods representing
+the behaviors performed by the corresponding object.
 \end{definition}
 
-%\end{Pro_Rel}
+From Observation 1, we can rely on the names of the fields and those
+of the methods accessed from a variable as an important pivot in order
+to recover the name of the variable. For example, in
+Figure~\ref{example_sim}, at line 7 and line 9, the 
+
+
 
 A property relation between a variable \texttt{v} and its
 property \texttt{p} is denoted by a triple $(v, p, t)$, 
@@ -23,9 +28,7 @@ $( \texttt{r}, \texttt{getData()}, \texttt{methodCall})$.
   the method calls or field accesses in its usages.
 \end{definition}
 
-Since the names of methods or fields are not minified, we consider
-them as the pivots in the usage context for recovering names of the
-minified variables.
+
 %
 We focus on the roles of a variable used {\em as an argument in a method call}
  or {\em receiving the value returned by a method call or field access}.
