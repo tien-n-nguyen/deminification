@@ -1,21 +1,3 @@
 \subsection{Approach Overview}
 
-From the observations, we propose an IR-based, data-driven approach to
-recover the variables' names in a minified JS code based
-on the contextual information
-%of the variables
-including \textit{single-variable usage context} (SVC),
-\textit{multiple-variable usage context} (MVC), and
-\textit{task-specific context} (TSC).
-%
-We initially construct a database to store
-%the information about
-the variables' names and the corresponding context information
-extracted from a large corpus of JS code.
-%
-To recover the names, given a minified JS code, we first use
-the \textit{SVC} and \textit{TSC} information to find in our
-database the candidate names for each variable. Then, these candidates
-for each variable are ranked by the likelihood that they are used
-along with the candidates of other variables, in order to name the
-variables in the same function by using~\textit{MVC}.
+
