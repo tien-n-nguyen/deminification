@@ -9,19 +9,20 @@ the behaviors performed by the corresponding object.
 
 From Observation 1, we can rely on the names of the fields and those
 of the methods accessed from a variable as an important pivot in order
-to recover the name of the variable. For example, in
-Figure~\ref{example_sim}, at line 7 and line 9, the 
+to recover the name of the variable. A model can encounter the same
+names for the fields and methods, it can learn to derive the name of
+the variable under study because the names of the variable and those
+of the methods and fields in the original code are in harmony with one
+another. For example, in Figure~\ref{example_sim}, at line 7 and line
+9, we will explore the variable \code{r} in its field accesses and
+method calls \code{r.cloneRange()}, \code{r.startOffset}, and
+\code{r.endOffset}, because the names for those fields and methods are
+intact after code minification. We denote an instance of field access
+and method call as a triple $(v, p, t)$, where $v$ is the variable,
+$p$ is the name of the field or method, and $t$ is either
+\code{fieldAccess} or \code{methodCall}, e.g., $(r, cloneRange,
+methodCall)$ and $(r, startOffset, fieldAccess)$.
 
-
-
-A property relation between a variable \texttt{v} and its
-property \texttt{p} is denoted by a triple $(v, p, t)$, 
-where \texttt{t} is the type of relation, which can be 
-either \texttt{fieldAccess} or \texttt{methodCall}.
-In Figure~\ref{example_sim}, a set of property relations for \texttt{r}
-includes $( \texttt{r}, \texttt{types}, \texttt{fieldAccess})$,
-$( \texttt{r}, \texttt{getData}, \texttt{fieldAccess})$,
-$( \texttt{r}, \texttt{getData()}, \texttt{methodCall})$.
 
 \begin{definition}{\bf [Role Relation (RoleRel)]}
   Role relation represents the relationships between a variable and
