@@ -3,7 +3,7 @@
 
 \begin{figure}[t]
 	\begin{center}
-		\includegraphics[width=.7\columnwidth]{figures/training.png}
+		\includegraphics[width=.8\columnwidth]{figures/training-2.png}
 		\caption{Training Process}
 		\label{training_process}
 	\end{center}
@@ -16,6 +16,20 @@
 		\label{testing_process}
 	\end{center}
 \end{figure}
+
+There are two main processes in {\tool}: training and predicting.
+
+Figure~\ref{training_process} illustrates the training process, which
+takes as input the minified code with all the original variables'
+names and types. The training process contains the following key
+steps. First, we parse the minified code and build two representation
+graphs: 1) type relation graph~\cite{} representing the relations
+among the types of the variables, and 2) variable relation
+graph~\cite{icse19} represent the usage context of a variable with
+regard to its field accesses and method calls. The two graphs are
+merged into a representation graph.
+
+
 
 Step 1. Generate graphs...
 
