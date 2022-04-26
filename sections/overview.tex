@@ -3,32 +3,32 @@
 
 \begin{figure}[t]
 	\begin{center}
-	  \includegraphics[width=\columnwidth]{figures/training-2.png}
+	  \includegraphics[width=\columnwidth]{figures/overview.png}
           \vspace{-15pt}
-		\caption{Training Process}
-		\label{training_process}
+		\caption{{\tool}: Architecture Overview}
+		\label{overview}
 	\end{center}
 \end{figure}
 
-\begin{figure}[t]
-	\begin{center}
-		\includegraphics[width=.7\columnwidth]{figures/testing.png}
-		\caption{Testing Process}
-		\label{testing_process}
-	\end{center}
-\end{figure}
+%\begin{figure}[t]
+%	\begin{center}
+%	  \includegraphics[width=\columnwidth]{figures/testing.png}
+%          \vspace{-15pt}
+%		\caption{Testing Process}
+%		\label{predict_process}
+%	\end{center}
+%\end{figure}
 
 There are two main processes in {\tool}: training and predicting.
 
-Figure~\ref{training_process} illustrates the training process, which
-takes as input the minified code with all the original variables'
-names and types. The training process contains the following key
-steps. First, we parse the minified code and build two representation
-graphs: 1) type relation graph~\cite{} representing the relations
-among the types of the variables, and 2) variable relation
-graph~\cite{icse19} represent the usage context of a variable with
-regard to its field accesses and method calls. The two graphs are
-merged into a representation graph.
+Figure~\ref{overview} illustrates the overall process, which takes as
+input the minified code with all the original variables' names and
+types. The process contains the following key steps. First, we parse
+the minified code and build two representation graphs: 1) type
+relation graph~\cite{} representing the relations among the types of
+the variables, and 2) variable relation graph~\cite{icse19} represent
+the usage context of a variable with regard to its field accesses and
+method calls. The two graphs are merged into a representation graph.
 
 We have two models dedidated to two tasks: variable type generation
 (VTG) and variable name generation (VNG). The VTG model first extracts
@@ -39,7 +39,8 @@ specialized Graph Convolution Network (GCN)~\cite{} with the support
 of the embedding model GloVe~\cite{} as well as the Gate Recurrent
 Unit (GRU)~\cite{}. The actual types of the variables in the input
 minified code are used as the labels during the training. For type
-prediction, the types of the variables are predicted using the trained
+prediction (Figure~\ref{overview}), the same process is used
+except that the types of the variables are predicted using the trained
 VTG model. When generating the types, we use some basic rule from
 parser to eliminate the impossible candidates.
 
@@ -51,8 +52,9 @@ into the a specialized Graph Convolution Network (GCN)~\cite{}. We
 leverage that GCN model and others to generate the candidate names for
 the minified ones. The actual names of the variables in the input
 minified code are used as the labels during the training. For name
-prediction, the names of the variables are predicted using the trained
-VTG model. When generating the names, we use program analysis rules to
+prediction (Figure~\ref{overview}), the same process is used except
+that the names of the variables are predicted using the trained VTG
+model. When generating the names, we use program analysis rules to
 ensure the consistencies among the names.
 
 To propagate the impact of type prediction to name prediction and vice
