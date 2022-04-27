@@ -24,24 +24,46 @@ $p$ is the name of the field or method, and $t$ is either
 methodCall)$ and $(r, startOffset, fieldAccess)$.
 
 
-\begin{definition}{\bf [Role Relation (RoleRel)]}
-  Role relation represents the relationships between a variable and
-  the method calls or field accesses in its usages.
+%Tien
+
+\begin{definition}{\bf [Argument Relation]}
+  A variable $v$ is said to have an argument relation with a method
+  $m$ if it is used as an argument of a call to that method as in
+  $o.m(...,v,...)$.
+\end{definition}
+
+\begin{definition}{\bf [Assignment Relation]}
+  A variable $v$ is said to have an assignment relation with a method
+  $m$ or a field $f$ if it is used as a left-hand side in an
+  assignment from a method call or a field access as in $v =
+  o.m(...)$, or $v = o.f$.
 \end{definition}
 
 
 %
-We focus on the roles of a variable used {\em as an argument in a method call}
- or {\em receiving the value returned by a method call or field access}.
+%We focus on the roles of a variable used {\em as an argument in a method call}
+% or {\em receiving the value returned by a method call or field access}.
 %
-If we have $o.m(...,v,...)$, $v = o.m(...)$, or $v = o.f$,
+%If we have $o.m(...,v,...)$, $v = o.m(...)$, or $v = o.f$,
 %where $m$ is a method call and $f$ is a field access,
-then there exist
-the role relations between $v$ and $m$, and between $v$ and $f$. The
-rationale is that the names of $m$ and its argument are often in
-conformance with each other, \eg
-\texttt{getData(contentType)}. Similar rationale is applied to the
-above assignments to $v$.
+%then there exist
+%the role relations between $v$ and $m$, and between $v$ and $f$.
+
+The idea is that the name of the minified variable $v$ in the original
+code is often in accordance with the names of the method or the field
+in such an assignment or an argument. For example, \code{range} and
+\code{getRangeAt} are in accordance with each other in \code{range =
+  selection.getRangeAt(0)}; or \code{selectNodeContents} and
+\code{root} are in accordance with each other in
+\code{preSelectionRange.selectNodeContents(root)}.  We will use the
+triple notations $(v, p, argument)$, $(v, p, assignment)$, and
+$(v, f, assignment)$ to denote those three cases, where $v$ is a
+variable, $p$ is a method name, and $f$ is a field name.
+
+%The rationale is that the names of $m$ and its argument are often in
+%conformance with each other, \eg
+%\texttt{getData(contentType)}. Similar rationale is applied to the
+%above assignments to $v$.
 
 %A variable could be received a value of a field/method, or could be a
 %input of an method invocation. For instance, in
@@ -51,10 +73,10 @@ above assignments to $v$.
 %is an argument of function \texttt{getData()} and the value
 %of \texttt{getData()} is influenced by \texttt{f}.
 
-A role relation between a variable \texttt{v} and a field/method
-\texttt{p} is denoted by a triple $(v, p, t)$, where
-\texttt{t} is the type of role relation. A role relation could
-be either \texttt{argument} or \texttt{assignment}.
+%A role relation between a variable \texttt{v} and a field/method
+%\texttt{p} is denoted by a triple $(v, p, t)$, where
+%\texttt{t} is the type of role relation. A role relation could
+%be either \texttt{argument} or \texttt{assignment}.
 
 %We expect this role relation to contribute significantly to the name
 %recovery process.
@@ -94,31 +116,32 @@ be either \texttt{argument} or \texttt{assignment}.
 %\end{table}
 
 
-\begin{definition}{\bf [Relation Graph]}
-A relation graph (RG) for a variable $v$ is a directed graph
-in the shape of a star to represent the single-variable usage context
-of $v$ with regard to its property and role relations with 
-the fields and methods in its usage.
+\begin{definition}{\bf [Relation Graph]}~\cite{icse19}
+A relation graph (RG) is a directed graph
+%in the shape of a star to represent the single-variable usage context
+%of $v$ with regard to its property and role relations with 
+%the fields and methods in its usage.
 %
-The center vertex of the RG represents the variable. The other vertices
-represent the methods/fields in method calls or field accesses, respectively, and are labeled with their names. 
-Edges represent relations and are labeled with relation types. 
+in which each node of the RG represents a variable. The connected
+nodes represent the methods/fields in method calls or field accesses,
+respectively, and are labeled with their names. Edges represent
+relations among nodes and are labeled with relation types.
 \end{definition}
 
-Figure~\ref{SG_sample_ano} shows the relation graph of the variable
-\texttt{r}, which includes a set of property relations:
-$( \texttt{r}, \texttt{types}, \texttt{fieldAccess})$, $( \texttt{r},
-\texttt{getData}, \texttt{fieldAccess})$, $( \texttt{r},
-\texttt{getData()}, \texttt{methodCall})$,
+%Figure~\ref{SG_sample_ano} shows the relation graph of the variable
+%\texttt{r}, which includes a set of property relations:
+%$( \texttt{r}, \texttt{types}, \texttt{fieldAccess})$, $( \texttt{r},
+%\texttt{getData}, \texttt{fieldAccess})$, $( \texttt{r},
+%\texttt{getData()}, \texttt{methodCall})$,
 %
-and a set of role relations: $( \texttt{r}, \texttt{clipboardData},
-\texttt{assignment})$, $( \texttt{r}, \texttt{dataTransfer},
-\texttt{assignment})$ in our example.
+%and a set of role relations: $( \texttt{r}, \texttt{clipboardData},
+%\texttt{assignment})$, $( \texttt{r}, \texttt{dataTransfer},
+%\texttt{assignment})$ in our example.
 
 \begin{figure}[t]
 	\begin{center}
-		\includegraphics[width=.7\columnwidth]{figures/stargraph.pdf}
-		\caption{The Relation Graph of Variable $r$ in Figure~\ref{example_sim}}
-		\label{SG_sample_ano}
+		\includegraphics[width=0.9\columnwidth]{figures/relation-graph}
+		\caption{The Relation Graph for Figure~\ref{example_sim}}
+		\label{rel-graph}
 	\end{center}
 \end{figure}
