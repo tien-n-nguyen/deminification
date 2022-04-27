@@ -145,3 +145,64 @@ relations among nodes and are labeled with relation types.
 		\label{rel-graph}
 	\end{center}
 \end{figure}
+
+Figure~\ref{rel-graph} shows the relation graph for the variables in
+the code in Figure~\ref{example_sim}. For example, there are an
+$assign$ edge from the variable \code{r} to the node
+\code{getRangeAt}, and a $methodcall$ edge from \code{q} to
+\code{getRangeAt} because we have \code{r = q.getRangeAt(0)} at line
+7.
+
+
+
+
+\begin{figure}[t]
+  \small
+  \begin{eqnarray*}
+    \theta \in Type (\Theta) &::=& \gamma | \, \alpha [\theta, ..., \theta] \, | \, u \, | \, \mathbf{None} \, | \, \mathbf{type}\\
+  \gamma \in \, Elementary \, Type (\Gamma) &::=& \mathbf{int} \, | \, \mathbf{float} \, | \, \mathbf{str} \, | \, \mathbf{bool} \, | \, \mathbf{bytes}\\
+  \alpha \in Generic \, Type (A) &::=& \mathbf{List} \, | \, \mathbf{Tuple} \, | \, \mathbf{Dict} \, | \, \mathbf{Set} \, |\\
+  & & \, \mathbf{Callable} \, | \, \mathbf{Generator} \, | \, \mathbf{Union}\\
+  b \in \, Builtin \, Type (B) &::=& \gamma \, | \, \alpha[\theta]\\
+  u \in \, User \, Defined \, Type (U) &::=& all \, classes \, and \, named \, tuples\\
+  o \in \, Overloading \, User \, Def \, Type (O) &::=& all \, classes \, with \, operator \\
+  & & overloading \, in \, code
+  \end{eqnarray*}
+  \vspace{-18pt}
+\caption{Types in Python}
+\label{python-types}
+\end{figure}
+
+Figure~\ref{python-types} shows the type system in
+Python~\cite{type-graph-icse22}. Due to space limit, we do not include
+the type system for JavaScript. To represent the dependencies among
+the types, we adopt the type dependency graph (TDG) from
+HiTyper~\cite{type-graph-icse22}.
+
+\begin{definition}{\bf Type Dependency Graph]}~\cite{type-graph-icse22}
+    \label{tdg-def}
+A Type Dependency Graph is a graph $G$ = $(N,E)$ in which $N$ is the
+set of nodes representing all the variables and expresions, and $E$ is
+the set of edges from $n_i$ to $n_j$ indicating that the type of $n_j$
+can be derived from the type of $n_i$ by the type inference rules in
+the type system.
+\end{definition}
+
+For example, from line 10 of Figure~\ref{example_org}, \code{start} =
+\code{preSelectionRange.} \code{toString().} \code{length}, our model
+can build the dependency between the type of \code{start} from the
+type of \code{length} in the \code{String} class (which is
+\code{int}). As another example, there is a type dependency between
+the return type of \code{getIndexRelativeToAdjacentEmptyBlocks} and
+the type of the variable \code{emptyBlocksIndex} at line 23, and
+another dependency between the type of \code{emptyBlocksIndex} and the
+type of \code{selectState.emptyBlocksIndex} at line 25.  Connecting
+all the dependencies among the types of variables and expressions, we
+have the type dependency graph for the code as defined in
+Definition~\ref{tdg-def}.
+
+We leverage the graph building algorithm from HiTyper to parse the
+code and transform every variable occurrence and expression into nodes
+and maintains type dependencies between them. We also extend the
+notion and the algorithm to build the type dependency graph (TDG) for
+the JavaScript code. Details on TDG is in~\cite{type-graph-icse22}.
