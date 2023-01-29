@@ -178,7 +178,10 @@ meaningful names with respect to the surrounding names in the code. In
 other words, the predicted name of a variable and those of its
 properties (fields and methods) are in accordance. As another example,
 \code{preSelectionRange} and \code{setEnd} are in accordance in
-\code{preSelectionRange.setEnd} at line 9.
+\code{preSelectionRange.setEnd} at line 9. In fact, there exist
+approaches to explore the concordance between the method's name and
+the names of its arguments to detect name-based bugs in a
+program~\cite{deepbugs-oopsla18}.
 
 %\textit{Each individual variable has certain properties and plays
 %  particular roles in the code. Thus, the name of a variable is
@@ -254,23 +257,20 @@ one another.
 \textbf{O4.} {\em The mutual impact between variable name learning and
   variable type learning.} If a model learns correctly the type of a
 variable, it would help to learn better the name of the variable and
-vice versa. For example, let us assume that we need to recover the
-name \code{emptyBlocksIndex} for the variable \code{y} at line 24 in
-Figure~\ref{example_sim}: \code{if (y != -1)}. From that comparison, a
-model could learn that \code{y} is of the type \code{int}. Now,
-knowing that it is an integer, a model could combine that with the
-knowledge learned from line 23 (\code{var y =
-  this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
-name for \code{y} could be something relevant to {\em ``Index''}.
-%at line 24 of Figure~\ref{example_sim}, \code{if (y != -1)}, a model
-%can derive that \code{y} is of the type of \code{int}. Together with
-%the line 23, \code{var y =
-%  this.getIndexRelativeToAdjacentEmptyBlocks(...)}, the predicted name
-%of \code{y} could be relevant to {\em ``Index''}, especially after the
-%verb {\em ``get''}.
-On the other hand, correct learning of a variable name can also
-benefit for learning of its type. For example, if the name is
-\code{trailingImageCount}, then its type is likely to be \code{int}.
+vice versa. For example, to recover the name \code{emptyBlocksIndex}
+for the variable \code{y} at line 24 in Figure~\ref{example_sim}:
+\code{if (y != -1)}. From that comparison, a model could learn that
+\code{y} is of the type \code{int}. Knowing that it is an integer, a
+model could combine that with the knowledge learned from line 23
+(\code{var y = this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and
+predict the name for \code{y} could be something relevant to {\em
+  ``Index''}. On the other hand, correct learning of a variable name
+can also benefit for learning of its type. At line 18 of
+Figure~\ref{example_sim}, if the name \code{trailingImageCount} is
+recovered for the variable \code{a}, then its type is likely to be
+\code{int} if the model could make sense of the sub-tokens
+\code{image} and \code{count}.
+
 %In contrast, if a model encounters many instances whose names are
 %ended with {\em ``Index''} or {\em ``Count''}, it might be able to see
 %the comparison similar to line 24 and to derive the type \code{int}

@@ -107,17 +107,32 @@ need to be recovered.
 In this work, we present {\tool}, a deep learning (DL)-based variable
 name recovery approach. We formulate the name recovery problem as the
 dual-task learning between the variable name prediction model and the
-type prediction model. Correct learning for one model can benefit for
-the learning in the other and vice versa. The rationale is that the
-name chosen for a variable in the code should be natural
-(unsurprising) with respect to the type of that variable. Moreover, if
-one knows the name of a variable, its type should be in accordance and
-follow naming conventions. Exploring this duality can provide useful
-constraints to predict both the variable names and their types.  To
-build the variable name prediction model and the type prediction
-model, we leverage a variant of the graph convolution network (GCN) to
-model different kinds of relationships not only among the variables
-but also among the types of the variables. Our DL models are
-expected to have better predictive power than the CRF in JSNice and
-SMT in JSNaughty, especially in modeling the relations among variables
-and among types.
+type prediction model. {\em Correct learning for one model can benefit
+  for the learning in the other and vice versa} due to the naturalness
+of names in source code~\cite{hindle-icse12}. The rationale is that
+{\em the name chosen for a variable in the original code should be
+  natural (unsurprising) with respect to the type of that
+  variable}. For example, if a variable of the type \code{Student}
+should not have a name that is completely irrelevant to the notion
+``student''. Similarly, if a model learns the name of a variable, its
+type should be in accordance with the name and follow naming
+conventions. For example, if a model recovers the name of a variable
+as {\em count} or {\em index}, its type should be of \code{int} or
+\code{Integer}.
+
+Exploring this duality can provide useful constraints to predict both
+the variable names and their types.  To build the variable name
+prediction model and the type prediction model, we leverage the Label,
+Graph Convolution Network (Label-GCN)~\cite{label-gcn} to model
+different kinds of relationships not only among the variables but also
+among the types. To propagate the mutual impact of type learning and
+name learning, we apply a dual-task learning mechanism between the two
+models. We use the uncertainty weighted multi-task loss as the
+multitask learning loss function and use the maximum of the top-1
+accuracy score from two tasks as the training target. Our DL-based
+model is expected to have better predictive power than the CRF in
+JSNice and SMT in JSNaughty, especially in modeling the relations
+among variables and types.
+
+We have conducted experiments to evaluate {\tool} in real-world
+datasets in both name recovery and type prediction. ...

@@ -1471,3 +1471,51 @@ series = {ICSE '19}
   year      = {2022},
   url       = {https://arxiv.org/abs/2105.03595}
 }
+
+@article{deepbugs-oopsla18,
+author = {Pradel, Michael and Sen, Koushik},
+title = {DeepBugs: A Learning Approach to Name-Based Bug Detection},
+year = {2018},
+issue_date = {November 2018},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {2},
+number = {OOPSLA},
+url = {https://doi.org/10.1145/3276517},
+doi = {10.1145/3276517},
+abstract = {Natural language elements in source code, e.g., the names of variables and functions, convey useful information. However, most existing bug detection tools ignore this information and therefore miss some classes of bugs. The few existing name-based bug detection approaches reason about names on a syntactic level and rely on manually designed and tuned algorithms to detect bugs. This paper presents DeepBugs, a learning approach to name-based bug detection, which reasons about names based on a semantic representation and which automatically learns bug detectors instead of manually writing them. We formulate bug detection as a binary classification problem and train a classifier that distinguishes correct from incorrect code. To address the challenge that effectively learning a bug detector requires examples of both correct and incorrect code, we create likely incorrect code examples from an existing corpus of code through simple code transformations. A novel insight learned from our work is that learning from artificially seeded bugs yields bug detectors that are effective at finding bugs in real-world code. We implement our idea into a framework for learning-based and name-based bug detection. Three bug detectors built on top of the framework detect accidentally swapped function arguments, incorrect binary operators, and incorrect operands in binary operations. Applying the approach to a corpus of 150,000 JavaScript files yields bug detectors that have a high accuracy (between 89% and 95%), are very efficient (less than 20 milliseconds per analyzed file), and reveal 102 programming mistakes (with 68% true positive rate) in real-world code.},
+journal = {Proc. ACM Program. Lang.},
+month = {oct},
+articleno = {147},
+numpages = {25},
+keywords = {JavaScript, Natural language, Name-based program analysis, Bug detection, Machine learning}
+}
+
+
+@article{label-gcn,
+  author    = {Claudio Bellei and
+               Hussain Alattas and
+               Nesrine Kaaniche},
+  title     = {Label-GCN: An Effective Method for Adding Label Propagation to Graph
+               Convolutional Networks},
+  journal   = {CoRR},
+  volume    = {abs/2104.02153},
+  year      = {2021},
+  url       = {https://arxiv.org/abs/2104.02153},
+  eprinttype = {arXiv},
+  eprint    = {2104.02153},
+  timestamp = {Mon, 12 Apr 2021 16:14:56 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2104-02153.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{gcn,
+  author    = {Thomas N. Kipf and
+               Max Welling},
+  title     = {Semi-Supervised Classification with Graph Convolutional Networks},
+  booktitle = {5th International Conference on Learning Representations, {ICLR} 2017,
+               Toulon, France, April 24-26, 2017, Conference Track Proceedings},
+  publisher = {OpenReview.net},
+  year      = {2017},
+  url       = {https://openreview.net/forum?id=SJU4ayYgl},
+}
