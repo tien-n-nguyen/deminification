@@ -116,58 +116,47 @@ function is aimed to export/retrieve the selection from a document.
 In the minified code, all local variables were randomly renamed with
 short and meaningless names, \eg \code{root} becomes \code{w},
 \code{doc} becomes \code{b}, etc. by the minification tool,
-\eg UglifyJS~\cite{uglifyJS}. This makes developers difficult to
-comprehend it.
+\eg UglifyJS~\cite{uglifyJS}. This makes them difficult to
+comprehend.
 
-
-%
-%The name chosen for a variable in the code should be {\em natural}
-%(unsurprising) in the context~\cite{JSNaughty2017} and follow naming
-%conventions~\cite{barr-codeconvention-fse14}, so that the de-minified
-%code becomes easy to understand for developers.
-
-
-%To achieve this goal, we conjecture that the meaningful names of
-%minified variables could be observed in a large corpus of existing
-%source code. This motivates us to conform our approach to a {\em
-%  data-driven direction}, where we learn the names from original source
-%code to recover the names for variables in the minified code.
-%
-%Indeed, for the minified code in Figure~\ref{example_sim}, all
-%original names are found in our experimental dataset that contains
-%322K JS files collected from 12K GitHub~projects.
-%
 
 \subsection{Observations}
 
-
-
 We aim to recover the names of the variables in the minified
 code. Such process is not trivial and affected by multiple factors.
-Let us illustrate them via the following observations:
+Let us explain the following observations to motivate our solution:
 
+\textbf{O1.} {\em The mutual impact between variable name learning and
+  variable type learning.} If a model learns correctly the type of a
+variable, it would help to learn better the name of the variable and
+vice versa. Let us consider the name
+\code{emptyBlocksIndex} for the variable \code{y} at line 24 in
+Figure~\ref{example_sim}: \code{if (y != -1)}. From that comparison, a
+model could learn that \code{y} is of the type \code{int}. Knowing
+that it is an integer, a model could combine that with the knowledge
+learned from line 23 (\code{var y =
+  this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
+name for \code{y} could be something relevant to {\em ``Index''}. On
+the other hand, correct learning of a variable name can also benefit
+for learning of its type. At line 18 of Figure~\ref{example_sim}, if
+the name \code{trailingImageCount} is recovered for the variable
+\code{a}, then its type is likely to be \code{int} if the model could
+make sense of the sub-tokens \code{image} and \code{count}.
 
-%1) a) variable "range"
+\textbf{O3}. {\em The name of a variable can be affected by the names
+  of the surrounding variables in a function.} Intuitively, because
+multiple variables are used together to achieve the common task in the
+function, their names are often consistent with one another. For
+example, at line 7, the choice of the name \code{range} in the
+recovery process could be influenced by the choice of the variable
+\code{selection} as the call to \code{getRangeAt} is made on that
+variable as in the statement \code{range} =
+\code{selection.getRangeAt(0)}. The choice of the name
+\code{preSelectionRange} could be affected by the choice of the
+variable \code{range} due to the statement \code{preSelectionRange} =
+\code{range.cloneRange()}.
 
-%range.cloneRange(), range.toString()
-%range.startContainer, range.startOffset
-
-%b) variable "preSelectionRange"
-
-%preSelectionRange.selectNodeContents(...)
-%preSelectionRange.setEnd(...)
-
-\textbf{O1}.{\em The fields and methods of a variable are kept intact
-  after minification.} If the names of the fields and methods were
-minified, the corresponding field accesses and method calls would not
-be valid anymore. For example, \code{cloneRange()} in
-\code{r.cloneRange()} at line 7 and \code{startContainer} in
-\code{r.startContainer} at line 9 in Figure~\ref{example_org} are
-unchanged in Figure~\ref{example_sim}. Due to that, a model can rely
-on the names of those properties of a variable/object to predict the
-variable's name.
-
-\textbf{O2}. {\em The actual variable name must also be in accordance
+\textbf{O3}. {\em The actual variable name must also be in accordance
   with the names of the accessed fields and called methods}. For
 example, in the original code in Figure~\ref{example_org}, the
 variable name \code{range} makes sense in \code{range.startOffset} and
@@ -177,121 +166,29 @@ code comprehension, developers tend to use the naming conventions and
 meaningful names with respect to the surrounding names in the code. In
 other words, the predicted name of a variable and those of its
 properties (fields and methods) are in accordance. As another example,
-\code{preSelectionRange} and \code{setEnd} are in accordance in
-\code{preSelectionRange.setEnd} at line 9. In fact, there exist
+\code{preSelectionRange} and \code{setEnd} are in accordance with each
+other in \code{preSelectionRange.setEnd} at line 9. In fact, there exist
 approaches to explore the concordance between the method's name and
 the names of its arguments to detect name-based bugs in a
 program~\cite{deepbugs-oopsla18}.
 
-%\textit{Each individual variable has certain properties and plays
-%  particular roles in the code. Thus, the name of a variable is
-%  intuitively affected by its properties and roles}. The properties
-%are the method calls or field accesses to which a variable of a
-%certain type can access. If a method is called or a field is accessed
-%by a variable, the name of the variable should be compatible with the
-%method's or the field's name. For example, in our experimental
-%dataset, the number of candidates that can call method
-%\texttt{getData()} (lines 6 and 14) is only 7 out of 31 variables
-%names found in a function named \texttt{getClipboardContent}. Such
-%number is down to a \textit{single} candidate if we additionally
-%consider that it can also access the fields \texttt{getData} (line 5)
-%and \texttt{types} (line 11). Thus, \texttt{r} could be named as
-%\texttt{dataTransfer}, which is the same name in the original code in
-%Figure~\ref{example_org}. For the variable \texttt{f} that is created
-%and assigned as an element of the array \texttt{types[]} at line 13,
-%there are 4 candidates for such variable that can be used as an
-%argument of the method named \texttt{getData()} (line~14). The number
-%of candidates for \texttt{i}, which is the returned result of the call
-%to \texttt{getData()} (line 6) and also has a field with the name
-%\texttt{length} (line 7), is only 7.
-
-%2)
-
-%range = selection.getRangeAt(0)
-%preSelectionRange = range.cloneRange()
-
-%trailingImageCount = this.getTrailingImageCount(...)
-
-%emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks (...)
-
-%Tien
+\textbf{O4}.{\em The fields and methods of a variable are kept intact
+  after minification.} If the names of the fields and methods were
+minified, the corresponding field accesses and method calls would not
+be valid anymore. For example, \code{cloneRange()} in
+\code{r.cloneRange()} at line 7 and \code{startContainer} in
+\code{r.startContainer} at line 9 in Figure~\ref{example_org} are
+unchanged in Figure~\ref{example_sim}. Due to that, a model can rely
+on the names of those properties of a variable/object to predict the
+variable's name.
 
 
 
-\textbf{O3}. {\em The name of a variable can be affected by the names
-  of the surrounding variables in a function.}  For example, at line
-7, the choice of the name \code{range} in the recovery process could
-be influenced by the choice of the variable \code{selection} as the
-call to \code{getRangeAt} is made on that variable as in the statement
-\code{range} = \code{selection.getRangeAt(0)}. The choice of the name
-\code{preSelectionRange} could be affected by the choice of the
-variable \code{range} due to the statement \code{preSelectionRange} =
-\code{range.cloneRange()}.
-%
-Intuitively, because multiple variables are used together to achieve
-the common task in the function, their names are often consistent with
-one another.
 
 
 
-%\textit{In a function, a variable might collaborate with other
-%  variables to implement the function. Consequently, the recovering
-%  name for a variable might be influenced by the name of
-%  others}. Intuitively, since the variables are used together, their
-%names are often consistent with each other to achieve the common task
-%in the function.
-%
-%In the example, in 28 possible pairs of candidates for \texttt{i} (7
-%candidates) and \texttt{f} (4 candidates), there are only 2 pairs of
-%candidates that are used to name two variables in the same function
-%in our dataset. One of them is the correct pair, which is
-%\texttt{legacyText} and \texttt{contentType}.
-%
-%experimental
 
-%3) var emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks(...);
-%   if (emptyBlocksIndex !== -1) {
 
-%Tien
-
-\textbf{O4.} {\em The mutual impact between variable name learning and
-  variable type learning.} If a model learns correctly the type of a
-variable, it would help to learn better the name of the variable and
-vice versa. For example, to recover the name \code{emptyBlocksIndex}
-for the variable \code{y} at line 24 in Figure~\ref{example_sim}:
-\code{if (y != -1)}. From that comparison, a model could learn that
-\code{y} is of the type \code{int}. Knowing that it is an integer, a
-model could combine that with the knowledge learned from line 23
-(\code{var y = this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and
-predict the name for \code{y} could be something relevant to {\em
-  ``Index''}. On the other hand, correct learning of a variable name
-can also benefit for learning of its type. At line 18 of
-Figure~\ref{example_sim}, if the name \code{trailingImageCount} is
-recovered for the variable \code{a}, then its type is likely to be
-\code{int} if the model could make sense of the sub-tokens
-\code{image} and \code{count}.
-
-%In contrast, if a model encounters many instances whose names are
-%ended with {\em ``Index''} or {\em ``Count''}, it might be able to see
-%the comparison similar to line 24 and to derive the type \code{int}
-%for that variable.
-%Therefore, correct learning of variable names can benefit for learning
-%of variable types and vice versa.
-
-%\textit{Within a function, e.g., \texttt{getClipboardContent}, a
-%  variable name, e.g., \texttt{contentType} is affected by the
-%  specific task of the function that is described by the function's
-%  name~\cite{sutton-fse15}}.~This is intuitive because the names of
-%variables are often~relevant~to the task that the variables are used
-%in the code~to~achieve. Such task is typically described with a
-%succinct function~name. In Figure~\ref{example_org}, the task of~the
-%function is to get the clipboard's content, thus, it is named
-%\texttt{get\-ClipboardContent}. In our~dataset, there are 31 names
-%being used to specify~the variables in function
-%\texttt{getClipboardContent}, \eg \texttt{data},
-%\texttt{dataTransfer}, \texttt{contentType}. Meanwhile, the variable
-%names \texttt{students} or \texttt{salary} have never been used in the
-%function with that name.
 
 
 
