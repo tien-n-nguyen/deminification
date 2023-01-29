@@ -1,4 +1,4 @@
-\section{Motivation}
+\section{Motivating Example}
 \label{example_section}
 
 
@@ -158,27 +158,27 @@ Let us illustrate them via the following observations:
 %preSelectionRange.setEnd(...)
 
 \textbf{O1}.{\em The fields and methods of a variable are kept intact
-  after minification.} That is true if the names of the fields and
-methods were minified, the corresponding field accesses and method
-calls would not be valid anymore. For example, \code{cloneRange()} in
+  after minification.} If the names of the fields and methods were
+minified, the corresponding field accesses and method calls would not
+be valid anymore. For example, \code{cloneRange()} in
 \code{r.cloneRange()} at line 7 and \code{startContainer} in
 \code{r.startContainer} at line 9 in Figure~\ref{example_org} are
 unchanged in Figure~\ref{example_sim}. Due to that, a model can rely
 on the names of those properties of a variable/object to predict the
 variable's name.
-%
-Moreover, the actual variable name must be in accordance with the
-names of the accessed fields and called methods. For example, in the
-original code in Figure~\ref{example_org}, the variable name
-\code{range} makes a general sense in \code{range.startOffset} and
+
+\textbf{O2}. {\em The actual variable name must also be in accordance
+  with the names of the accessed fields and called methods}. For
+example, in the original code in Figure~\ref{example_org}, the
+variable name \code{range} makes sense in \code{range.startOffset} and
 \code{range.endOffset} because a range could have a start offset and
 an ending offset. The rationale is that in the orignal code, for easy
 code comprehension, developers tend to use the naming conventions and
-easy-to-remember names with respect to the surrounding names in the
-code. In other words, the predicted name of a variable and those of
-its properties (fields and methods) are in accordance. As another
-example, \code{preSelectionRange} and \code{setEnd} are in accordance
-in \code{preSelectionRange.setEnd} at line 9.
+meaningful names with respect to the surrounding names in the code. In
+other words, the predicted name of a variable and those of its
+properties (fields and methods) are in accordance. As another example,
+\code{preSelectionRange} and \code{setEnd} are in accordance in
+\code{preSelectionRange.setEnd} at line 9.
 
 %\textit{Each individual variable has certain properties and plays
 %  particular roles in the code. Thus, the name of a variable is
@@ -215,14 +215,15 @@ in \code{preSelectionRange.setEnd} at line 9.
 
 
 
-\textbf{O2}. {\em The name of a variable can be affected by those of
-  the surrounding variables in a function.} For example, at line 7,
-the choice of the name \code{range} in the recovery process could be
-influenced by the choice of the variable \code{selection} as it calls
-\code{getRangeAt} (\code{range} = \code{selection.getRangeAt(0)}), and
-the choice of the name \code{preSelectionRange} could be affected by
-the choice of the variable \code{range} (\code{preSelectionRange} =
-\code{range.cloneRange()}).
+\textbf{O3}. {\em The name of a variable can be affected by the names
+  of the surrounding variables in a function.}  For example, at line
+7, the choice of the name \code{range} in the recovery process could
+be influenced by the choice of the variable \code{selection} as the
+call to \code{getRangeAt} is made on that variable as in the statement
+\code{range} = \code{selection.getRangeAt(0)}. The choice of the name
+\code{preSelectionRange} could be affected by the choice of the
+variable \code{range} due to the statement \code{preSelectionRange} =
+\code{range.cloneRange()}.
 %
 Intuitively, because multiple variables are used together to achieve
 the common task in the function, their names are often consistent with
@@ -250,20 +251,32 @@ one another.
 
 %Tien
 
-\textbf{O3.} {\em The mutual impact between variable name learning and
+\textbf{O4.} {\em The mutual impact between variable name learning and
   variable type learning.} If a model learns correctly the type of a
 variable, it would help to learn better the name of the variable and
-vice versa. For example, at line 24 of Figure~\ref{example_sim},
-\code{if (y != -1)}, a model can derive that \code{y} is of the type
-of \code{int}. Together with the line 23, \code{var y =
-  this.getIndexRelativeToAdjacentEmptyBlocks(...)}, the predicted name
-of \code{y} could be relevant to {\em ``Index''}, especially after the
-verb {\em ``get''}. In contrast, if a model encounters many instances
-whose names are ended with {\em ``Index''} or {\em ``Count''}, it might
-be able to see the comparison similar to line 24 and to derive
-the type \code{int} for that variable. Therefore,
-correct learning of variable names can benefit for learning of
-variable types and vice versa.
+vice versa. For example, let us assume that we need to recover the
+name \code{emptyBlocksIndex} for the variable \code{y} at line 24 in
+Figure~\ref{example_sim}: \code{if (y != -1)}. From that comparison, a
+model could learn that \code{y} is of the type \code{int}. Now,
+knowing that it is an integer, a model could combine that with the
+knowledge learned from line 23 (\code{var y =
+  this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
+name for \code{y} could be something relevant to {\em ``Index''}.
+%at line 24 of Figure~\ref{example_sim}, \code{if (y != -1)}, a model
+%can derive that \code{y} is of the type of \code{int}. Together with
+%the line 23, \code{var y =
+%  this.getIndexRelativeToAdjacentEmptyBlocks(...)}, the predicted name
+%of \code{y} could be relevant to {\em ``Index''}, especially after the
+%verb {\em ``get''}.
+On the other hand, correct learning of a variable name can also
+benefit for learning of its type. For example, if the name is
+\code{trailingImageCount}, then its type is likely to be \code{int}.
+%In contrast, if a model encounters many instances whose names are
+%ended with {\em ``Index''} or {\em ``Count''}, it might be able to see
+%the comparison similar to line 24 and to derive the type \code{int}
+%for that variable.
+%Therefore, correct learning of variable names can benefit for learning
+%of variable types and vice versa.
 
 %\textit{Within a function, e.g., \texttt{getClipboardContent}, a
 %  variable name, e.g., \texttt{contentType} is affected by the
