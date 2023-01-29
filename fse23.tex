@@ -160,7 +160,21 @@
 
 %\input{sections/abstract}
 \begin{abstract}
-
+In this work, we present {\tool}, a deep learning (DL)-based variable
+name recovery approach. We formulate the name recovery problem as the
+dual-task learning between the variable name prediction model and the
+type prediction model. {\em Correct learning for one model can benefit
+  for the learning in the other and vice versa} due to the naturalness
+of names in source code~\cite{hindle-icse12}. The rationale is that
+{\em the name chosen for a variable in the original code should be
+  natural (unsurprising) with respect to the type of that
+  variable}. For example, if a variable of the type \code{Student}
+should not have a name that is completely irrelevant to the notion
+``student''. Similarly, if a model learns the name of a variable, its
+type should be in accordance with the name and follow naming
+conventions. For example, if a model recovers the name of a variable
+as {\em count} or {\em index}, its type should be of \code{int} or
+\code{Integer}. Exploring this duality can provide useful constraints to predict both the variable names and their types.
 \end{abstract}
 %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
 
@@ -189,7 +203,7 @@
 
 \input{sections/intro}
 \input{sections/motiv}
-\input{sections/key-ideas}
+%\input{sections/key-ideas}
 \input{sections/overview}
 \input{sections/concepts}
 \input{sections/type-gen}
