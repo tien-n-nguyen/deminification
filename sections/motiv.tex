@@ -119,31 +119,40 @@ short and meaningless names, \eg \code{root} becomes \code{w},
 \eg UglifyJS~\cite{uglifyJS}. This makes them difficult to
 comprehend.
 
-
-\subsection{Observations}
+%\subsection{Observations}
 
 We aim to recover the names of the variables in the minified
 code. Such process is not trivial and affected by multiple factors.
-Let us explain the following observations to motivate our solution:
+Let us explain the following observations then to motivate our
+solution:
 
-\textbf{O1.} {\em The mutual impact between variable name learning and
-  variable type learning.} If a model learns correctly the type of a
-variable, it would help to learn better the name of the variable and
-vice versa. Let us consider the name
+\vspace{1pt} \textbf{Observation 1.} {\em The mutual impact between
+  variable name learning and variable type learning.} If a model
+learns correctly the type of a variable, it would help to learn better
+the name of the variable and vice versa. Let us consider the name
 \code{emptyBlocksIndex} for the variable \code{y} at line 24 in
 Figure~\ref{example_sim}: \code{if (y != -1)}. From that comparison, a
 model could learn that \code{y} is of the type \code{int}. Knowing
 that it is an integer, a model could combine that with the knowledge
 learned from line 23 (\code{var y =
   this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
-name for \code{y} could be something relevant to {\em ``Index''}. On
+name for \code{y} could be {\em ``Index''} or similar. On
 the other hand, correct learning of a variable name can also benefit
 for learning of its type. At line 18 of Figure~\ref{example_sim}, if
 the name \code{trailingImageCount} is recovered for the variable
 \code{a}, then its type is likely to be \code{int} if the model could
 make sense of the sub-tokens \code{image} and \code{count}.
 
-\textbf{O3}. {\em The name of a variable can be affected by the names
+\vspace{1pt} \noindent {\bf Key Idea 1.} [{\bf Dual-task Learning
+    between Name Prediction and Type Prediction}] {\em We leverage the
+  duality between the learning to predict the variable names and the
+  learning to predict the variable types.} In the original code, the
+name of a variable should be natural (unsurprising) with respect to
+the type of that variable. We build a name prediction model and a type
+prediction one, and we apply a dual-task learning mechanism between
+the two models.
+
+\textbf{O2}. {\em The name of a variable can be affected by the names
   of the surrounding variables in a function.} Intuitively, because
 multiple variables are used together to achieve the common task in the
 function, their names are often consistent with one another. For
