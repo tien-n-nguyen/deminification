@@ -3,8 +3,8 @@
 
 \begin{figure}[t]
 	\begin{center}
-	  \includegraphics[width=\columnwidth]{figures/overview.png}
-          \vspace{-15pt}
+	  \includegraphics[width=0.95\columnwidth]{figures/overview.png}
+          \vspace{-10pt}
 		\caption{{\tool}: Architecture Overview}
 		\label{overview}
 	\end{center}
@@ -19,44 +19,49 @@
 %	\end{center}
 %\end{figure}
 
-There are two main processes in {\tool}: training and predicting.
+%There are two main processes in {\tool}: training and predicting.
 
-Figure~\ref{overview} illustrates the overall process, which takes as
-input the minified code with all the original variables' names and
-types. The process contains the following key steps. First, we parse
-the minified code and build two representation graphs: 1) the type
-dependency graph~\cite{type-graph-icse22} representing the relations
-among the types of the variables in a function/method, and 2) the
-variable relation graph~\cite{icse19} represent the usage context of a
-variable with regard to its field accesses and method calls. The two
-graphs are merged into a representation graph.
+Figure~\ref{overview} illustrates the overall process. The input is
+the minified code with all the original variables' names and types
+during training and without them during the prediction.
+%
+The process contains the following key steps. First, the minified code
+is parsed and two feature graphs are extracted: 1) the Type Dependency
+Graph~\cite{type-graph-icse22} representing the relations among the
+types of the variables in a function/method according to type
+inference rules, and 2) the Relation Graph~\cite{icse19} represent the
+relations among the variables including the ones via field accesses
+and method calls (Section~\ref{sec:concepts}). The two graphs can
+always be extracted for minified code in both training or
+prediction. They will be merged into a representation graph.
 
-We have two models dedicated to two tasks: variable type generation
-(VTG) and variable name generation (VNG). The VTG model first extracts
-the features in a representation graph (e.g., the variables' names,
-the names of the fields and methods), and converts them into the input
-vectors for the VTG and VNG models. The VTG model leverages Label,
-Graph Convolution Network (Label-GCN)~\cite{label-gcn} with the
-support of an embedding model~\cite{pennington2014glove} as well as
-the Gate Recurrent Unit (GRU). The actual types of the
-variables in the input minified code are used as the labels during the
-training. For type prediction (Figure~\ref{overview}), the same
-process is used except that the types of the variables are predicted
-using the trained VTG model. When generating the types, we use some
-basic rule from parser to eliminate the impossible candidates.
+We have two models dedicated to the two tasks: Variable Type
+Generation (VTG) and Variable Name Generation (VNG). The VTG model
+first extracts the features in a representation graph (e.g., the
+variables' names, the names of the fields and methods), and converts
+them into the input vectors for the VTG and VNG models.
+
+The VTG model leverages Edge-Enhanced Graph Convolution Networks
+(EE-GCN)~\cite{ee-gcn} with the support of an embedding
+model~\cite{pennington2014glove} as well as the Gate Recurrent Unit
+(GRU). The actual variable types in the input minified code
+are used as the labels during training. For prediction, the same
+process is used except that the types are predicted
+using the trained model. To generate the types, we use type
+inference rules to eliminate the impossible candidates.
 
 The VNG model first extracts the features in the graph and builds the
 representation vectors. For the nodes that represent the variables
 with the minified names, we mask the node features and regard them as
 the missing features, and then feed the graph with missing features
-into the Label-GCN~\cite{label-gcn}. We leverage that GCN model and
-others to generate the candidate names for the minified ones. The
-actual names of the variables in the input minified code are used as
-the labels during the training. For name prediction
-(Figure~\ref{overview}), the same process is used except that the
-names of the variables are predicted using the trained VTG model. When
-generating the names, we use program analysis rules to ensure the
-consistencies among the names.
+into a Graph Convolution Network - Missing Features
+(GCNmf)~\cite{GCNmf}. The actual names
+of the variables in the input minified code are used as the labels
+during the training. For name prediction (Figure~\ref{overview}), the
+same process is used except that the names of the variables are
+predicted using the trained VTG model. When generating the names, we
+use program analysis rules to ensure the consistencies among the
+names.
 
 To propagate the impact of type prediction to name prediction and vice
 versa, we apply a dual-task learning mechanism between VTG and VNG
