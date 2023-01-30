@@ -187,31 +187,46 @@ system~\cite{type-graph-icse22}.
 %Due to space limit, we do not include
 %the type system for JavaScript.
 To represent the dependencies among the types, we adopt the type
-dependency graph (TDG)~\cite{type-graph-icse22}.
+dependency graph (TDG)~\cite{type-graph-icse22}, which aims to capture
+the type inference rules among variables and expressions.
 
 \begin{definition}{\bf Type Dependency Graph]}~\cite{type-graph-icse22}
     \label{tdg-def}
 A Type Dependency Graph is a graph $G$ = $(N,E)$ in which $N$ is the
 set of nodes representing all the variables and expresions, and $E$ is
-the set of edges from $n_i$ to $n_j$ indicating that the type of $n_j$
+the set of edges from $n_i$ $\rightarrow$ $n_j$ indicating that the type of $n_j$
 can be derived from the type of $n_i$ by the type inference rules in
 the type system.
 \end{definition}
 
-For example, from line 10 of Figure~\ref{example_org}, \code{start} =
-\code{preSelectionRange.} \code{toString().} \code{length}, our model
-can build the dependency between the type of \code{start} from the
-type of \code{length} in the \code{String} class (which is
-\code{int}). As another example, there is a type dependency between
-the return type of \code{getIndexRelativeToAdjacentEmptyBlocks} and
-the type of the variable \code{emptyBlocksIndex} at line 23:
-\code{emptyBlocksIndex} \code{=}
-\code{this.get\-Index\-Relative\-To\-Adjacent\-Empty\-Blocks(...)}.
+In Figure~\ref{example_sim}, let us consider line 5: \code{q =
+  b.getSelection();}. The TDG will contain a node for the expression
+\code{b.getSelection()} connecting to a node for the variable \code{q}
+because its type can be derived from the return type of the method
+call \code{getSelection}. We also have a node for the variable
+\code{b} connecting to a node the method \code{getSelection}
+because the type of \code{getSelection} can be derived from
+that of the variable \code{b}.
+
+\fbox{\code{b.getSelection}} $\rightarrow$ \fbox{\code{q}}
+
+\fbox{\code{getSelection}} $\rightarrow$ \fbox{\code{b}}
+
+%For example, from line 10 of Figure~\ref{example_org}, \code{start} =
+%\code{preSelectionRange.} \code{toString().} \code{length}, our model
+%can build the dependency between the type of \code{start} from the
+%type of \code{length} in the \code{String} class (which is
+%\code{int}). As another example, there is a type dependency between
+%the return type of \code{getIndexRelativeToAdjacentEmptyBlocks} and
+%the type of the variable \code{emptyBlocksIndex} at line 23:
+%\code{emptyBlocksIndex} \code{=}
+%\code{this.get\-Index\-Relative\-To\-Adjacent\-Empty\-Blocks(...)}.
 %another dependency between the type of \code{emptyBlocksIndex} and the
 %type of \code{selectState.emptyBlocksIndex} at line 25.
 Connecting all the dependencies among the types of variables and
-expressions, we have the type dependency graph for the code as defined
-in Definition~\ref{tdg-def}.
+expressions, we have the type dependency graph for a
+function/method. Note that both the Type Dependency Graph and the
+Relation Graph can be built for either the original or minified code.
 
 %We leverage the graph building algorithm from HiTyper to parse the
 %code and transform every variable occurrence and expression into nodes
