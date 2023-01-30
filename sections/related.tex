@@ -1,0 +1,110 @@
+\section{Related Work}
+\label{related_section}
+
+{\tool} is closely related JSNice~\cite{JSNice2015} and
+JSNaughty~\cite{JSNaughty2017}.
+%to recover the minified names for JS code.
+JSNice~\cite{JSNice2015}
+%formulates the problem of recovering the variable names with
+uses the graph representation of variables and
+surrounding program entities via program dependencies. It infers
+the variable names as a problem of structured prediction with
+conditional random fields (CRFs)~\cite{JSNice2015}. In comparison,
+first, while JSNice uses ML,
+%an advanced machine learning algorithm in CRF,
+{\tool} is IR-based in which
+%we formulate the problem of name recovery
+it searches for a list candidate names in a large code corpus. Second,
+{\tool} considers not only the impacts of surrounding program
+entities in SVC, but also task and multiple-variable contexts.
+%the current selected names for co-occurring
+%variables in a function, as well as the task of the function.
+%to which the variable belongs.
+Third, with CRF, JSNice is effective when variables have more
+dependencies, and less effective~with the functions having one
+variable. Finally, {\tool} is much faster and
+the results are more accurate as shown in
+Section~\ref{empirical_result_section}.
+
+JSNaughty~\cite{JSNaughty2017} formulates name recovery as a
+statistical machine translation from the minified code to the
+recovered code. First, due to the nature of ML, it faces the
+scalability issue in much higher time complexity. Second, JSNaughty
+uses a phrase-based translation model, which enforces a strict order
+between the recovered variable names in a function. This is too
+strict since a name of a variable might not~need~to occur before
+another name of another variable.
+%
+Third, JSNaughty does not consider the task context of
+the variables.
+%to which the variables are serving.
+Finally, our training/testing time is much faster.
+%
+In contrast, other~deobfuscation methods use static/dynamic
+analyses~\cite{Christodorescu:2003:SAE:1251353.1251365,Moser:2007:EME:1263552.1264210,Udupa05deobfuscation:reverse}.
+
+
+Statistical NLP approaches have been used in SE.
+%Allamanis {\em et al.}~\cite{sutton-fse15} propose a neural
+%probabilistic language model to suggest method/class names.
+%Tien
+%The code tokens with statistical co-occurrences are projected into a
+%continuous space together with the text tokens from the names.
+%
+Naturalize~\cite{barr-codeconvention-fse14}  enforces a
+consistent naming style.
+%by providing better names.
+%Their specialized model handles well the method/class naming problem
+%and is not suitable to capture the relations among (much more) texts
+%and code elements in software documentation.
+%
+%Allamanis {\em et al.}~\cite{bimodal15} introduce a jointly
+%probabilistic model short natural language utterances and source code
+%snippets.
+%^Researchers have applied {\em statistical NLP methods} including word
+%embeddings to software artifacts.
+% Tien
+%PAM~\cite{sutton-16} is a parameter-free, probabilistic algorithm to
+%mine API patterns.
+%It uses a probabilistic formulation of frequent sequence
+%mining on API sequences.
+%Allamanis {\em et al.}~\cite{sutton-fse15}
+%suggest methods/classes' names using embeddings.
+%Code elements' names are broken down into words.
+%The elements with statistical cooccurrences are projected into a
+%continuous space with the words from the names.
+%The model learns which names are semantically similar by assigning
+%them to locations such that names with similar embeddings tend to be
+%used in similar contexts~\cite{sutton-fse15}.
+%In comparison, we use Word2Vec~and learn the transformation
+%between two spaces. Their model works in the same
+%space. 
+%Moreover, {\tool} works on the abstraction level of API elements,
+%rather than names of tokens.
+%Maddison and Tarlow~\cite{tarlow14} present a generative model for
+%source code that is based on AST
+%structures.
+%Tien
+%TBCNN~\cite{tbcnn14} also uses trees for suggest next code
+%tokens.
+%
+Other applications of statistical NLP include code
+suggestion~\cite{hindle-icse12,tbcnn14}, code
+convention~\cite{barr-codeconvention-fse14}, method name
+suggestion~\cite{sutton-fse15}, API suggestions~\cite{raychev-pldi14},
+code mining~\cite{sutton-msr13}, type resolution~\cite{icse18}, pattern mining~\cite{sutton-16}.
+Statistical NLP was used to generate code from text, \eg
+SWIM~\cite{Raghothaman-ICSE16}, DeepAPI~\cite{gu-fse16},
+Anycode~\cite{anycode-oopsla15}, etc.
+
+%first uses IBM Model with word
+%translation to produce code elements. It then uses syntactic rules on
+%those elements to build code sequences close to the
+%query. DeepAPI~\cite{gu-fse16} uses RNN to generate API sequences for
+%a given text by using deep learning to relate APIs. Desai {\em et
+%  al.}~\cite{Desai2016ICSE} synthesize domain-specific languages from
+%English. Anycode~\cite{anycode-oopsla15} uses a probabilistic CFG
+%with trees for Java constructs and API calls to synthesize small Java
+%expressions. T2API~\cite{icsme18} uses graph-based API synthesis
+%algorithm that generates a graph representing an API usage from a
+%large corpus.
