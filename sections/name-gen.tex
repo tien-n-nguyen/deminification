@@ -1,15 +1,6 @@
 \section{Variable Name Generation Model}
 \label{sec:name-gen}
 
-\begin{figure*}[ht]
-	\begin{center}
-	  \includegraphics[width=4.7in]{figures/name-gen-model}
-          \vspace{-6pt}
-		\caption{Variables Name Generation Model (VNG)}
-		\label{fig:name-gen}
-	\end{center}
-\end{figure*}
-
 This section presents the Variable Name Generation Model (VNG).  The
 input is the minified code with all the original variables' names and
 types during training, and without the names during
@@ -46,6 +37,7 @@ known and used). Finally, we apply the semantic checkers to make sure
 that the variables' names are valid in the scope and that the same
 variable is assigned with a consistent name.
 
+\input{sections/missing_feature}
 
 %1> Similar to step 2, we use GloVe to learn the representation vector.
 

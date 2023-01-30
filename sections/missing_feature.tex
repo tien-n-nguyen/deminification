@@ -1,1 +1,19 @@
-We use Figure~\ref{rel-graph} as an example to explain how our variable name generation model works. Because when we use different code minification tools to process the same source code, the minified variable names could be different. In this case, the minified variable names do not have fixed meanings in different codes with varying minification tools. So in our variable name generation model, when the generated combined graph comes in, we regard the node $n_r, n_q, n_d$ with the minified variable names such as $r, q, d$ in Figure~\ref{rel-graph} as the nodes with missing node features. After feeding the graph into the GCNmf model, it will randomly create representation vectors $v_r, v_q, v_d$ for nodes $n_r, n_q, n_d$ at first. During the convolution process, the representation vectors $v_r, v_q, v_d$ will be automatically updated based on the neighbor node features and the connection relationships. When the convolution process is finished, the final stage of representation vectors $v'_r, v'_q, v'_d$ for nodes $n_r, n_q, n_d$ are fed into the GRU decoder to predict minified variable names. At the same time, the final representation vectors for each node can be used in the type generation model for the type prediction.
+We use Figure~\ref{rel-graph} as an example to explain how our
+variable name generation model works. Because when we use different
+code minification tools to process the same source code, the minified
+variable names could be different. In this case, the minified variable
+names do not have fixed meanings in different codes with varying
+minification tools. So in our variable name generation model, when the
+generated combined graph comes in, we regard the node $n_r, n_q, n_d$
+with the minified variable names such as $r, q, d$ in
+Figure~\ref{rel-graph} as the nodes with missing node features. After
+feeding the graph into the GCNmf model, it will randomly create
+representation vectors $v_r, v_q, v_d$ for nodes $n_r, n_q, n_d$ at
+first. During the convolution process, the representation vectors
+$v_r, v_q, v_d$ will be automatically updated based on the neighbor
+node features and the connection relationships. When the convolution
+process is finished, the final stage of representation vectors $v'_r,
+v'_q, v'_d$ for nodes $n_r, n_q, n_d$ are fed into the GRU decoder to
+predict minified variable names. At the same time, the final
+representation vectors for each node can be used in the type
+generation model for the type prediction.
