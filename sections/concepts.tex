@@ -27,7 +27,7 @@ of variables. Let us explain those concepts used in {\tool}.
 %and those of the methods and fields in the original code are in
 %harmony with one another. For example,
 
-In Figure~\ref{example_sim}, at line 7 and line 9, we will explore the
+In Figure~\ref{example_sim}, at lines 7--9, we explore the
 field accesses and method calls of the variable \code{r} in
 \code{r.cloneRange()}, \code{r.startOffset}, and \code{r.endOffset}.
 
@@ -190,12 +190,10 @@ $assign$ edge from the variable \code{r} to the node
 
 In this work, we focus on Python source
 code. Figure~\ref{python-types} shows Python's type
-system~\cite{type-graph-icse22}.
-%Due to space limit, we do not include
-%the type system for JavaScript.
-To represent the dependencies among the types, we adopt the type
-dependency graph (TDG)~\cite{type-graph-icse22}, which aims to capture
-the type inference rules among variables and expressions.
+system~\cite{type-graph-icse22}. To represent the dependencies among
+the types, we adopt Type Dependency Graph
+(TDG)~\cite{type-graph-icse22}, which aims to capture the type
+inference rules for variables/expressions.
 
 \begin{definition}{\bf Type Dependency Graph]}~\cite{type-graph-icse22}
     \label{tdg-def}
