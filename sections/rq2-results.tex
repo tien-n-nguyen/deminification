@@ -1,0 +1,28 @@
+\subsection{{\bf RQ2. Comparative Study on Variable Type Prediction.}}
+\label{empirical-rq2}
+
+\begin{table}[t]
+	\caption{RQ2. Comparative Study on Variable Type Prediction.}
+	\begin{center}
+		\small
+		\renewcommand{\arraystretch}{1} \begin{tabular}{p{1.7cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}}
+			
+			\hline
+                       & \multicolumn{2}{c}{Top-1}         & \multicolumn{2}{c}{Top-3}         & \multicolumn{2}{c}{Top-5} \\
+			\hline
+                       & EM & MP & EM & MP & EM & MP  \\ 
+			\hline
+			HiTyper                                & 0.65 & 0.76 & 0.73 & 0.82 & 0.74 & 0.84 \\
+			Type4Py                                & 0.71 & 0.78 & 0.76 & 0.82 & 0.78 & 0.85 \\
+			Typilus                                &      &      &      &      &      &      \\
+			Ivanov et al.\cite{ivanov21predicting} &      &      &      &      &      &      \\
+			TypeWriter                             &      &      &      &      &      &      \\
+			\hline
+			{\tool}                                & 0.69 & 0.79 & 0.77 & 0.83 & 0.80 & 0.85 \\
+			\hline
+		\end{tabular}
+		\label{RQ2-result}
+		{\bf EM}:Exact Match, {\bf MP}:Match to Parametric
+	\end{center}
+\end{table}
+
