@@ -22,13 +22,15 @@ code~\cite{barr-codeconvention-fse14}.
 %important role.
 
 In modern software development, some technologies require the exposure
-of source code, e.g., in Web programming languages, the client code
+of source code, e.g., in the client-server paradigm, the client code
 need to executed in the client side. To avoid the exposure, the source
 code is obfuscated and/or minified such that the variable names are
 replaced with short, opaque, and meaningless names.  The minification
 of the variable names hides the business logics from the readers while
-maintaining the essence of the code. For Web programming, the JS files
-are also more quickly loaded from the servers for better performance.
+maintaining the essence of the code.
+
+%For Web programming, the JS files are also more quickly loaded from
+%the servers for better performance.
 
 
 %Web technologies and programming languages require the exposure of
@@ -123,15 +125,17 @@ Exploring this duality can provide useful constraints to predict both
 the variable names and their types.  To build the variable name
 prediction model and the type prediction model, we leverage the
 Edge-Enhanced Graph Convolution Networks (EE-GCN)~\cite{ee-gcn} to
-model different kinds of relationships not only among the variables
-but also among the types. To propagate the mutual impact of type
-learning and name learning, we apply a dual-task learning mechanism
-between the two models. We use the uncertainty weighted multi-task
-loss as the multi-task learning loss function and use the maximum of
-the top-1 accuracy score from two tasks as the training target. Our
-DL-based model is expected to have better predictive power than the
-CRF in JSNice and SMT in JSNaughty, especially in modeling the
-relations among variables and types.
+model different kinds of relationships among the variables and among
+the types. We formulate the name and type recovery problem as the
+predicting the missing features in the EE-GCN. To propagate the mutual
+impact of type learning and name learning, we apply a dual-task
+learning mechanism between the two models. We use the uncertainty
+weighted multi-task loss as the multi-task learning loss function and
+use the maximum of the accuracy score from two tasks as the training
+target. Our DL-based model is expected to have better predictive power
+than the CRF in JSNice and SMT in JSNaughty, especially in predicting
+the missing features when considering the relations among variables
+and types.
 
 We have conducted experiments to evaluate {\tool} in both name
 recovery and type prediction on a real-world dataset with +63K Python
