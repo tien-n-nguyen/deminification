@@ -1,4 +1,4 @@
-Let us use Figure~\ref{rel-graph} to illustrate the benefit of {\bf
+Let us use Figure~\ref{rel-graph} to illustrate the benefit of {\em
 modeling the variable name generation/recovery problem as predicting
 the missing features} using GCNmf~\cite{GCNmf}. A variable with a
 minified name is modeled as a nodel in our graph, e.g., $r$, $q$, and
@@ -6,7 +6,7 @@ $d$.  The prior works based on machine translation (e.g.,
 JSNaughty~\cite{JSNaughty2017}) aiming to translate the minified code
 to the orginal code, face an issue of different naming schemes using
 by different minification tools. For example, the
-variable \code{range} might become $r1$, instead of $r$, by a
+variable \code{range} might become $r_1$, instead of $r$, by a
 different minification tool or by alpha-renaming. In {\tool}, the
 minified names themselves do not play a crucial role in deciding the
 orignal names as in prior work. They help in recognizing the
@@ -15,9 +15,9 @@ considers a node for a minified variable as a placeholder with a
 missing feature that it aims to fill in.  In prediction, GCNmf will
 create the vectors $v_r$, $v_q$, and $v_d$ for the nodes. During the
 convolution process, those vectors are automatically updated based on
-the neighboring node features and the relations. After the convolution
-process, the final vectors $V_r$, $V_q$, and $V_d$ will be fed into
-the GRU decoder for the variable name prediction.
+the neighboring node features and the relations. After convolution,
+the final vectors will be fed into the GRU decoder for variable name
+prediction.
 
 %We use Figure~\ref{rel-graph} as an example to explain how our
 %variable name generation model works. Because when we use different
