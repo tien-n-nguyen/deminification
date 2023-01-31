@@ -43,7 +43,19 @@ improves over HiTyper due to the propagation of VNG to VTG.
 Type4Py~\cite{Type4Py-icse22} is a deep similarity learning-based
 hierarchical neural network model. It learns to discriminate between
 similar and dissimilar types in a high-dimensional space. Likely types
-are then inferred through the nearest neighbor search.
+are then inferred through the nearest neighbor search. We formulate
+the problem as missing feature recovery, rather than finding similar
+types in high-dimensional space. In a similar vein,
+Typilus~\cite{typilus-pldi20} proposes TypeSpace containing the
+embeddings with type properties of a
+symbol. TypeWriter~\cite{typewriter-fse20} learns to infer the return
+and argument types for functions from partially annotated code bases
+by combining the natural language properties of code with programming
+language-level information. {\tool} does not use natural-language
+properties. Ivanov {\em et al.}~\cite{ivanov21predicting} demonstrate
+that graph-based embeddings are complementary to FastText embeddings
+to improve the quality of type prediction. We use GCNmf to predict
+the missing features, rather than combining with FastText.
 
 %%
 %Third, JSNaughty does not consider the task context of the
