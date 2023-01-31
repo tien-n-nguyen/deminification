@@ -68,17 +68,18 @@ as code review, analysis, enhancement, and reuse.
 Several automated approaches have been proposed to automatically
 recover the names of the variables in the minified source code.  The
 approaches can be broadly classified into two directions: {\em
-information retrieval} and {\em machine learning}.
-JSNeat~\cite{icse19} follows an information retrieval (IR) approach to
-recover names by searching for them in a large corpus of open-source
-JS code. JSNeat integrates three types of contexts to match a variable
-in given minified code against the corpus including 1) the context of
-the properties and roles of the variable, 2) the context of that
-variable and relations with other variables under recovery, and 3) the
-context of the task of the function to which the variable contributes.
-Despite its successes, due to the inherent limitation of the
-information retrieval direction, JSNeat {\em cannot generate a new
-variable name} that was not encountered in the corpus.
+  information retrieval}, {\em statistical learning}, and {\em machine
+  learning}.  JSNeat~\cite{icse19} follows an information retrieval
+(IR) approach to recover names by searching for them in a large corpus
+of open-source JS code. JSNeat integrates three types of contexts to
+match a variable in given minified code against the corpus including
+1) the context of the properties and roles of the variable, 2) the
+context of that variable and relations with other variables under
+recovery, and 3) the context of the task of the function to which the
+variable contributes.  Despite its successes, due to the inherent
+limitation of the information retrieval direction, JSNeat {\em cannot
+  generate a new variable name} that was not encountered in the
+corpus.
 
 JSNice~\cite{JSNice2015}, following a probabilistic model (PM)
 approach, is an automatic variable name recovery approach that
