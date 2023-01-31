@@ -3,31 +3,29 @@
 
 \begin{figure*}[ht]
 	\begin{center}
-	  \includegraphics[width=4.8in]{figures/type-gen-model}
-          \vspace{-10pt}
+	  \includegraphics[width=4.8in]{figures/type-gen-model-2}
+          \vspace{-6pt}
 		\caption{Variable Type Generation Model (VTG)}
 		\label{fig:type-gen}
 	\end{center}
 \end{figure*}
 
-\begin{figure*}[h]
-	\begin{center}
-	  \includegraphics[width=4.6in]{figures/name-gen-model}
-          \vspace{-10pt}
-		\caption{Variables Name Generation Model (VNG)}
-		\label{fig:name-gen}
-	\end{center}
-\end{figure*}
+This section presents the Variable Type Generation Model (VTG).  The
+input is the minified code with all the original variables' names and
+types during training, and without the names during
+prediction. Similar to VNG model, the combined graph $G$ is processed
+in which the names in the code sequence of each node $n$ is tokenzed
+and an embedding model is applied to build the vector for $n$
+considering each sequence of sub-tokens for $n$ as a sentence.
 
-This section presents the Variable Type Generation Model (VTG). During
-training, the input is the minified code with all the original
-variables’ names and types, and during predicting, it does not have
-them. First, we build the TDG and the RG for the given minified code.
-The two graphs are combined into a representation graph $G$. For each
-node in $G$, we tokenize the names in the corresponding code sequence
-of the node. We consider each of them as a sentence and use an
-embedding model (e.g., GloVe~\cite{pennington2014glove}) to build the
-representation vector for each node in $G$.
+%During training, the input is the minified code with all the original
+%variables’ names and types, and during predicting, it does not have
+%them. First, we build the TDG and the RG for the given minified code.
+%The two graphs are combined into a representation graph $G$. For each
+%node in $G$, we tokenize the names in the corresponding code sequence
+%of the node. We consider each of them as a sentence and use an
+%embedding model (e.g., GloVe~\cite{pennington2014glove}) to build the
+%representation vector for each node in $G$.
 
 Next, we feed the graph $G$ with those vectors to the
 EE-GCN~\cite{ee-gcn}. EE-GCN could accept both node and edge features.

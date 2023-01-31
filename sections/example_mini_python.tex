@@ -1,0 +1,49 @@
+\begin{figure}[t]
+	\centering
+	\lstset{
+		numbers=left,
+		numberstyle= \tiny,
+		keywordstyle= \color{blue!70},
+		commentstyle= \color{red!50!green!50!blue!50},
+		frame=shadowbox,
+		rulesepcolor= \color{red!20!green!20!blue!20} ,
+		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+		framexleftmargin=1.5em,
+                numbersep= 5pt,
+		language=Java,
+    basicstyle=\scriptsize\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
+    emphstyle=\bfseries,
+                moredelim=**[is][\color{red}]{@}{@},
+		escapeinside= {(*@}{@*)}
+	}
+	\begin{lstlisting}[]
+function exportSelection(self, w, b) {
+  if not w:
+     return null
+  q = b.getSelection()
+  if q.rangeCount > 0:
+    r = q.getRangeAt(0)
+    d = r.cloneRange()
+    d.selectNodeContents(w)
+    d.setEnd(r.startContainer, r.startOffset)
+    m = len(str(d))
+    p = {
+          "start": m,
+          "end": m + len(str(r)
+        };
+    if self.doesRangeStartWithImages(r, b):
+       p.startsWithImage = true
+    (*@{\color{orange}{a = self.getTrailingImageCount}@*)(w, p, r.endContainer, r.endOffset)
+    if a:
+      p.trailingImageCount = a
+    if m !== 0:
+      (*@{\color{violet}{y = self.getIndexRelativeToAdjacentEmptyBlocks}@*)(b, w, r.startContainer, r.startOffset)
+      (*@{\color{violet}{if y != -1:}@*)
+        p.emptyBlocksIndex = y
+      ...
+\end{lstlisting}
+\vspace{-12pt}
+\caption{The Minified Code for the Code in Figure~\ref{example_org}}
+\label{example_sim}
+\end{figure}

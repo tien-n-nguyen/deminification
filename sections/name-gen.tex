@@ -1,13 +1,26 @@
 \section{Variable Name Generation Model}
 \label{sec:name-gen}
 
-This section presents the Variable Name Generation Model (VNG).  The
-input is the minified code with all the original variables' names and
-types during training, and without the names during
-prediction. Similar to VTG model, the combined graph $G$ is processed
-in which the names in the code sequence of each node $n$ is tokenzed
-and an embedding model is applied to build the vector for $n$
-considering each sequence of sub-tokens for $n$ as a sentence.
+\begin{figure*}[h]
+	\begin{center}
+	  \includegraphics[width=4.6in]{figures/name-gen-model-2}
+          \vspace{-6pt}
+		\caption{Variables Name Generation Model (VNG)}
+		\label{fig:name-gen}
+	\end{center}
+\end{figure*}
+
+
+This section presents the Variable Name Generation Model (VNG).
+During training, the input is the minified code with all the original
+variables' names and types, and during predicting, the input does not
+have names and types. First, we build the TDG and the RG for the given
+minified code. The two graphs are combined into a representation
+graph $G$. For each node in $G$, we tokenize the names in the
+corresponding code sequence of the node. We consider each of them as a
+sentence and use an embedding model (e.g.,
+GloVe~\cite{pennington2014glove}) to build the representation vector
+for each node in $G$.
 
 Next, for training, we process the graph $G$ with the node vectors as
 follows. For the node $n$ that represents a variable with minified
@@ -24,9 +37,8 @@ keeping the other GCN layers unchanged. The GMM parameters and GCNmf
 weight parameters are learned within the same architecture, enabling
 the learning of missing features. The GCNmf model is trained with the
 masks for the minified variable names. For prediction, applying on the
-minified code (without names), the GCMmf model outputs the vectors not
-only for the nodes in the graph $G$ but also the vectors for the
-missing features.
+minified code (without names), the GCMmf model outputs the vectors for
+the nodes in the graph $G$ and the vectors for the missing features.
 
 The vectors representing the missing features, i.e., the missing
 variables' names in the input graph $G$ are used next to be fed into a
