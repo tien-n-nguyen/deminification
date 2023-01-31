@@ -1,0 +1,49 @@
+\begin{figure}[t]
+	\centering
+	\lstset{
+		numbers=left,
+		numberstyle= \tiny,
+		keywordstyle= \color{blue!70},
+		commentstyle= \color{red!50!green!50!blue!50},
+		frame=shadowbox,
+		rulesepcolor= \color{red!20!green!20!blue!20} ,
+		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+		framexleftmargin=1.5em,
+                numbersep= 5pt,
+		language=Python,
+    basicstyle=\scriptsize\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
+    emphstyle=\bfseries,
+                moredelim=**[is][\color{red}]{@}{@},
+		escapeinside= {(*@}{@*)}
+	}
+	\begin{lstlisting}[]
+function exportSelection(self, root, doc) {
+  if not root: 
+      return null
+  selection = doc.getSelection()
+  if selection.rangeCount > 0:
+      range_ = selection.getRangeAt(0)
+      preSelectionRange = range_.cloneRange()
+      preSelectionRange.selectNodeContents(root)
+      preSelectionRange.setEnd(range_.startContainer, range_.startOffset)
+      start = len(str(preSelectionRange))
+      selectionState = {
+          "start": start,
+          "end": start + len(str(range_))
+      }
+      if self.doesRangeStartWithImages(range_, doc):
+          selectionState.startsWithImage = true
+      trailingImageCount = self.getTrailingImageCount(root, selectionState, range_.endContainer, range_.endOffset)
+      if trailingImageCount:
+        selectionState.trailingImageCount = trailingImageCount;
+      if start != 0:
+        (*@{\color{violet}{emptyBlocksIndex = self.getIndexRelativeToAdjacentEmptyBlocks}@*)(doc, root, range_.startContainer, range_.startOffset)
+        (*@{\color{violet}{if emptyBlocksIndex != -1:}@*) 
+          selectionState.emptyBlocksIndex = emptyBlocksIndex
+        ...
+        \end{lstlisting}
+\vspace{-12pt}
+\caption{An Original Code from a Project in GitHub}
+\label{example_org}
+\end{figure}
