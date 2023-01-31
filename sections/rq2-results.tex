@@ -12,8 +12,8 @@
 			\hline
                        & EM & MP & EM & MP & EM & MP  \\ 
 			\hline
-			HiTyper                                & 0.65 & 0.76 & 0.73 & 0.82 & 0.74 & 0.84 \\
-			Type4Py                                & 0.71 & 0.78 & 0.76 & 0.82 & 0.78 & 0.85 \\
+			HiTyper                                & 0.69 & 0.77 & 0.72 & 0.81 & 0.72 & 0.82 \\
+			Type4Py                                & 0.62 & 0.66 & 0.66 & 0.72 & 0.67 & 0.73 \\
 			Typilus                                &      &      &      &      &      &      \\
 			Ivanov et al.\cite{ivanov21predicting} &      &      &      &      &      &      \\
 			TypeWriter                             &      &      &      &      &      &      \\
@@ -26,3 +26,11 @@
 	\end{center}
 \end{table}
 
+{\color{red}{I found that the hityper and type4py have results on the dataset ManyTypes4PY. Our results are a little bit different from theirs. I think the reason is that we only use 25k+ while they use the full dataset. To make it consistent, I changed the numbers here in the table to the results that they got on the full dataset. But I still keep our results on google slides in case we need them.}}
+
+1. {\tool} performs the best comparing with all baselines by increasing the top-1, top-3, and top-5 accuracy by XX\%, XX\%, and XX\%
+2. HiTyper is mainly based on the rules from python to predict the types. {\tool} performs similarly (and even slightly better) than HiTyper. It proves that {\tool} can work well on type prediction with less human effort on rules summarization. Also, {\tool} can easier be used on programming languages compared with HiTyper
+3. Type4py uses a hierarchical neural network with RNN layers to predict types. {\tool} could improve XX\% compared with Type4py because {\tool} learns both the variable representation vectors and different types of the variable relationships from the combined graphs while type4py relies on AST-structure that can show the relationship but cannot differ the different types of relationships.
+4. Typilus uses a graph model to learn the relationship to predict variable types. {\tool} could improve XX\% compared with Typilus because {\tool} uses dual learning, and the name prediction results can help improve the accuracy of the type prediction.
+5. Ivanov et al.\cite{ivanov21predicting} uses simple CNN models to predict variable types. {\tool} could improve XX\% compared with Ivanov et al.\cite{ivanov21predicting} because {\tool} uses a combined graph with the graph-based model to predict types, and the combined graph can represent the variable relationship better than the sequential order of tokens. These relationships can help predict the types with higher accuracy.
+6. TypeWriter is similar to Type4py, and it is also based on AST structure. For the similar reason explained in point 3, {\tool} can outperform TypeWriter by XX\%.
