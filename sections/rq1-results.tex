@@ -53,42 +53,65 @@ names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 {\bf 15.9\%}, respectively. The absolute improvements in top-1
 accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 
-We examined the predicted names from all the baselines. Comparing with
+We examined the predicted names from all the baselines. Compared to
 JSNeat, an information retrieval approach, we found that it often
-failed in the following cases: 1) it has not seen the names before in
-the database. {\tool} can generate a new name with its decoder. 2) it
-found the name in the database with different relations or different
-surrounding contexts due to explicitly setting of similarity
-thresholds. For the latter, while JSNeat aims to explicitly find the
-similar variables via feature matching, {\tool} with its neural
-network can implicitly do so without explicitly setting any similarity
-threshold.
+failed in the following cases. (1) It has not seen the names before in
+the database. {\tool} can generate a new name with its decoder. Due to
+explicitly setting of similarity thresholds, it faces two other
+issues. (2) The correct name was not returned because the relations
+and contexts are not similar enough with pre-defined thresholds.  (3)
+if two variables in the same function are assigned with the same name
+via the similarity measure, JSNeat cannot decide one, turning to a
+random selection. Avoiding feature matching with explicit similarity
+threshold, {\tool} with its neural network can implicitly do so
+without any similarity threshold.
 
-JSNaughty
+Compared to JSNaughty~\cite{JSNaughty2017} with statistical machine
+translation from minified code to original code, we found that it
+relies much on the {\em minified names} in minified code. We examine
+the {\em phrase mapping table}, a byproduct of their machine
+translation model, which contains the knowledge it learned from
+training. We reported that JSNaughty learns {\em inconsistent
+  mappings} between the minified names and original ones. That is,
+there are several mappings for the same minfied names with different
+weights depending on their occurrences in the corpus. For example,
+\code{b} $\leftrightarrow$ \code{doc}, \code{b} $\leftrightarrow$
+\code{book}, etc. In contrast, {\tool} does not rely on the minified
+names themselves, by considering modeling them as the nodes with
+missing features (i.e., missing names and types) in the GCNmf
+model~\cite{GCNmf}.
 
-JSNice
+{\tool} is similar in spirit to JSNice~\cite{JSNice2015} in which both
+formulates the problem as predicting the features/attributes of the
+nodes in a graph. The Conditional Random Field in JSNice uses
+probabilistic name prediction graph. In comparison, {\tool} leverages
+more advanced neural network in GCNmf~\cite{GCNmf} as well as a more
+specialized graph with the help of the type prediction model.
+
+%which is not as powerful as the advanced neural network
+%GCNmf~\cite{GCNmf}.
 
 
-1. On both local variables and all variables, {\tool} performs XXX\%
-better than the baselines.
+%1. On both local variables and all variables, {\tool} performs XXX\%
+%better than the baselines.
 
-2. JSNeat uses information retrieval techniques to find the possible
-variable names based on the training data. {\tool} can perform better
-because sometimes it is hard to find similar variable names with
-similar variable relationships, and sometimes the same variable names
-may have different variable relationships. JSNeat cannot perform well
-in these cases, but {\tool} can still work as designed.
+%2. JSNeat uses information retrieval techniques to find the possible
+%variable names based on the training data. {\tool} can perform better
+%because sometimes it is hard to find similar variable names with
+%similar variable relationships, and sometimes the same variable names
+%may have different variable relationships. JSNeat cannot perform well
+%in these cases, but {\tool} can still work as designed.
 
-3. JSNice uses conditional random field models to predict variable
-names based on dependency graphs. {\tool} can outperform {\tool} by
-XX\% because {\tool} uses combine graph from relation graph and
-TDG. The combined graphs contain more detailed information between
-variables compared with dependency graphs.
+%3. JSNice uses conditional random field models to predict variable
+%names based on dependency graphs. {\tool} can outperform {\tool} by
+%XX\% because {\tool} uses combine graph from relation graph and
+%TDG. The combined graphs contain more detailed information between
+%variables compared with dependency graphs.
 
-4. JSNaughty regards the name prediction problem as the translation
-problem. {\tool} can outperform JSNaughty XX\% because different
-minification tools can provide different minified variable names for
-the same source code, but {\tool} regards the minified variable names
-as missing features in GCNmf. In this case, the minified variable
-names will not influence the performance of {\tool}, but it will
-influence JSNaughty performance.
+%4. JSNaughty regards the name prediction problem as the translation
+%problem. {\tool} can outperform JSNaughty XX\% because different
+%minification tools can provide different minified variable names for
+%the same source code, but {\tool} regards the minified variable names
+%as missing features in GCNmf. In this case, the minified variable
+%names will not influence the performance of {\tool}, but it will
+%influence JSNaughty performance.

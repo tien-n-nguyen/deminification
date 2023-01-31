@@ -110,14 +110,14 @@ function exportSelection(w, b) {
 
 Let us start with a real-world example to motivate our approach.
 Figures~\ref{example_org} and~\ref{example_sim} show the original and
-minified versions~of the JS function \code{exportSelection}.  The
+minified versions~of the function \code{exportSelection}.  The
 function is aimed to export/retrieve the selection from a document.
 %
 In the minified code, all local variables were randomly renamed with
 short and meaningless names, \eg \code{root} becomes \code{w},
-\code{doc} becomes \code{b}, etc. by the minification tool,
-\eg UglifyJS~\cite{uglifyJS}. This makes them difficult to
-comprehend.
+\code{doc} becomes \code{b}, etc. by a minification tool.
+%\eg UglifyJS~\cite{uglifyJS}.
+This makes them difficult to comprehend.
 
 %\subsection{Observations}
 
