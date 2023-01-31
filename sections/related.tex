@@ -29,6 +29,22 @@ before another name of another variable.  In contrast, the other
 methods for code deobfuscation mainly leverage static/dynamic
 analyses~\cite{Christodorescu:2003:SAE:1251353.1251365,Moser:2007:EME:1263552.1264210,Udupa05deobfuscation:reverse}.
 
+
+HiTyper~\cite{HiTyper-icse22} is a hybrid approach between static
+inference and deep learning. It uses Type Dependency Graph (TDG) to
+encode type inference rules to conduct type rejection to inspect the
+output predictions. It iteratively conducts static inference and
+DL-based prediction until the TDG is fully inferred. In comparison,
+{\tool} focuses on variable name recovery for minified code, and
+leverages TDG with EE-GCN to infer the types, improving the name
+generation in a dual-task learning fashion. As seen, {\tool} also
+improves over HiTyper due to the propagation of VNG to VTG.
+%
+Type4Py~\cite{Type4Py-icse22} is a deep similarity learning-based
+hierarchical neural network model. It learns to discriminate between
+similar and dissimilar types in a high-dimensional space. Likely types
+are then inferred through the nearest neighbor search.
+
 %%
 %Third, JSNaughty does not consider the task context of the
 %variables. Finally, our training/testing time is much faster.
