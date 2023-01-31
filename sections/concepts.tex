@@ -166,7 +166,7 @@ the code in Figure~\ref{example_sim}. For example, there are an
 $assign$ edge from the variable \code{r} to the node
 \code{getRangeAt}, and a $methodcall$ edge from \code{q} to
 \code{getRangeAt} because we have \code{r = q.getRangeAt(0)} at line
-7.
+6.
 
 
 
@@ -204,8 +204,8 @@ can be derived from the type of $n_i$ by the type inference rules in
 the type system.
 \end{definition}
 
-In Figure~\ref{example_sim}, let us consider line 5: \code{q =
-  b.getSelection();}. The TDG will contain a node for the expression
+In Figure~\ref{example_sim}, let us consider line 4: \code{q =
+  b.getSelection()}. The TDG will contain a node for the expression
 \code{b.getSelection()} connecting to a node for the variable \code{q}
 because its type can be derived from the return type of the method
 call \code{getSelection}. We also have a node for the variable
