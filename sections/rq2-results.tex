@@ -1,36 +1,98 @@
 \subsection{{\bf RQ2. Comparative Study on Variable Type Prediction.}}
 \label{empirical-rq2}
 
+\begin{figure}[thbp]
+\begin{center}
+\includegraphics[width=3.2in]{figures/type-prediction-result}
+\vspace{-8pt}
+\caption{RQ2. Top-1 Accuracy on Variable Type Prediction}
+\label{type-prediction-result}
+\end{center}
+\end{figure}
+
 \begin{table}[t]
-	\caption{RQ2. Comparative Study on Variable Type Prediction.}
+  \caption{RQ2. Comparison on Variable Type Prediction.}
+  \vspace{-5pt}
 	\begin{center}
 		\small
-		\renewcommand{\arraystretch}{1} \begin{tabular}{p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}}
+		\renewcommand{\arraystretch}{1} \begin{tabular}{|p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|}
 			
 			\hline
-                       & \multicolumn{2}{c}{Top-1}         & \multicolumn{2}{c}{Top-3}         & \multicolumn{2}{c}{Top-5} \\
+                       & \multicolumn{2}{c|}{Top-1}         & \multicolumn{2}{c|}{Top-3}         & \multicolumn{2}{c|}{Top-5} \\
 			\hline
-                       & EM & MP & EM & MP & EM & MP  \\ 
+                       & EM & PM & EM & PM & EM & PM  \\ 
 			\hline
-			HiTyper~\cite{HiTyper-icse22}  & 0.69 & 0.77 & 0.72 & 0.81 & 0.72 & 0.82 \\
-			Type4Py~\cite{Type4Py-icse22}  & 0.62 & 0.66 & 0.66 & 0.72 & 0.67 & 0.73 \\
-			Typilus~\cite{typilus-pldi20}  &      &      &      &      &      &      \\
-			Ivanov {\em et al.}~\cite{ivanov21predicting} &      &      &      &      &      &      \\
-			TypeWriter~\cite{typewriter-fse20}  &      &      &      &      &      &      \\
+		        Ivanov {\em et al.}~\cite{ivanov21predicting} &  52    & 58     &   55   &  63     &  60     &   67    \\
+			Typilus~\cite{typilus-pldi20}  &   55   &  61    &  59    &   66   &  62    &  70     \\
+			TypeWriter~\cite{typewriter-fse20}  &   60   &  64    &  63    &  69    &  65    & 71      \\
+                       	Type4Py~\cite{Type4Py-icse22}  & 62 & 66 & 66 & 72 & 67 & 73 \\
+                        HiTyper~\cite{HiTyper-icse22}  & 69 & 77 & 72 & 81 & 72 & 82 \\
 			\hline
-			{\tool}                                & 0.69 & 0.79 & 0.77 & 0.83 & 0.80 & 0.85 \\
+			{\bf {\tool}}                        & 79 & 89 & 87 & 90 & 88 & 94 \\
 			\hline
 		\end{tabular}
-		\label{RQ2-result}
-		{\bf EM}:Exact Match, {\bf MP}:Match to Parametric
+		\label{type-result}
+		{\bf EM}: Exact Match, {\bf PM}: Parametric Match
 	\end{center}
 \end{table}
 
-{\color{red}{I found that the hityper and type4py have results on the dataset ManyTypes4PY. Our results are a little bit different from theirs. I think the reason is that we only use 25k+ while they use the full dataset. To make it consistent, I changed the numbers here in the table to the results that they got on the full dataset. But I still keep our results on google slides in case we need them.}}
+%{\color{red}{I found that the hityper and type4py have results on the dataset ManyTypes4PY. Our results are a little bit different from theirs. I think the reason is that we only use 25k+ while they use the full dataset. To make it consistent, I changed the numbers here in the table to the results that they got on the full dataset. But I still keep our results on google slides in case we need them.}}
 
-1. {\tool} performs the best comparing with all baselines by increasing the top-1, top-3, and top-5 accuracy by XX\%, XX\%, and XX\%
+In this study, we evaluate {\tool}'s accuracy and compare it with the
+state-of-the-art approaches in variable type prediction for minified
+code. As seen in Figure~\ref{type-prediction-result}, for all
+variables in minified code, {\tool} achieves high top-1 accuracy of
+{\bf 79\%} for exact-matches of the types and {\bf 89\%} for the
+parametric matches. That is, in 79\% of the cases, it can recover the
+correct variable types with a single prediction.
+%
+The relative improvements in top-1 accuracy in exact-matching over
+Ivanov {\em et al.}~\cite{ivanov21predicting},
+Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
+Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
+{\bf 51.9\%, 43.6\%}, {\bf 31.6\%}, {\bf 27.4\%}, and {\bf
+  14.5\%}, respectively. The absolute improvements in top-1 accuracy
+over the state-of-the-art approaches are from
+10\%--27\%.
+
+Regarding the parametric matches (disregarding the types of the
+parameters), {\tool} achieves higher top-1 accuracy. In 79\% of the
+cases, it can recover the correct variable types (discarding those of
+parameters) with a single prediction. The relative improvements in
+top-1 accuracy in parametric-matching over Ivanov {\em et
+  al.}~\cite{ivanov21predicting}, Typilus~\cite{typilus-pldi20},
+TypeWriter\cite{typewriter-fse20}, Type4Py~\cite{Type4Py-icse22}, and
+HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 39\%},
+{\bf 34.8\%}, and {\bf 15.5\%}, respectively.
+
+Moreover, {\tool} also achieves high top-$k$ ($k$=3,5) accuracies: as
+seen in Table~\ref{type_result}, in 88\% of the variables, the correct
+types of the variables are in the list of 5 candidate types. The
+relative improvements in top-5 accuracy in parametric-matching over
+Ivanov {\em et al.}~\cite{ivanov21predicting},
+Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
+Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
+{\bf 46.6\%, 42\%}, {\bf 35.3\%}, {\bf 31.3\%}, and {\bf 22.2\%},
+respectively.
+
+%1. {\tool} performs the best comparing with all baselines by increasing the top-1, top-3, and top-5 accuracy by XX\%, XX\%, and XX\%
+
+We examined the cases that {\tool} predicted correctly and the
+baselines missed. Compared with HiTyper~\cite{HiTyper-icse22}, HiTyper
+did not perform well for the isolated groups of a couple
+variables. That is, the groups are isolated, i.e., not type-dependent
+to other variables and HiTyper did not correctly detect any of those
+variable types. In those cases, {\tool} could rely on the concordance
+between the names and types of a variable. For example, the type of a
+variable named \code{index} or \code{count} will likely be \code{int}.
+
+
 2. HiTyper is mainly based on the rules from python to predict the types. {\tool} performs similarly (and even slightly better) than HiTyper. It proves that {\tool} can work well on type prediction with less human effort on rules summarization. Also, {\tool} can easier be used on programming languages compared with HiTyper
+
 3. Type4py uses a hierarchical neural network with RNN layers to predict types. {\tool} could improve XX\% compared with Type4py because {\tool} learns both the variable representation vectors and different types of the variable relationships from the combined graphs while type4py relies on AST-structure that can show the relationship but cannot differ the different types of relationships.
+
 4. Typilus uses a graph model to learn the relationship to predict variable types. {\tool} could improve XX\% compared with Typilus because {\tool} uses dual learning, and the name prediction results can help improve the accuracy of the type prediction.
+
 5. Ivanov et al.\cite{ivanov21predicting} uses simple CNN models to predict variable types. {\tool} could improve XX\% compared with Ivanov et al.\cite{ivanov21predicting} because {\tool} uses a combined graph with the graph-based model to predict types, and the combined graph can represent the variable relationship better than the sequential order of tokens. These relationships can help predict the types with higher accuracy.
+
 6. TypeWriter is similar to Type4py, and it is also based on AST structure. For the similar reason explained in point 3, {\tool} can outperform TypeWriter by XX\%.
