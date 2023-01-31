@@ -36,7 +36,7 @@ function exportSelection(self, root, doc) {
           selectionState.startsWithImage = true
       trailingImageCount = self.getTrailingImageCount(root, selectionState, range_.endContainer, range_.endOffset)
       if trailingImageCount:
-        selectionState.trailingImageCount = trailingImageCount;
+        selectionState.trailingImageCount = trailingImageCount
       if start != 0:
         (*@{\color{violet}{emptyBlocksIndex = self.getIndexRelativeToAdjacentEmptyBlocks}@*)(doc, root, range_.startContainer, range_.startOffset)
         (*@{\color{violet}{if emptyBlocksIndex != -1:}@*) 
