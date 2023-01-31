@@ -1,112 +1,113 @@
 \section{Motivating Example}
 \label{example_section}
 
+\input{sections/example_python_version}
 
+%%%\begin{figure}[t]
+%%%	\centering
+%%%	\lstset{
+%%%		numbers=left,
+%%%		numberstyle= \tiny,
+%%%		keywordstyle= \color{blue!70},
+%%%		commentstyle= \color{red!50!green!50!blue!50},
+%%%		frame=shadowbox,
+%%%		rulesepcolor= \color{red!20!green!20!blue!20} ,
+%%%		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+%%%		framexleftmargin=1.5em,
+%%%                numbersep= 5pt,
+%%%		language=Java,
+%%%    basicstyle=\scriptsize\ttfamily,
+%%%    numberstyle=\scriptsize\ttfamily,
+%%%    emphstyle=\bfseries,
+%%%                moredelim=**[is][\color{red}]{@}{@},
+%%%		escapeinside= {(*@}{@*)}
+%%%	}
+%%%	\begin{lstlisting}[]
+%%%function exportSelection(root, doc) {
+%%%  if (!root) {
+%%%      return null;
+%%%  }
+%%%  var selectionState = null, selection = doc.getSelection();
+%%%  if (selection.rangeCount > 0) {
+%%%      var range = selection.getRangeAt(0), preSelectionRange = range.cloneRange(), start;
+%%%      preSelectionRange.selectNodeContents(root);
+%%%      preSelectionRange.setEnd(range.startContainer, range.startOffset);
+%%%      start = preSelectionRange.toString().length;
+%%%      selectionState = {
+%%%          start: start,
+%%%          end: start + range.toString().length
+%%%      };
+%%%      if (this.doesRangeStartWithImages(range, doc)) {
+%%%          selectionState.startsWithImage = true;
+%%%      }
+%%%      var trailingImageCount = this.getTrailingImageCount(root, selectionState, range.endContainer, range.endOffset);
+%%%      if (trailingImageCount) {
+%%%        selectionState.trailingImageCount = trailingImageCount;
+%%%      }
+%%%      if (start !== 0) {
+%%%        (*@{\color{violet}{var emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks}@*)(doc, root, range.startContainer, range.startOffset);
+%%%        (*@{\color{violet}{if (emptyBlocksIndex !== -1)}@*) {
+%%%          selectionState.emptyBlocksIndex = emptyBlocksIndex;
+%%%        }...
+%%%        \end{lstlisting}
+%%%\vspace{-12pt}
+%%%\caption{An Original Code from a Project in GitHub}
+%%%\label{example_org}
+%%%\end{figure}
 
-\begin{figure}[t]
-	\centering
-	\lstset{
-		numbers=left,
-		numberstyle= \tiny,
-		keywordstyle= \color{blue!70},
-		commentstyle= \color{red!50!green!50!blue!50},
-		frame=shadowbox,
-		rulesepcolor= \color{red!20!green!20!blue!20} ,
-		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
-		framexleftmargin=1.5em,
-                numbersep= 5pt,
-		language=Java,
-    basicstyle=\scriptsize\ttfamily,
-    numberstyle=\scriptsize\ttfamily,
-    emphstyle=\bfseries,
-                moredelim=**[is][\color{red}]{@}{@},
-		escapeinside= {(*@}{@*)}
-	}
-	\begin{lstlisting}[]
-function exportSelection(root, doc) {
-  if (!root) {
-      return null;
-  }
-  var selectionState = null, selection = doc.getSelection();
-  if (selection.rangeCount > 0) {
-      var range = selection.getRangeAt(0), preSelectionRange = range.cloneRange(), start;
-      preSelectionRange.selectNodeContents(root);
-      preSelectionRange.setEnd(range.startContainer, range.startOffset);
-      start = preSelectionRange.toString().length;
-      selectionState = {
-          start: start,
-          end: start + range.toString().length
-      };
-      if (this.doesRangeStartWithImages(range, doc)) {
-          selectionState.startsWithImage = true;
-      }
-      var trailingImageCount = this.getTrailingImageCount(root, selectionState, range.endContainer, range.endOffset);
-      if (trailingImageCount) {
-        selectionState.trailingImageCount = trailingImageCount;
-      }
-      if (start !== 0) {
-        (*@{\color{violet}{var emptyBlocksIndex = this.getIndexRelativeToAdjacentEmptyBlocks}@*)(doc, root, range.startContainer, range.startOffset);
-        (*@{\color{violet}{if (emptyBlocksIndex !== -1)}@*) {
-          selectionState.emptyBlocksIndex = emptyBlocksIndex;
-        }...
-        \end{lstlisting}
-\vspace{-12pt}
-\caption{An Original Code from a Project in GitHub}
-\label{example_org}
-\end{figure}
+\input{sections/example_mini_python}
 
-
-\begin{figure}[t]
-	\centering
-	\lstset{
-		numbers=left,
-		numberstyle= \tiny,
-		keywordstyle= \color{blue!70},
-		commentstyle= \color{red!50!green!50!blue!50},
-		frame=shadowbox,
-		rulesepcolor= \color{red!20!green!20!blue!20} ,
-		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
-		framexleftmargin=1.5em,
-                numbersep= 5pt,
-		language=Java,
-    basicstyle=\scriptsize\ttfamily,
-    numberstyle=\scriptsize\ttfamily,
-    emphstyle=\bfseries,
-                moredelim=**[is][\color{red}]{@}{@},
-		escapeinside= {(*@}{@*)}
-	}
-	\begin{lstlisting}[]
-function exportSelection(w, b) {
-  if (!w) {
-    return null;
-  }
-  var p = null, q = b.getSelection();
-  if (q.rangeCount > 0) {
-    var r = q.getRangeAt(0), d = r.cloneRange(), m;
-    d.selectNodeContents(w);
-    d.setEnd(r.startContainer, r.startOffset);
-    m = d.toString().length;
-    p = {
-          start: m,
-          end: m + r.toString().length
-        };
-    if (this.doesRangeStartWithImages(r, b)) {
-       p.startsWithImage = true;
-    }
-    var (*@{\color{orange}{a = this.getTrailingImageCount}@*)(w, p, r.endContainer, r.endOffset);
-    if (a) {
-      p.trailingImageCount = a;
-    }
-    if (m !== 0) {
-      (*@{\color{violet}{var y = this.getIndexRelativeToAdjacentEmptyBlocks}@*)(b, w, r.startContainer, r.startOffset);
-      (*@{\color{violet}{if (y !== -1)}@*) {
-        p.emptyBlocksIndex = y;
-      }...
-\end{lstlisting}
-\vspace{-12pt}
-\caption{The Minified Code for the Code in Figure~\ref{example_org}}
-\label{example_sim}
-\end{figure}
+%%%\begin{figure}[t]
+%%%	\centering
+%%%	\lstset{
+%%%		numbers=left,
+%%%		numberstyle= \tiny,
+%%%		keywordstyle= \color{blue!70},
+%%%		commentstyle= \color{red!50!green!50!blue!50},
+%%%		frame=shadowbox,
+%%%		rulesepcolor= \color{red!20!green!20!blue!20} ,
+%%%		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+%%%		framexleftmargin=1.5em,
+%%%                numbersep= 5pt,
+%%%		language=Java,
+%%%    basicstyle=\scriptsize\ttfamily,
+%%%    numberstyle=\scriptsize\ttfamily,
+%%%    emphstyle=\bfseries,
+%%%                moredelim=**[is][\color{red}]{@}{@},
+%%%		escapeinside= {(*@}{@*)}
+%%%	}
+%%%	\begin{lstlisting}[]
+%%%function exportSelection(w, b) {
+%%%  if (!w) {
+%%%    return null;
+%%%  }
+%%%  var p = null, q = b.getSelection();
+%%%  if (q.rangeCount > 0) {
+%%%    var r = q.getRangeAt(0), d = r.cloneRange(), m;
+%%%    d.selectNodeContents(w);
+%%%    d.setEnd(r.startContainer, r.startOffset);
+%%%    m = d.toString().length;
+%%%    p = {
+%%%          start: m,
+%%%          end: m + r.toString().length
+%%%        };
+%%%    if (this.doesRangeStartWithImages(r, b)) {
+%%%       p.startsWithImage = true;
+%%%    }
+%%%    var (*@{\color{orange}{a = this.getTrailingImageCount}@*)(w, p, r.endContainer, r.endOffset);
+%%%    if (a) {
+%%%      p.trailingImageCount = a;
+%%%    }
+%%%    if (m !== 0) {
+%%%      (*@{\color{violet}{var y = this.getIndexRelativeToAdjacentEmptyBlocks}@*)(b, w, r.startContainer, r.startOffset);
+%%%      (*@{\color{violet}{if (y !== -1)}@*) {
+%%%        p.emptyBlocksIndex = y;
+%%%      }...
+%%%\end{lstlisting}
+%%%\vspace{-12pt}
+%%%\caption{The Minified Code for the Code in Figure~\ref{example_org}}
+%%%\label{example_sim}
+%%%\end{figure}
 
 Let us start with a real-world example to motivate our approach.
 Figures~\ref{example_org} and~\ref{example_sim} show the original and
@@ -130,15 +131,15 @@ solution:
   variable name learning and variable type learning.} If a model
 learns correctly the type of a variable, it would help to learn better
 the name of the variable and vice versa. Let us consider the name
-\code{emptyBlocksIndex} for the variable \code{y} at line 24 in
-Figure~\ref{example_sim}: \code{if (y != -1)}. From that comparison, a
+\code{emptyBlocksIndex} for the variable \code{y} at line 22 in
+Figure~\ref{example_sim}: \code{if y != -1:}. From that comparison, a
 model could learn that \code{y} is of the type \code{int}. Knowing
 that it is an integer, a model could combine that with the knowledge
-learned from line 23 (\code{var y =
-  this.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
+learned from line 21 (\code{y =
+  self.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
 name for \code{y} could be {\em ``Index''} or similar. On
 the other hand, correct learning of a variable name can also benefit
-for learning of its type. At line 18 of Figure~\ref{example_sim}, if
+for learning of its type. At line 17 of Figure~\ref{example_sim}, if
 the name \code{trailingImageCount} is recovered for the variable
 \code{a}, then its type is likely to be \code{int} if the model could
 make sense of the sub-tokens \code{image} and \code{count}.
@@ -157,15 +158,15 @@ the two models.
 \textbf{Observation 2}. {\em The name and type of a variable can be
   affected by the names and types of the surrounding variables in a
   function.}  Intuitively, because multiple variables are used
-together to achieve the common task in the function, their names are
-often consistent with one another. For example, at line 7, the choice
-of the name \code{range} in the recovery process could be influenced
+together to achieve the task in the function, their names are
+often consistent with one another. For example, at line 6, the choice
+of the name \code{range\_} in the recovery process could be influenced
 by the choice of the variable \code{selection} as the call to
 \code{getRangeAt} is made on that variable as in the statement
-\code{range} = \code{selection.getRangeAt(0)}. The choice of the name
+\code{range\_} = \code{selection.getRangeAt(0)}. The choice of the name
 \code{preSelectionRange} could be affected by the choice of the
-variable \code{range} due to the statement \code{preSelectionRange} =
-\code{range.cloneRange()}. Moreover, the type system in a programming
+variable \code{range\_} due to the statement \code{preSelectionRange} =
+\code{range\_.cloneRange()}. Moreover, the type system in a programming
 language always requires the concordance between the types of
 variables. For example, the types of two sides of an assignment must
 be consistent.
