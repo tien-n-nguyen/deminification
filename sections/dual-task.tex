@@ -11,7 +11,7 @@ problem and multi-task loss~\cite{kendall2018multi} to learn both of
 them at the same time. Specifically, for each regression, \tool uses a
 smooth L1 loss function to estimate the accuracy of output as follows:
 \begin{equation}\label{eq1}
-L = {l_1, l_2, ..., l_n}^T
+L = \{l_1, l_2, ..., l_n\}^T
 \end{equation}
 \begin{equation}\label{eq2}
 l_n = \left\{ 
@@ -26,7 +26,7 @@ $f$; $y_n$ is the ground truth. To get the joint loss function for the
 dual-task learning with uncertainty weighting, following Kendall {\em
   et al.}'s~\cite{kendall2018multi}, we have:
 \begin{equation}\label{eq3}
-L_i(W) = {l_1^W, l_2^W, ..., l_n^W}^T
+L_i(W) = \{l_1^W, l_2^W, ..., l_n^W\}^T
 \end{equation}
 \begin{equation}\label{eq4}
 l_n^W = \left\{ 
