@@ -81,22 +81,22 @@ limitation of the information retrieval direction, JSNeat {\em cannot
   generate a new variable name} that was not encountered in the
 corpus.
 
-JSNice~\cite{JSNice2015}, following a probabilistic model (PM)
-approach, is an automatic variable name recovery approach that
-represents the program properties and relations among program entities
-in a JS code as dependence graphs. JSNice~\cite{JSNice2015} uses a
+JSNice~\cite{JSNice2015}, following a statistical direction, is an
+automatic variable name recovery approach that represents the program
+properties and relations among program entities in JavaScript (JS)
+code as dependence graphs. JSNice~\cite{JSNice2015} uses a
 probabilistic model with the program dependency graph including
 variables and surrounding program entities. It formulates the problem
 of variable name recovery as the structured prediction via conditional
 random fields (CRFs)~\cite{JSNice2015}. Unfortunately, it still has
 low accuracy.
 %
-In contrast, JSNaughty~\cite{JSNaughty2017} formulates the variable
-name recovery problem for source code as a {\em statistical machine
-translation} (SMT) from minified code to the recovered
-code. JSNaughty~\cite{JSNaughty2017}'s phrase-based translation
-approach cannot capture well the relations among the variables that
-need to be recovered.
+In contrast, JSNaughty~\cite{JSNaughty2017} formulates
+%the variable name recovery
+that problem as a {\em statistical machine translation} from
+minified code to the recovered code. JSNaughty~\cite{JSNaughty2017}'s
+phrase-based translation approach cannot capture well the relations
+among the variables that need to be recovered.
 
 %We use multi-tasking framework to do the name prediction and the type
 %predicting at the same time.
@@ -107,36 +107,50 @@ need to be recovered.
 %variables that need to be recovered => EGCN
 
 In this work, we present {\tool}, a deep learning (DL)-based variable
-name recovery approach. We focus mainly on the name recovery problem
-and address it as the dual-task learning between the variable name
+name recovery approach. We focus mainly on variable name recovery and
+address it as part of the dual-task learning~between the variable name
 prediction model and the type prediction model. {\em Correct learning
   for one model can benefit for the learning in the other and vice
   versa} due to the naturalness of names in source
 code~\cite{hindle-icse12}. The rationale is that {\em the name chosen
   for a variable in the original code should be natural (unsurprising)
-  with respect to the type of that variable}. For example, if a
-variable of the type \code{Student} should not have a name that is
-completely irrelevant to the notion ``student''. Similarly, if a model
-learns the name of a variable, its type should be in accordance with
-the name and follow naming conventions. For example, if a model
-recovers the name of a variable as {\em count} or {\em index}, its
-type should be of \code{int} or \code{Integer}.
+  with respect to the type of that variable}. For example, for easy
+comprehension, a variable of the type \code{Offset} might have a name
+relevant to the notion of {\em offset} or its abbreviations, e.g.,
+\code{startOffset}, \code{endOffset}, etc.
+%
+%For example, if a variable of the type \code{Student} should not have
+%a name that is completely irrelevant to the notion
+%``student''.
+%
+Similarly, if a model learns the name of a variable, its type should
+be in accordance with the name.
+%and follow naming conventions.
+For example, if a model recovers the name of a variable as {\em count}
+or {\em index}, its type might likely be of \code{int} or
+\code{Integer}.
 
 Exploring this duality can provide useful constraints to predict both
 the variable names and their types.  To build the variable name
 prediction model and the type prediction model, we leverage Graph
 Convolution Network - Missing Features (GCNmf)~\cite{GCNmf} to model
-different kinds of relationships among the variables and among the
-types. We formulate {\bf the name recovery problem as the
-  predicting the missing features} in GCNmf. To propagate the
-mutual impact of type learning and name learning, we apply a dual-task
-learning mechanism between the two models. We use the uncertainty
-weighted multi-task loss as the multi-task learning loss function and
-use the maximum of the accuracy score from two tasks as the training
-target. Our DL-based model is expected to have better predictive power
-than the CRF in JSNice and SMT in JSNaughty, especially in predicting
-the missing features when considering the relations among variables
-and types.
+different kinds of {\em relations/dependencies among the variables and
+  among the types}. We formulate {\bf the name recovery problem as the
+  predicting the missing features} in GCNmf. To propagate the mutual
+impact of type learning and name learning, we apply a dual-task
+learning mechanism between the two models.
+%
+With the philosophy that {\em ``Tell Me Your Friends, I'll Tell You Who
+  You Are''}, {\tool} decides a variable's name by learning at once
+the names of the variables connecting to one another.
+%
+%We use the uncertainty weighted multi-task loss as the multi-task
+%learning loss function and use the maximum of the accuracy score from
+%two tasks as the training target.
+Our DL-based model is expected to have better predictive power than
+the CRF in JSNice and SMT in JSNaughty, especially in predicting the
+missing features when considering the relations among variables and
+types.
 
 We have conducted experiments to evaluate {\tool} in both name
 recovery and type prediction on a real-world dataset with +180k Python
@@ -158,7 +172,7 @@ Typilus~\cite{typilus-pldi20}, and TypeWriter~\cite{typewriter-fse20}.
 In brief, the contributions of this paper includes:
 
 1. {\bf {\tool}}: a Deep Learning (DL)-based approach to recover both
-variable names and types;
+variable names and types in a dual-task learning;
 
 2. An extensive comparative evaluation and analysis on {\tool}'s
 accuracy (Data and code is available in a
