@@ -99,6 +99,36 @@ Neural Network (RNN) operating on the code token embeddings built from
 the Asbstract Syntax Tree (AST). In contrast, we use GCNmf that could
 capture better the dependencies with different types of edges.
 
+Compared to Typilus~\cite{typilus-pldi20}, {\tool} relatively improves
+31.6\% in top-1 accuracy. Similar to Type4Py, Typilus builds a vector
+space for type embeddings. It uses a graph neural network to learn to
+map variables, parameters, and function returns to a type embedding
+using deep similarity learning. For type inference, using the type
+map, it accepts unannotated code, computes type embeddings with the
+trained GNN and finds the concrete $k$ nearest neighboring types as
+the candidates. There are two key limitations in Typilus that {\tool}
+overcomes. First, their graph representation does not directly encode
+the type dependencies. It encodes among the code tokens the
+next-lexical-token relation, structural/syntactical relations, and
+data dependencies. Second, it does not have the assistance of the
+learning of variable names as the above explanation in the comparative
+analysis with HiTyper.
+
+TypeWriter~\cite{typewriter-fse20} extracts code tokens to build token
+embeddings and uses two RNNs for identifiers and for code to merge
+them to form type vectors. It then uses feedback-directted search on
+the results from a static type checker to search for consistent types.
+The key limitation is that the type dependencies are not encoded
+during the learning. Instead, TypeWriter leverages an external static
+type checker and relies on the feedback-directed searching for the
+right types. If the RNN models do not produce the right types at the
+first place, then the searching via a static type checker will not
+result in any better output.
+
+Compared to Ivanov {\em et al.}~\cite{ivanov21predicting}, {\tool} has
+the same advantages as it has in comparison with the above approaches
+using graph embeddings.
+
 %2. HiTyper is mainly based on the rules from python to predict the
 %types. {\tool} performs similarly (and even slightly better) than
 %HiTyper. It proves that {\tool} can work well on type prediction with
@@ -107,8 +137,8 @@ capture better the dependencies with different types of edges.
 
 %3. Type4py uses a hierarchical neural network with RNN layers to predict types. {\tool} could improve XX\% compared with Type4py because {\tool} learns both the variable representation vectors and different types of the variable relationships from the combined graphs while type4py relies on AST-structure that can show the relationship but cannot differ the different types of relationships.
 
-4. Typilus uses a graph model to learn the relationship to predict variable types. {\tool} could improve XX\% compared with Typilus because {\tool} uses dual learning, and the name prediction results can help improve the accuracy of the type prediction.
+%4. Typilus uses a graph model to learn the relationship to predict variable types. {\tool} could improve XX\% compared with Typilus because {\tool} uses dual learning, and the name prediction results can help improve the accuracy of the type prediction.
 
-5. Ivanov et al.\cite{ivanov21predicting} uses simple CNN models to predict variable types. {\tool} could improve XX\% compared with Ivanov et al.\cite{ivanov21predicting} because {\tool} uses a combined graph with the graph-based model to predict types, and the combined graph can represent the variable relationship better than the sequential order of tokens. These relationships can help predict the types with higher accuracy.
+%5. Ivanov et al.\cite{ivanov21predicting} uses simple CNN models to predict variable types. {\tool} could improve XX\% compared with Ivanov et al.\cite{ivanov21predicting} because {\tool} uses a combined graph with the graph-based model to predict types, and the combined graph can represent the variable relationship better than the sequential order of tokens. These relationships can help predict the types with higher accuracy.
 
-6. TypeWriter is similar to Type4py, and it is also based on AST structure. For the similar reason explained in point 3, {\tool} can outperform TypeWriter by XX\%.
+%6. TypeWriter is similar to Type4py, and it is also based on AST structure. For the similar reason explained in point 3, {\tool} can outperform TypeWriter by XX\%.

@@ -16,7 +16,9 @@ output (32, 64, 128); (5) Number of GCN layers (4, 8, 16).
 
 \subsubsection{RQ2. Comparative Study on Variable Type Prediction.}
 
-{\em Baselines.} We compared {\tool} against the state-of-the-art variable type prediction approaches: HiTyper~\cite{type-graph-icse22}, Type4PY~\cite{mir2021type4py}, Typilus~\cite{allamanis2020typilus}, Ivanov et al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}
+{\em Baselines.} We compared {\tool} against the state-of-the-art variable type prediction approaches: HiTyper~\cite{type-graph-icse22}, Type4PY~\cite{mir2021type4py}, Typilus~\cite{allamanis2020typilus}, Ivanov et al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}.
+
+
 
 \textit{Procedure.} With all variable types information summarized in the ManyTypes4Py dataset, we directly used the variable types information for variables in each method for all approaches in this RQ. Because {\tool} is a dual-learning approach, to make {\tool} work correctly, we took the same data splitting for training, tuning, and testing dataset as in RQ1 for all baselines and {\tool} in this RQ.
 
