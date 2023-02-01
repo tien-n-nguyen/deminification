@@ -35,23 +35,83 @@ embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 %Typilus~\cite{allamanis2020typilus}, Ivanov et
 %al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}.
 
-We did not compare with Xu {\em et al.}~\cite{xu-fse16},
+We did not compare our tool with Xu {\em et al.}~\cite{xu-fse16},
 DeepTyper~\cite{DeepTyper-fse18}, NL2Type~\cite{nl2type-icse19},
 LAMBDANET~\cite{LambdaNet-iclr20}, OptTyper~\cite{optyper20}, and
 TypeBERT~\cite{typeBERT-fse21}, because in its paper, Type4Py has been
-compared to show the better performance than them, and we compared
+compared to show the better performance than them, and we are comparing
 with Type4Py.
 
 
-\textit{Procedure.} With all variable types information summarized in the ManyTypes4Py dataset, we directly used the variable types information for variables in each method for all approaches in this RQ. Because {\tool} is a dual-learning approach, to make {\tool} work correctly, we took the same data splitting for training, tuning, and testing dataset as in RQ1 for all baselines and {\tool} in this RQ.
+\textit{Procedure.}
+With all variable type information summarized in the ManyTypes4Py
+dataset, we directly used the variable type information for the
+variables in each method for all the approaches. We used the same data
+splitting for training, tuning, and testing as in RQ1. We ran the
+baselines with the parameters in their source code.
 
-Because all baselines in this RQ are designed for python, we directly used the original implementation for each baseline and kept all parameters the same as in their original research studies. And we tuned {\tool} with autoML~\cite{NNI} for the same key hyper-parameters to have the best performance as in RQ1.
+{\em Parameter Tuning.} For {\tool}, we tuned it with
+autoML~\cite{NNI} for the same key hyper-parameters to have the best
+performance as in RQ1. We fed to {\tool} the minified code but with
+all the names and types, and obtained the output from the variable
+type generation (VTG) model for all the variables in the code.
 
-\subsubsection{RQ3. Sensitivity Analysis}
+%Because {\tool} is a dual-learning approach, to make {\tool} work
+%correctly, we took the same data splitting for training, tuning, and
+%testing dataset as in RQ1 for all baselines and {\tool} in this RQ.
+%Because all baselines in this RQ are designed for python, we directly
+%used the original implementation for each baseline and kept all
+%parameters the same as in their original research studies. And we
+%tuned {\tool} with autoML~\cite{NNI} for the same key hyper-parameters
+%to have the best performance as in RQ1.
 
-We built the variants of {\tool} by changing its important components to check the influence of each component on both the variable name and type prediction results. These variants of {\tool} include: 1. using label-GCN (LGCN) as the variable type prediction model and using GCN with missing features (GCNmf) as the variable name prediction model on relation graph (RG); 2. using edge-enhanced GCN (EEGCN) as the variable type prediction model and using GCNmf as the variable name prediction model on code property graph (CPG); 3. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on RG; 4. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on type dependency graph (TDG); 5. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on the combined graph (CG).
+\subsubsection{RQ3. Ablation Study}
+
+We built several variants of {\tool} to evaluate different factors in
+its components by measuring their accuracies and making comparisons.
+First, we evaluate our hypothesis that mutual impact between name
+learning and type learning via dual-task learning. We built two
+variants VNG and VTG separately without connecting them via dual-task
+learning. Second, the graph representation for source code is
+important in the name and type prediction. Thus, we kept the same
+architecture for {\tool} and fed to it different graph representations
+for source code. This allows us to evaluate the impact of our chosen
+graph representations for this problem. Third, the key technical
+solution in {\tool} is the formulation in which predicting names and
+types for variables is considered as predicting the missing features
+among the connected program elements. We currently used the EE-GCN
+model to capture those relations and dependencies. We replaced
+it with the Label-GCN~\cite{label-gcn} and made a comparison.
+
+%We built the variants of {\tool} by changing its important components to check the influence of each component on both the variable name and type prediction results. These variants of {\tool} include: 1. using label-GCN (LGCN) as the variable type prediction model and using GCN with missing features (GCNmf) as the variable name prediction model on relation graph (RG); 2. using edge-enhanced GCN (EEGCN) as the variable type prediction model and using GCNmf as the variable name prediction model on code property graph (CPG); 3. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on RG; 4. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on type dependency graph (TDG); 5. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on the combined graph (CG).
 
 \subsubsection*{Evaluation Metrics}
 
-For the variable name prediction task, we follow the existing research \cite{tran2019recovering} to calculate the prediction accuracy on local variables and all variables. And for the variable type prediction task, following the previous work \cite{type-graph-icse22}, we use two metrics, Exact Match and Match to Parametric, on top-1, top-3, and top-5 for evaluation. These two metrics compute the ratio of results that: 1) Exact Match: completely matches human annotations. 2) Match to Parametric: satisfy exact match when ignoring all the type parameters. (e.g., Dict[int, str] and Dict[int, int] are considered as matched under Match to Parametric metric.)
+For the variable name prediction task, we follow the prior
+research~\cite{icse19} to calculate the prediction accuracy on local
+variables and all variables. We compared the resulting names from a
+tool against the original names. Specifically, the tool is considered
+to correctly recover the name of a variable $v$ if the recovered name
+$vn$ is matched exactly with its original name. For $v$, if matching,
+we count it as a hit, otherwise, it is a miss. Accuracy is measured by
+the ratio between the total number of hits over the total number of
+cases. Top-$k$ accuracy is measured similarly, however, the hit is
+obtained only when the correct name is in the top-$k$ candidate list
+from a tool.
+
+For the variable type prediction task, following the previous
+work \cite{type-graph-icse22}, we use two metrics, \code{Exact-Match}
+and
+\code{Parametric-Match} with the above Top-$k$ accuracy. \code{Exact-Match}
+occurs when the resulting type matches exactly with the
+human-annotations. \code{Parametric-Match} occurs if the result
+matches with the correct type but the types of the parameters might
+not. For example, \code{Dict[int,str]} is considered as
+parametric-matched with \code{Dict[int,int]}.
+
+%These two metrics compute the ratio of results that: 1) Exact Match:
+%completely matches human annotations. 2) Match to Parametric: satisfy
+%exact match when ignoring all the type parameters. (e.g., Dict[int,
+%str] and Dict[int, int] are considered as matched under Match to
+%Parametric metric.)
 
