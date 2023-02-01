@@ -16,8 +16,22 @@ output (32, 64, 128); (5) Number of GCN layers (4, 8, 16).
 
 \subsubsection{RQ2. Comparative Study on Variable Type Prediction.}
 
-{\em Baselines.} We compared {\tool} against the state-of-the-art variable type prediction approaches: HiTyper~\cite{type-graph-icse22}, Type4PY~\cite{mir2021type4py}, Typilus~\cite{allamanis2020typilus}, Ivanov et al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}.
+{\em Baselines.} We compared {\tool} against the state-of-the-art
+  variable type prediction approaches: Ivanov {\em et
+  al.}~\cite{ivanov21predicting}, Typilus~\cite{typilus-pldi20},
+  TypeWriter\cite{typewriter-fse20}, Type4Py~\cite{Type4Py-icse22},
+  and HiTyper~\cite{HiTyper-icse22}.
 
+%HiTyper~\cite{type-graph-icse22}, Type4PY~\cite{mir2021type4py},
+%Typilus~\cite{allamanis2020typilus}, Ivanov et
+%al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}.
+
+We did not compare with Xu {\em et al.}~\cite{xu-fse16},
+DeepTyper~\cite{DeepTyper-fse18}, NL2Type~\cite{nl2type-icse19},
+LAMBDANET~\cite{LambdaNet-iclr20}, OptTyper~\cite{optyper20}, and
+TypeBERT~\cite{typeBERT-fse21}, because in its paper, Type4Py has been
+compared to show the better performance than them, and we compared
+with Type4Py.
 
 
 \textit{Procedure.} With all variable types information summarized in the ManyTypes4Py dataset, we directly used the variable types information for variables in each method for all approaches in this RQ. Because {\tool} is a dual-learning approach, to make {\tool} work correctly, we took the same data splitting for training, tuning, and testing dataset as in RQ1 for all baselines and {\tool} in this RQ.
