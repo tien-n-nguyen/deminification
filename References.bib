@@ -1686,3 +1686,118 @@ pages = {209–220},
 numpages = {12},
 series = {ESEC/FSE 2020}
 }
+
+@inproceedings{xu-fse16,
+author = {Xu, Zhaogui and Zhang, Xiangyu and Chen, Lin and Pei, Kexin and Xu, Baowen},
+title = {Python Probabilistic Type Inference with Natural Language Support},
+year = {2016},
+isbn = {9781450342186},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2950290.2950343},
+doi = {10.1145/2950290.2950343},
+abstract = {We propose a novel type inference technique for Python programs. Type inference is difficult for Python programs due to their heavy dependence on external APIs and the dynamic language features. We observe that Python source code often contains a lot of type hints such as attribute accesses and variable names. However, such type hints are not reliable. We hence propose to use probabilistic inference to allow the beliefs of individual type hints to be propagated, aggregated, and eventually converge on probabilities of variable types. Our results show that our technique substantially outperforms a state-of-the-art Python type inference engine based on abstract interpretation.},
+booktitle = {Proceedings of the 2016 24th ACM SIGSOFT International Symposium on Foundations of Software Engineering},
+pages = {607–618},
+numpages = {12},
+keywords = {Probabilistic Inference, Type Inference, Python, Dynamic Languages},
+location = {Seattle, WA, USA},
+series = {FSE 2016}
+}
+
+@inproceedings{DeepTyper-fse18,
+author = {Hellendoorn, Vincent J. and Bird, Christian and Barr, Earl T. and Allamanis, Miltiadis},
+title = {Deep Learning Type Inference},
+year = {2018},
+isbn = {9781450355735},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3236024.3236051},
+doi = {10.1145/3236024.3236051},
+abstract = {Dynamically typed languages such as JavaScript and Python are increasingly popular, yet static typing has not been totally eclipsed: Python now supports type annotations and languages like TypeScript offer a middle-ground for JavaScript: a strict superset of JavaScript, to which it transpiles, coupled with a type system that permits partially typed programs. However, static typing has a cost: adding annotations, reading the added syntax, and wrestling with the type system to fix type errors. Type inference can ease the transition to more statically typed code and unlock the benefits of richer compile-time information, but is limited in languages like JavaScript as it cannot soundly handle duck-typing or runtime evaluation via eval. We propose DeepTyper, a deep learning model that understands which types naturally occur in certain contexts and relations and can provide type suggestions, which can often be verified by the type checker, even if it could not infer the type initially. DeepTyper, leverages an automatically aligned corpus of tokens and types to accurately predict thousands of variable and function type annotations. Furthermore, we demonstrate that context is key in accurately assigning these types and introduce a technique to reduce overfitting on local cues while highlighting the need for further improvements. Finally, we show that our model can interact with a compiler to provide more than 4,000 additional type annotations with over 95% precision that could not be inferred without the aid of DeepTyper.},
+booktitle = {Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+pages = {152–162},
+numpages = {11},
+keywords = {Deep Learning, Naturalness, Type Inference},
+location = {Lake Buena Vista, FL, USA},
+series = {ESEC/FSE 2018}
+}
+
+
+@inproceedings{nl2type-icse19,
+author = {Malik, Rabee Sohail and Patra, Jibesh and Pradel, Michael},
+title = {NL2Type: Inferring JavaScript Function Types from Natural Language Information},
+year = {2019},
+publisher = {IEEE Press},
+url = {https://doi.org/10.1109/ICSE.2019.00045},
+doi = {10.1109/ICSE.2019.00045},
+abstract = {JavaScript is dynamically typed and hence lacks the type safety of statically typed languages, leading to suboptimal IDE support, difficult to understand APIs, and unexpected runtime behavior. Several gradual type systems have been proposed, e.g., Flow and TypeScript, but they rely on developers to annotate code with types. This paper presents NL2Type, a learning-based approach for predicting likely type signatures of JavaScript functions. The key idea is to exploit natural language information in source code, such as comments, function names, and parameter names, a rich source of knowledge that is typically ignored by type inference algorithms. We formulate the problem of predicting types as a classification problem and train a recurrent, LSTM-based neural model that, after learning from an annotated code base, predicts function types for unannotated code. We evaluate the approach with a corpus of 162,673 JavaScript files from real-world projects. NL2Type predicts types with a precision of 84.1% and a recall of 78.9% when considering only the top-most suggestion, and with a precision of 95.5% and a recall of 89.6% when considering the top-5 suggestions. The approach outperforms both JSNice, a state-of-the-art approach that analyzes implementations of functions instead of natural language information, and DeepTyper, a recent type prediction approach that is also based on deep learning. Beyond predicting types, NL2Type serves as a consistency checker for existing type annotations. We show that it discovers 39 inconsistencies that deserve developer attention (from a manual analysis of 50 warnings), most of which are due to incorrect type annotations.},
+booktitle = {Proceedings of the 41st International Conference on Software Engineering},
+pages = {304–315},
+numpages = {12},
+keywords = {type inference, identifiers, JavaScript, deep learning, comments},
+location = {Montreal, Quebec, Canada},
+series = {ICSE '19}
+}
+
+@inproceedings{LambdaNet-iclr20,
+title={LambdaNet: Probabilistic Type Inference using Graph Neural Networks},
+author={Jiayi Wei and Maruth Goyal and Greg Durrett and Isil Dillig},
+booktitle={International Conference on Learning Representations},
+year={2020},
+url={https://openreview.net/forum?id=Hkx6hANtwH}
+}
+
+
+@article{optyper20,
+  author    = {Irene Vlassi Pandi and
+               Earl T. Barr and
+               Andrew D. Gordon and
+               Charles Sutton},
+  title     = {OptTyper: Probabilistic Type Inference by Optimising Logical and Natural
+               Constraints},
+  journal   = {CoRR},
+  volume    = {abs/2004.00348},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2004.00348},
+  eprinttype = {arXiv},
+  eprint    = {2004.00348},
+  timestamp = {Mon, 14 Feb 2022 09:20:23 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2004-00348.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{typeBERT-fse21,
+author = {Jesse, Kevin and Devanbu, Premkumar T. and Ahmed, Toufique},
+title = {Learning Type Annotation: Is Big Data Enough?},
+year = {2021},
+isbn = {9781450385626},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3468264.3473135},
+doi = {10.1145/3468264.3473135},
+abstract = {TypeScript is a widely used optionally-typed language where developers can adopt “pay as you go” typing: they can add types as desired, and benefit from static typing. The “type annotation tax” or manual effort required to annotate new or existing TypeScript can be reduced by a variety of automatic methods. Probabilistic machine-learning (ML) approaches work quite well. ML approaches use different inductive biases, ranging from simple token sequences to complex graphical neural network (GNN) models capturing syntax and semantic relations. More sophisticated inductive biases are hand-engineered to exploit the formal nature of software. Rather than deploying fancy inductive biases for code, can we just use “big data” to learn natural patterns relevant to typing? We find evidence suggesting that this is the case. We present TypeBert, demonstrating that even with simple token-sequence inductive bias used in BERT-style models and enough data, type-annotation performance of the most sophisticated models can be surpassed.},
+booktitle = {Proceedings of the 29th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+pages = {1483–1486},
+numpages = {4},
+keywords = {deep learning, Type inference, TypeScript, transfer learning},
+location = {Athens, Greece},
+series = {ESEC/FSE 2021}
+}
+
+
+@INPROCEEDINGS{CPG-2014,
+  author={Yamaguchi, Fabian and Golde, Nico and Arp, Daniel and Rieck, Konrad},
+  booktitle={2014 IEEE Symposium on Security and Privacy}, 
+  title={Modeling and Discovering Vulnerabilities with Code Property Graphs}, 
+  year={2014},
+  volume={},
+  number={},
+  pages={590-604},
+  doi={10.1109/SP.2014.44}}
+
+@online{NNI,
+	title = {The NNI autoML tool},
+	year = 2021,
+	url = {https://github.com/microsoft/nni},
+}

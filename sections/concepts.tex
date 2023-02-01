@@ -242,7 +242,7 @@ Relation Graph can be built for either the original or minified code.
 
 \begin{figure}[t]
 	\begin{center}
-	  \includegraphics[width=1.8in]{figures/type-dep-graph}
+	  \includegraphics[width=2in]{figures/type-dep-graph-2}
           \vspace{-8pt}
 		\caption{Type Dependency Graph for Figure~\ref{example_sim}}
 		\label{tdg}
@@ -250,9 +250,12 @@ Relation Graph can be built for either the original or minified code.
 \end{figure}
 
 Figure~\ref{tdg} displays the TDG for the running example. While the
-variable $m$ at line 7 (Figure~\ref{example_sim}) has unknown type,
-its type at line 10 can be derived by the function call
-\code{length}. At line 11 (Figure~\ref{example_sim}), the type of the
-variable \code{p} is derived from the type of the left-hand-side of
-line 11 (\code{Dict}). Thus, we have an edge from \code{Dict\_write}
-to \code{p}.
+type of the variable $m$ at line 10 (Figure~\ref{example_sim}) can be
+derived by the function call \code{len}. The subscript is used to to
+denote the same variable at different locations. At line 11
+(Figure~\ref{example_sim}), the type of the variable \code{p} is
+derived from the type of the left-hand-side of line 11
+(\code{Dict}). Thus, we have an edge from \code{Dict\_write} to
+\code{p}. Similarly, the type of the variable \code{r} at line 6 can
+be derived from the call to \code{getRangeAt}. The types at line 13
+and line 9 can be derived from the type at line~6.
