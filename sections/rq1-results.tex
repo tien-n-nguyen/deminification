@@ -25,10 +25,35 @@
 \begin{center}
 \includegraphics[width=3.2in]{figures/name-prediction-result}
 \vspace{-8pt}
-\caption{RQ1. Comparison on Variable Name Prediction}
+\caption{RQ1. Top-1 Accuracy on Variable Name Prediction}
 \label{name-prediction-result}
 \end{center}
 \end{figure}
+
+
+\begin{table}[thbp]
+  \caption{RQ1. Comparison on Variable Name Prediction.}
+  \vspace{-5pt}
+	\begin{center}
+		\small
+		\renewcommand{\arraystretch}{1} \begin{tabular}{|p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|}
+			
+			\hline
+                       & \multicolumn{2}{c|}{Top-1}         & \multicolumn{2}{c|}{Top-3}         & \multicolumn{2}{c|}{Top-5} \\
+			\hline
+                       & Local & All & Local & All & Local & All  \\ 
+			\hline
+		        JSNice~\cite{JSNice2015} &  41.6    & 54.5  & 52.2 &    63.0   & 59.5      &   67.8    \\
+			JSNaughty~\cite{JSNaughty2017}  &   48.3   &  59.6    &  59.8    &  69.7    &  66.3    &   75.0    \\
+			JSNeat~\cite{icse19}  &   58.2   &  66.5    &  65.3    & 75.4     &  71.6    & 80.1     \\
+			\hline
+			{\bf {\tool}} & 67.5 & 76.7 & 75.4 & 84.3 & 82.1 & 90.2 \\
+			\hline
+		\end{tabular}
+		\label{name-result}
+	\end{center}
+\end{table}
+
 
 In this study, we evaluate {\tool}'s accuracy and compare it with the
 state-of-the-art approaches in variable name prediction for minified
@@ -52,6 +77,10 @@ relative improvements in top-1 accuracy in recovering local variables'
 names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 {\bf 15.9\%}, respectively. The absolute improvements in top-1
 accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
+
+As seen in Table~\ref{name-result}, the result is also consistent for
+top-3 and top-5 accuracies for {\tool}. The relative improvements with
+same trends are also at the same level with respect to the baselines.
 
 We examined the predicted names from all the baselines. Compared to
 JSNeat, an information retrieval approach, we found that it often
