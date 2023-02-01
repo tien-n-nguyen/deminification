@@ -111,14 +111,15 @@
 
 Let us start with a real-world example to motivate our approach.
 Figures~\ref{example_org} and~\ref{example_sim} show the original and
-minified versions~of the function \code{exportSelection}.  The
-function is aimed to export/retrieve the selection from a document.
+minified versions of the function \code{exportSelection} in Python.
+The function is aimed to export/retrieve the selection from a
+document.
 %
-In the minified code, all local variables were randomly renamed with
-short and meaningless names, \eg \code{root} becomes \code{w},
-\code{doc} becomes \code{b}, etc. by a minification tool.
+In the minified code, all local variables were randomly renamed by a
+minification tool with short and meaningless names, \eg \code{root}
+becomes \code{w}, \code{doc} becomes \code{b}, etc.
 %\eg UglifyJS~\cite{uglifyJS}.
-This makes them difficult to comprehend.
+This makes the code difficult to comprehend.
 
 %\subsection{Observations}
 
@@ -137,12 +138,13 @@ model could learn that \code{y} is of the type \code{int}. Knowing
 that it is an integer, a model could combine that with the knowledge
 learned from line 21 (\code{y =
   self.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
-name for \code{y} could be {\em ``Index''} or similar. On
-the other hand, correct learning of a variable name can also benefit
-for learning of its type. At line 17 of Figure~\ref{example_sim}, if
-the name \code{trailingImageCount} is recovered for the variable
-\code{a}, then its type is likely to be \code{int} if the model could
-make sense of the sub-tokens \code{image} and \code{count}.
+name for \code{y} could be {\em ``Index''} or similar. On the other
+hand, correct learning of a variable name can also benefit for
+learning of its type. At line 17 of
+Figures~\ref{example_org}--\ref{example_sim}, if the name
+\code{trailingImageCount} is recovered for the variable \code{a},
+its type is likely to be \code{int} if the model could make sense of
+the sub-token \code{count} in that name \code{trailingImageCount}.
 
 \vspace{2pt} \noindent {\bf Key Idea 1.} [{\bf Dual-task Learning
     between Name Prediction and Type Prediction}] {\em While focusing

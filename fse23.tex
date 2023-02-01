@@ -165,22 +165,24 @@
 
 To avoid the exposure of original source code, the variable names
 deployed in the wild are often replaced by short, meaningless names,
-thus making the code difficult to manually understand and analysis.
-We introduce {\tool}, a Deep-Learning (DL)-based approach that
-formulates that recovery problem as the predicting the missing
-features in a variant of Graph Convolution Network. The graph
-represents both the relations among the variables and the relations
-among their types in a function/method. {\tool} also leverages
-dual-task learning to propagate the mutual impact between the learning
-of the variable names and that of their types. We have conducted
-experiments to evaluate {\tool} in both name recovery and type
-prediction on a real-world dataset with 180k Python methods. For
+thus making the code difficult to understand and be analyzed.  We
+introduce {\tool}, a Deep-Learning (DL)-based approach that formulates
+such recovery problem as the predicting the missing features in the
+Graph Convolutional Network--Missing Features. The graph represents
+both the relations among the variables and those among their types, in
+which names/types of some nodes are missing.  Moreover, {\tool}
+leverages dual-task learning to propagate the mutual impact between
+the learning of the variable names and that of their types. We 
+conducted experiments to evaluate {\tool} in both name recovery and
+type prediction on a real-world dataset with 180k Python methods. For
 variable name prediction, in 76.7\% of the cases, {\tool} can predict
 correctly the variables' names with a single suggested name. {\tool}
 relatively improves from 15.3--40.7\% in top-1 accuracy over the
-state-of-the-art variable name recovery approaches. Top-1 accuracy for
-type prediction is 79\%. It relatively improves 14.5\%--51.9\% in top-1
-accuracy over the existing type prediction approaches.
+state-of-the-art variable name recovery approaches.
+%Top-1 accuracy for type prediction is 79\%.
+It relatively improves 14.5\%--51.9\% in top-1 accuracy over the
+existing type prediction approaches. We showed that learning
+of types help improve variable name recovery.
 
 \end{abstract}
 %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

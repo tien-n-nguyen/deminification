@@ -34,7 +34,7 @@ function exportSelection(self, w, b) {
         };
     if self.doesRangeStartWithImages(r, b):
        p.startsWithImage = true
-    (*@{\color{orange}{a = self.getTrailingImageCount}@*)(w, p, r.endContainer, r.endOffset)
+    (*@{\color{orange}{a}@*) = self.getTrailingImageCount(w, p, r.endContainer, r.endOffset)
     if a:
       p.trailingImageCount = a
     if m !== 0:

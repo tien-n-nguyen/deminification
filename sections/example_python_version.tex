@@ -34,7 +34,7 @@ function exportSelection(self, root, doc) {
       }
       if self.doesRangeStartWithImages(range_, doc):
           selectionState.startsWithImage = true
-      trailingImageCount = self.getTrailingImageCount(root, selectionState, range_.endContainer, range_.endOffset)
+      (*@{\color{orange}{trailingImageCount}@*) = self.getTrailingImageCount(root, selectionState, range_.endContainer, range_.endOffset)
       if trailingImageCount:
         selectionState.trailingImageCount = trailingImageCount
       if start != 0:
