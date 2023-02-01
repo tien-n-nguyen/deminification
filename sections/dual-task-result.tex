@@ -4,21 +4,30 @@
 
 \begin{figure}[thbp]
 \begin{center}
-\includegraphics[width=3.4in]{figures/dual-task-result}
+\includegraphics[width=2.3in]{figures/dual-task-result-1}
 \vspace{-8pt}
-\caption{RQ3. Impact of Dual-Task Learning}
-\label{dual-task-result}
+\caption{RQ3. Impact of Dual-Task Learning on Variable Name Prediction}
+\label{dual-task-result-1}
 \end{center}
 \end{figure}
 
-Figure~\ref{dual-task-result}a) shows the Top-1 accuracy in variable
+\begin{figure}[thbp]
+\begin{center}
+\includegraphics[width=2.3in]{figures/dual-task-result-2}
+\vspace{-8pt}
+\caption{RQ3. Impact of Dual-Task Learning on Variable Type Prediction}
+\label{dual-task-result-2}
+\end{center}
+\end{figure}
+
+Figure~\ref{dual-task-result-1} shows the Top-1 accuracy in variable
 name prediction when we removed the dual-task learning scheme and
 measured only the accuracy of the variable name generation (VNG)
 model.  As seen, without the impact from variable type generation
 (VTG) via dual-task learning, VNG performs only slightly better than
 the best baseline, JSNeat (68.1\% versus 66.5\%). The drop in Top-1
 accuracy from {\tool} is 12.6\% (from 76.7\% downto
-68.1\%). Similarly, as seen in Figure~\ref{dual-task-result}b),
+68.1\%). Similarly, as seen in Figure~\ref{dual-task-result-2},
 without the impact from VNG due to the removal of the dual-task
 learning scheme, VTG performs about the same as the best baseline
 HiTyper. The drop in Top-1 accuracy from {\tool} is 12.5\%.
