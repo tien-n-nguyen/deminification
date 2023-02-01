@@ -1,18 +1,27 @@
-\input{sections/dataset.tex}
-
 \subsection{Experimental Methodology}
 \label{empirical-method}
 
-\subsubsection{RQ1. Comparative Study on Variable Name Prediction.}
+\subsubsection{RQ1. Comparative Study on Variable Name Prediction\\}
+{\em Baselines.} We compared {\tool} against the state-of-the-art
+variable name recovery approaches for minified code including
+JSNeat~\cite{tran2019recovering}, JSNice~\cite{JSNice2015}, and
+JSNaughty~\cite{JSNaughty2017}.
 
-{\em Baselines.} We compared {\tool} against the state-of-the-art variable name prediction approaches: JSNeat~\cite{tran2019recovering}, JSNice~\cite{JSNice2015}, and JSNaughty~\cite{JSNaughty2017} 
+\textit{Procedure.} We took all the methods in that Python dataset
+and used Pyminifier to produce the minified code with variable name
+mininification. We randomly split all the methods into 80\%, 10\%,
+10\% in which 80\% of the methods as the training dataset, 10\% of the
+methods as the tuning dataset, and 10\% of the methods as the testing
+dataset for all baselines and {\tool}.
 
-\textit{Procedure.} We took all the methods in the ManyTypes4Py dataset and ran the pyminifier \cite{pyminifier} tool that is used for variable name minification to minify all the variables in each method. Then we use 80\% of the methods as the training dataset, 10\% of the methods as the tuning dataset, and 10\% of the methods as the testing dataset for all baselines and {\tool}.
+%We took all the methods in the ManyTypes4Py dataset and ran the pyminifier \cite{pyminifier} tool that is used for variable name minification to minify all the variables in each method. Then we use 80\% of the methods as the training dataset, 10\% of the methods as the tuning dataset, and 10\% of the methods as the testing dataset for all baselines and {\tool}.
 
-Because all of these three baselines are designed for JavaScript, we reimplement them based on their source code and design to make them can work on python. To keep the baselines in their original track, we keep all parameters the same as in their original research studies.
-
-We tuned {\tool} with autoML~\cite{NNI} for the following key hyper-parameters to have the best performance: (1) Epoch size (100, 150, 200); (2) Batch size (64, 128, 256); (3) Learning rate (0.001, 0.005, 0.010); (4) Vector length of feature embeddings and its
-output (32, 64, 128); (5) Number of GCN layers (4, 8, 16). 
+{\em Parameter Tuning.} We tuned {\tool} with autoML~\cite{NNI} for
+the following key hyper-parameters to have the best performance: (1)
+Epoch size (100, 150, 200); (2) Batch size (64, 128, 256); (3)
+Learning rate (0.001, 0.005, 0.010); (4) Vector length of feature
+embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
+8, 16).
 
 \subsubsection{RQ2. Comparative Study on Variable Type Prediction.}
 
