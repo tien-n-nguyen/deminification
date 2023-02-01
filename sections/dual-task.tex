@@ -1,3 +1,40 @@
 \section{Dual-Task Learning}
 \label{sec:dual}
 
+In {\tool}, in order to process the variable name prediction and variable type prediction two tasks together, we use the dual-task learning framework to train the variable name generation model and variable type generation model together. 
+
+As for these two tasks, {\tool} regards them both as regression problem and multi-task loss~\cite{kendall2018multi} to learn both of them at the same time. Specifically, for each regression problem, \tool uses a smooth L1 loss function to value the accuracy of output as follows:
+
+\begin{equation}\label{eq1}
+L = {l_1, l_2, ..., l_n}^T
+\end{equation}
+
+\begin{equation}\label{eq2}
+l_n = \left\{ 
+	\begin{array}{lr}
+    	0.5(f(x)_n-y_n)^2  & |f(x)_n-y_n|<1 \\
+   	    |f(x)_n-y_n|-0.5   & otherwise   \\
+	\end{array}
+\right.
+\end{equation}
+
+Where $f(x)_n$ is the output for a variable $n$ in a regression task $f$; $y_n$ is the ground truth. To get the joint loss function for the dual- task learning with uncertainty weighting, following Kendall {\em et al.}'s~\cite{kendall2018multi}, we have:
+
+\begin{equation}\label{eq3}
+L_i(W) = {l_1^W, l_2^W, ..., l_n^W}^T
+\end{equation}
+\begin{equation}\label{eq4}
+l_n^W = \left\{ 
+	\begin{array}{lr}
+		0.5(f(x)^W_n-y_n)^2  & |f(x)^W_n-y_n|<1 \\
+		|f(x)^W_n-y_n|-0.5   & otherwise   \\
+	\end{array}
+\right.
+\end{equation}
+\begin{equation}\label{eq5}
+L(W, \sigma_1, \sigma_2) = \sum_i\frac{1}{2\sigma_i^2}L_i(W) + log \sigma^2_i
+\end{equation}
+
+Where $W$ is the weight adding to the input, $\sigma_i$ is the $i^{th}$ noise scalar, and $W$ and $\sigma_i$ are both trainable in the model.
+
+By combining all loss functions into one in Formula~\ref{eq5}, {\tool} trains the variable name and type prediction tasks together. We simply pick the smallest loss results to get the most suitable model parameters for {\tool}.
