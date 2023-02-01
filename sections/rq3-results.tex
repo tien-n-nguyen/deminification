@@ -5,49 +5,51 @@
 
 \input{sections/graphs-result}
 
-\begin{table}[t]
-	\caption{RQ3. Sensitivity Analysis on Variable Name Prediction.}
-	\begin{center}
-		\small
-		\renewcommand{\arraystretch}{1} 
-		\begin{tabular}{p{2.5cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}}
-			\hline
-			                    & Local Variables & All Variables\\
-			\hline
-			LGCN+GCNmf+RG       & 0.69            & 0.77    \\
-			EEGCN+GCNmf+CPG     & 0.65            & 0.74    \\
-			EEGCN+GCNmf+RG      & 0.70            & 0.77    \\
-			EEGCN+GCNmf+TDG     & 0.66            & 0.75    \\
-			EEGCN+GCNmf+CG      & 0.67            & 0.76    \\
-			\hline
-		\end{tabular}
-		\label{RQ3-result-1}
-		{\bf LGCN}:Label-GCN, {\bf EEGCN}:Edge-enhanced GCN, {\bf GCNmf}:GCN with missing features, {\bf RG}:Relation Graph, {\bf CPG}: Code Property Graph, \\{\bf TDG}: Type Dependency Graph, {\bf CG}:Combined Graph
-	\end{center}
-\end{table}
+\input{sections/models-result}
 
-\begin{table}[t]
-	\caption{RQ3. Sensitivity Analysis on Variable Type Prediction.}
-	\begin{center}
-		\small
-		\renewcommand{\arraystretch}{1} \begin{tabular}{p{2.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}}
-			
-			\hline
-			& \multicolumn{2}{c}{Top-1}         & \multicolumn{2}{c}{Top-3}         & \multicolumn{2}{c}{Top-5} \\
-			\hline
-			& EM & MP & EM & MP & EM & MP  \\ 
-			\hline
-			LGCN+GCNmf+RG   & 0.61 & 0.67 & 0.70 & 0.79 & 0.71 & 0.80 \\
-			EEGCN+GCNmf+CPG & 0.66 & 0.75 & 0.74 & 0.81 & 0.76 & 0.83 \\
-			EEGCN+GCNmf+RG  & 0.63 & 0.69 & 0.71 & 0.80 & 0.73 & 0.82 \\
-			EEGCN+GCNmf+TDG & 0.71 & 0.78 & 0.79 & 0.82 & 0.82 & 0.85 \\
-			EEGCN+GCNmf+CG  & 0.69 & 0.79 & 0.77 & 0.83 & 0.80 & 0.85 \\
-			\hline
-		\end{tabular}
-		\label{RQ3-result-2}
-		{\bf EM}:Exact Match, {\bf MP}:Match to Parametric, {\bf LGCN}:Label-GCN, {\bf EEGCN}:Edge-enhanced GCN, {\bf GCNmf}:GCN with missing features, {\bf RG}:Relation Graph, {\bf CPG}: Code Property Graph, {\bf TDG}: Type Dependency Graph, {\bf CG}:Combined Graph
-	\end{center}
-\end{table}
+%\begin{table}[t]
+%	\caption{RQ3. Sensitivity Analysis on Variable Name Prediction.}
+%	\begin{center}
+%		\small
+%		\renewcommand{\arraystretch}{1} 
+%		\begin{tabular}{p{2.5cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}}
+%			\hline
+%			                    & Local Variables & All Variables\\
+%			\hline
+%			LGCN+GCNmf+RG       & 0.69            & 0.77    \\
+%			EEGCN+GCNmf+CPG     & 0.65            & 0.74    \\
+%			EEGCN+GCNmf+RG      & 0.70            & 0.77    \\
+%			EEGCN+GCNmf+TDG     & 0.66            & 0.75    \\
+%			EEGCN+GCNmf+CG      & 0.67            & 0.76    \\
+%			\hline
+%		\end{tabular}
+%		\label{RQ3-result-1}
+%		{\bf LGCN}:Label-GCN, {\bf EEGCN}:Edge-enhanced GCN, {\bf GCNmf}:GCN with missing features, {\bf RG}:Relation Graph, {\bf CPG}: Code Property Graph, \\{\bf TDG}: Type Dependency Graph, {\bf CG}:Combined Graph
+%	\end{center}
+%\end{table}
+
+%\begin{table}[t]
+%	\caption{RQ3. Sensitivity Analysis on Variable Type Prediction.}
+%	\begin{center}
+%		\small
+%		\renewcommand{\arraystretch}{1} \begin{tabular}{p{2.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}|p{0.5cm}<{\centering}}
+%			
+%			\hline
+%			& \multicolumn{2}{c}{Top-1}         & \multicolumn{2}{c}{Top-3}         & \multicolumn{2}{c}{Top-5} \\
+%			\hline
+%			& EM & MP & EM & MP & EM & MP  \\ 
+%			\hline
+%			LGCN+GCNmf+RG   & 0.61 & 0.67 & 0.70 & 0.79 & 0.71 & 0.80 \\
+%			EEGCN+GCNmf+CPG & 0.66 & 0.75 & 0.74 & 0.81 & 0.76 & 0.83 \\
+%			EEGCN+GCNmf+RG  & 0.63 & 0.69 & 0.71 & 0.80 & 0.73 & 0.82 \\
+%			EEGCN+GCNmf+TDG & 0.71 & 0.78 & 0.79 & 0.82 & 0.82 & 0.85 \\
+%			EEGCN+GCNmf+CG  & 0.69 & 0.79 & 0.77 & 0.83 & 0.80 & 0.85 \\
+%			\hline
+%		\end{tabular}
+%		\label{RQ3-result-2}
+%		{\bf EM}:Exact Match, {\bf MP}:Match to Parametric, {\bf LGCN}:Label-GCN, {\bf EEGCN}:Edge-enhanced GCN, {\bf GCNmf}:GCN with missing features, {\bf RG}:Relation Graph, {\bf CPG}: Code Property Graph, {\bf TDG}: Type Dependency Graph, {\bf CG}:Combined Graph
+%	\end{center}
+%\end{table}
 
 1. Code property graph is complex but cannot represent the variable relationships and type changes clearly (EEGCN+GCNmf+CPG compared with EEGCN+GCNmf+RG on name prediction; EEGCN+GCNmf+CPG compared with EEGCN+GCNmf+TDG on type prediction)
 
