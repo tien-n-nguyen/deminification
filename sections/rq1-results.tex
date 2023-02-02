@@ -1,4 +1,4 @@
-\subsection{{\bf RQ1. Comparative Study on Variable Name Prediction}}
+\subsection{{\bf Comparison on Name Prediction (RQ1)}}
 \label{empirical-rq1}
 
 %\begin{table}[t]
@@ -21,7 +21,7 @@
 %	\end{center}
 %\end{table}
 
-\begin{figure}[thbp]
+\begin{figure}[t] %[thbp]
 \begin{center}
 \includegraphics[width=3.2in]{figures/name-prediction-result-2}
 \vspace{-8pt}
@@ -31,9 +31,32 @@
 \end{figure}
 
 
-\begin{table}[thbp]
-  \caption{RQ1. Comparison on Variable Name Prediction.}
-  \vspace{-5pt}
+
+
+
+%In this study, we evaluate {\tool}'s accuracy and compare it with the
+%state-of-the-art approaches in variable name prediction for minified
+%code.
+%In this study, we evaluate {\tool} in variable name prediction.
+As seen in Figure~\ref{name-prediction-result}, for all variables in
+minified code, {\tool} achieves high top-1 accuracy of {\bf 76.7\%}:
+in 76.7\% of the cases, it can recover the correct variable names with
+a single prediction. The relative improvements in top-1 accuracy for
+all variables over JSNice, JSNaughty, and JSNeat are {\bf 40.7\%,
+  28.7\%}, and {\bf 15.3\%}, respectively. The absolute improvements
+in top-1 accuracy over the state-of-the-art approaches are from
+10.2\%--22.2\%.
+
+Considering only local variables, in {\bf 67.5\%} of them, {\tool}
+correctly predicts their original names with a single result. The
+relative improvements in top-1 accuracy in recovering local variables'
+names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
+{\bf 15.9\%}, respectively. The absolute improvements in top-1
+accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
+
+\begin{table}[t] %[thbp]
+  \caption{RQ1. Comparison on Variable Name Prediction}
+  \vspace{-8pt}
 	\begin{center}
 		\small
 		\renewcommand{\arraystretch}{1} \begin{tabular}{|p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|}
@@ -53,30 +76,6 @@
 		\label{name-result}
 	\end{center}
 \end{table}
-
-
-In this study, we evaluate {\tool}'s accuracy and compare it with the
-state-of-the-art approaches in variable name prediction for minified
-code.
-%We evaluated {\tool}'s accuracy and compared it with
-%JSNice~\cite{JSNice2015} and~JSNaughty \cite{JSNaughty2017}.
-%Figure~\ref{comparison_3tools} shows the results.
-%for all three tools.
-As seen in Figure~\ref{name-prediction-result}, for all variables in
-minified code, {\tool} achieves high top-1 accuracy of {\bf 76.7\%}:
-in 76.7\% of the cases, it can recover the correct variable names with
-a single prediction. The relative improvements in top-1 accuracy for
-all variables over JSNice, JSNaughty, and JSNeat are {\bf 40.7\%,
-  28.7\%}, and {\bf 15.3\%}, respectively. The absolute improvements
-in top-1 accuracy over the state-of-the-art approaches are from
-10.2\%--22.2\%.
-
-Considering only local variables, in {\bf 67.5\%} of them, {\tool}
-correctly predicts their original names with a single result. The
-relative improvements in top-1 accuracy in recovering local variables'
-names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
-{\bf 15.9\%}, respectively. The absolute improvements in top-1
-accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 
 As seen in Table~\ref{name-result}, the result is also consistent for
 top-3 and top-5 accuracies for {\tool}. The relative improvements are

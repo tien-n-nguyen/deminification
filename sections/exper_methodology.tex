@@ -103,14 +103,13 @@ cases. Top-$k$ accuracy is measured similarly, however, a hit is
 achieved when the correct name is in the top-$k$ candidate list from a
 tool.
 
-For the variable type prediction, following the prior
-work~\cite{HiTyper-icse22}, we use two metrics, \code{Exact-Match}
-and
-\code{Parametric-Match} with the above Top-$k$ accuracy. \code{Exact-Match}
+For the variable type prediction, we use two metrics,
+\code{Exact-Match} and \code{Parametric-Match} with the top-$k$
+accuracy as in HiTyper~\cite{HiTyper-icse22}. \code{Exact-Match}
 occurs when the resulting type matches exactly with the
 human-annotations. \code{Parametric-Match} occurs if the result
-matches with the correct type but the types of the parameters might
-not. For example, \code{Dict[int,str]} is considered as
+matches with the correct type but those of the parameters might
+not. For example, \code{Dict[int,str]} is 
 parametric-matched with \code{Dict[int,int]}.
 
 %These two metrics compute the ratio of results that: 1) Exact Match:

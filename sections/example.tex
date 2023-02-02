@@ -1,2 +1,51 @@
-\subsubsection{Example}
+\subsubsection{Examples}
 \label{sec:eval-example}
+
+\begin{figure}[t]
+	\centering
+	\lstset{
+		numbers=left,
+		numberstyle= \tiny,
+		keywordstyle= \color{blue!70},
+		commentstyle= \color{red!50!green!50!blue!50},
+		frame=shadowbox,
+		rulesepcolor= \color{red!20!green!20!blue!20} ,
+		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+		framexleftmargin=1.5em,
+                numbersep= 5pt,
+		language=Python,
+    basicstyle=\scriptsize\ttfamily,
+    numberstyle=\scriptsize\ttfamily,
+    emphstyle=\bfseries,
+                moredelim=**[is][\color{red}]{@}{@},
+		escapeinside= {(*@}{@*)}
+	}
+	\begin{lstlisting}[]
+def get(self, request):
+  client_ip = self.extract_ip_from(request)
+  is_limited = self.check_request_limit(client_ip)
+  if is_limited:
+    return Response({}, status=rest_framework.status.HTTP_403_FORBIDDEN)
+  count = BirdNameDatabase.objects.count() - 1
+  index = randint(0, count)
+  bn = BirdNameDatabase.objects.all()[index]
+  serialized = BirdNameSerializer(bn, many=False)
+  self.save_general_statistics(client_ip, bn)
+  return Response(serialized.data)
+
+def get(self, r):
+  q = self.extract_ip_from(r)
+  p = self.check_request_limit(q)
+  if p:
+    return Response({}, status=rest_framework.status.HTTP_403_FORBIDDEN)
+  m = BirdNameDatabase.objects.count() - 1
+  n = randint(0, m)
+  t = BirdNameDatabase.objects.all()[n]
+  s = BirdNameSerializer(t, many=False)
+  self.save_general_statistics(q, t)
+  return Response(s.data)       
+\end{lstlisting}
+\vspace{-16pt}
+\caption{A Correct Prediction Example in Dataset}
+\label{example1}
+\end{figure}
