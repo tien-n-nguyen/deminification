@@ -157,14 +157,15 @@ prediction one, and we apply a dual-task learning mechanism between
 the two models.
 
 \vspace{2pt}
-\textbf{Observation 2}. {\em The name and type of a variable can be
+\textbf{Observation 2}. {\em The name and type of a variable are
   affected by the names and types of the surrounding variables in a
   function.}  Intuitively, because multiple variables are used
 together to achieve the task in the function, their names are
 often consistent with one another. For example, at line 6, the choice
-of the name \code{range\_} in the recovery process could be influenced
-by the choice of the variable \code{selection} as the call to
-\code{getRangeAt} is made on that variable as in the statement
+of the name \code{range\_} in the recovery process could be derived
+%influenced
+by the choice of the variable \code{selection} and the call to
+\code{getRangeAt} as it is made on that variable as in the statement
 \code{range\_} = \code{selection.getRangeAt(0)}. The choice of the name
 \code{preSelectionRange} could be affected by the choice of the
 variable \code{range\_} due to the statement \code{preSelectionRange} =
@@ -174,8 +175,10 @@ variables. For example, the types of two sides of an assignment must
 be consistent.
 
 \vspace{2pt}
-\noindent {\bf Key Idea 2.} [{\bf Relations among Variables in a
-    Function}] {\em A variable name or type are influenced by the
+\noindent {\bf Key Idea 2.} [{\bf {\em ``Tell Me Your Friends, I'll Tell
+    You Who You Are''}}]
+%[{\bf Relations among Variables in a Function}]
+          {\em A variable name or type are influenced by the
   names or the properties of the other variables having the relations
   with that variable} in the surrounding context. We {\bf treat the
   problem of variable name generation as predicting the missing
