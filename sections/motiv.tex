@@ -222,28 +222,30 @@ in a program.
   kept intact after minification.} If the names of the fields and
 methods were minified, the corresponding field accesses and method
 calls would not be valid anymore. For example, \code{cloneRange()} in
-\code{r.cloneRange()} at line 7 and \code{startContainer} in
-\code{r.startContainer} at line 9 in Figure~\ref{example_org} are
-unchanged in Figure~\ref{example_sim}. Due to that, a model can rely
+\code{range\_.cloneRange()} at line 7 and \code{startContainer} in
+\code{range\_.startContainer} at line 9 in Figure~\ref{example_org} are
+unchanged in Figure~\ref{example_sim}. Thus, a model can rely
 on the names of those properties of a variable to predict the
 variable's name.
 
 \vspace{2pt}
 \noindent {\bf Key Idea 3.} [{\bf Properties of a Variable}] {\em The
-  name of a variable $v$ is in accordance with its own properties}
+  name of a variable~is in accordance with its own properties}
 including the names of its fields in field accesses and the names of
-its methods in the method calls on the variable $v$.
-%
-Moreover, the names of the fields and methods are kept intact after
-minification, thus, a model can rely on those names to predict the
-names of the variables. For example, a model can be trained to learn
-from the variables that have the field accesses to
-\code{startContainer}, \code{endContainer}, \code{startOffset}, and
-\code{endOffset}, and have the method calls to \code{cloneRange()}.
-It then uses that knowledge to predict the variable type and the name
-\code{range}.
+its methods in the method calls on that variable. Moreover, the names
+of fields and methods are~kept intact after minification, thus, a
+model can rely on those names to predict the variables' names. For
+example, a model can learn from the variables that have the field
+accesses to \code{start\-Container}, \code{end\-Container},
+\code{start\-Offset}, and \code{end\-Offset}, and have the method
+calls to \code{clone\-Range()}.  It then uses that knowledge to
+predict the name \code{range\_}.
 
+%variable type and the name \code{range\_}.
 
+In brief, to recover the name of a variable, a model could examine {\bf its
+own properties}, {\bf its relations} with other variables and their
+properties, and the relations among {\bf their types}.
 
 
 
