@@ -112,23 +112,31 @@ address it as part of the dual-task learning~between the variable name
 prediction model and the type prediction model. {\em Correct learning
   for one model can benefit for the learning in the other and vice
   versa} due to the naturalness of names in source
-code~\cite{hindle-icse12}. The rationale is that {\em the name chosen
-  for a variable in the original code should be natural (unsurprising)
-  with respect to the type of that variable}. For example, for easy
-comprehension, a variable of the type \code{Offset} might have a name
-relevant to the notion of {\em offset} or its abbreviations, e.g.,
-\code{startOffset}, \code{endOffset}, etc.
+code~\cite{hindle-icse12}.
+%
+Except for a few un-important variables (e.g., running variables in a
+loop or temporary variables), the majority of the variables carry some
+contextual meaning toward achieving the task intended in the current
+function.
+%
+{\em The names chosen for such a variable in the original code should
+  be natural (unsurprising) with respect to its type}.
+%The rationale is that {\em the name chosen for a variable in the
+%original code should be natural (unsurprising) with respect to the
+%type of that variable}.
+For example, for easy comprehension, a variable of the type
+\code{Offset} might have a name relevant to the notion of {\em offset}
+or its abbreviations, e.g., \code{startOffset}, \code{endOffset}, etc.
+Similarly, if a model learns the name of a variable, its type should
+be in accordance with the name. For example, if a model recovers the
+name of a variable as {\em count} or {\em index}, its type might
+likely be of \code{int} or \code{Integer}.
+
 %
 %For example, if a variable of the type \code{Student} should not have
 %a name that is completely irrelevant to the notion
 %``student''.
-%
-Similarly, if a model learns the name of a variable, its type should
-be in accordance with the name.
-%and follow naming conventions.
-For example, if a model recovers the name of a variable as {\em count}
-or {\em index}, its type might likely be of \code{int} or
-\code{Integer}.
+%%and follow naming conventions
 
 Exploring this duality can provide useful constraints to predict both
 the variable names and their types.  To build the variable name
