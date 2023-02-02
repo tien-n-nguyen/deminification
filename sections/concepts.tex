@@ -1,4 +1,4 @@
-\section{Important Concepts}
+%\section{Important Concepts}
 \label{sec:concepts}
 
 To identify the names of a variable, our approach first is to examine
@@ -190,12 +190,12 @@ $assign$ edge from the variable \code{r} to the node
 
 In this work, we focus on Python source
 code. Figure~\ref{python-types} shows Python's type
-system~\cite{type-graph-icse22}. To represent the dependencies among
+system~\cite{HiTyper-icse22}. To represent the dependencies among
 the types, we adopt Type Dependency Graph
-(TDG)~\cite{type-graph-icse22}, which aims to capture the type
+(TDG)~\cite{HiTyper-icse22}, which aims to capture the type
 inference rules for variables/expressions.
 
-\begin{definition}{\bf [Type Dependency Graph]}~\cite{type-graph-icse22}
+\begin{definition}{\bf [Type Dependency Graph]}~\cite{HiTyper-icse22}
     \label{tdg-def}
 A Type Dependency Graph is a graph $G$ = $(N,E)$ in which $N$ is the
 set of nodes representing all the variables and expresions, and $E$ is
@@ -241,7 +241,7 @@ kept. All edges are combined including the type-dependency edges.
 %code and transform every variable occurrence and expression into nodes
 %and maintains type dependencies between them. We also extend the
 %notion and the algorithm to build the type dependency graph (TDG) for
-%the JavaScript code. Details on TDG is in~\cite{type-graph-icse22}.
+%the JavaScript code. Details on TDG is in~\cite{HiTyper-icse22}.
 
 
 \begin{figure}[t]

@@ -39,22 +39,25 @@ We did not compare our tool with Xu {\em et al.}~\cite{xu-fse16},
 DeepTyper~\cite{DeepTyper-fse18}, NL2Type~\cite{nl2type-icse19},
 LAMBDANET~\cite{LambdaNet-iclr20}, OptTyper~\cite{optyper20}, and
 TypeBERT~\cite{typeBERT-fse21}, because in its paper, Type4Py has been
-compared to show the better performance than them, and we are comparing
-with Type4Py.
+shown to perform better than those tools, and we are comparing against
+Type4Py.
 
 
-\textit{Procedure.}
-With all variable type information summarized in the ManyTypes4Py
-dataset, we directly used the variable type information for the
-variables in each method for all the approaches. We used the same data
-splitting for training, tuning, and testing as in RQ1. We ran the
-baselines with the parameters in their source code.
+\textit{Procedure.}  With all variable type information summarized in
+the ManyTypes4Py dataset, we directly used the type information for
+the variables as the ground truth for all the approaches. We used the
+same data splitting for training, tuning, and testing as in RQ1. We
+ran the baselines with the parameters in their source code. We fed to
+{\tool} the minified code, and obtained the
+output types from the variable type generation (VTG) model for all the
+variables/expressions in the code.
 
-{\em Parameter Tuning.} For {\tool}, we tuned it with
-autoML~\cite{NNI} for the same key hyper-parameters to have the best
-performance as in RQ1. We fed to {\tool} the minified code but with
-all the names and types, and obtained the output from the variable
-type generation (VTG) model for all the variables in the code.
+%Tien paid attention to this
+%We fed to DeMinify the minified code but with ***all the names***
+
+{\em Parameter Tuning.} We tuned our model with
+autoML~\cite{NNI} for the same hyper-parameters to have the best
+performance as in RQ1. 
 
 %Because {\tool} is a dual-learning approach, to make {\tool} work
 %correctly, we took the same data splitting for training, tuning, and
@@ -79,28 +82,28 @@ for source code. This allows us to evaluate the impact of our chosen
 graph representations for this problem. Third, the key technical
 solution in {\tool} is the formulation in which predicting names and
 types for variables is considered as predicting the missing features
-among the connected program elements. We currently used the EE-GCN
-model to capture those relations and dependencies. We replaced
-it with the Label-GCN~\cite{label-gcn} and made a comparison.
+of connected program elements. We currently used the EE-GCN model to
+capture the relations and dependencies among program elements. We
+replaced it with the Label-GCN~\cite{label-gcn} and made a comparison.
 
 %We built the variants of {\tool} by changing its important components to check the influence of each component on both the variable name and type prediction results. These variants of {\tool} include: 1. using label-GCN (LGCN) as the variable type prediction model and using GCN with missing features (GCNmf) as the variable name prediction model on relation graph (RG); 2. using edge-enhanced GCN (EEGCN) as the variable type prediction model and using GCNmf as the variable name prediction model on code property graph (CPG); 3. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on RG; 4. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on type dependency graph (TDG); 5. using EEGCN as the variable type prediction model and using GCNmf as the variable name prediction model on the combined graph (CG).
 
 \subsubsection*{Evaluation Metrics}
 
-For the variable name prediction task, we follow the prior
-research~\cite{icse19} to calculate the prediction accuracy on local
-variables and all variables. We compared the resulting names from a
-tool against the original names. Specifically, the tool is considered
-to correctly recover the name of a variable $v$ if the recovered name
-$vn$ is matched exactly with its original name. For $v$, if matching,
-we count it as a hit, otherwise, it is a miss. Accuracy is measured by
-the ratio between the total number of hits over the total number of
-cases. Top-$k$ accuracy is measured similarly, however, the hit is
-obtained only when the correct name is in the top-$k$ candidate list
-from a tool.
+For the variable name prediction, we follow a prior work~\cite{icse19}
+to calculate the prediction accuracy on local~variables and all
+variables. We compared the resulting names from a tool against the
+original names. A tool is considered to correctly
+recover the name of a variable $v$ if the recovered name $vn$ is
+matched exactly with its original name. For $v$, if matching, we count
+it as a hit, otherwise, it is a miss. Accuracy is measured by the
+ratio between the total number of hits over the total number of
+cases. Top-$k$ accuracy is measured similarly, however, a hit is
+achieved when the correct name is in the top-$k$ candidate list from a
+tool.
 
-For the variable type prediction task, following the previous
-work \cite{type-graph-icse22}, we use two metrics, \code{Exact-Match}
+For the variable type prediction, following the prior
+work~\cite{HiTyper-icse22}, we use two metrics, \code{Exact-Match}
 and
 \code{Parametric-Match} with the above Top-$k$ accuracy. \code{Exact-Match}
 occurs when the resulting type matches exactly with the
