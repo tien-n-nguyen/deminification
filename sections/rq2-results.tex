@@ -39,15 +39,17 @@
 %{\color{red}{I found that the hityper and type4py have results on the dataset ManyTypes4PY. Our results are a little bit different from theirs. I think the reason is that we only use 25k+ while they use the full dataset. To make it consistent, I changed the numbers here in the table to the results that they got on the full dataset. But I still keep our results on google slides in case we need them.}}
 
 While we focus on variable name prediction, the result of variable
-type prediction is also important and useful because the types
-in the minified code are exactly the same for the original code.
-In this study, we evaluate {\tool}'s accuracy and compare it with the
-state-of-the-art approaches in variable type prediction for minified
-code. As seen in Figure~\ref{type-prediction-result}, for all
-variables in minified code, {\tool} achieves high top-1 accuracy of
-{\bf 79\%} for exact-matches of the types and {\bf 89\%} for the
-parametric matches. That is, in 79\% of the cases, it can recover the
-correct variable types with a single prediction.
+type prediction is also important and useful because the types in the
+minified code are exactly the same for the original code.  In this
+study, we evaluate {\tool}'s accuracy and compare it with the
+state-of-the-art approaches in variable type prediction. As seen in
+Figure~\ref{type-prediction-result}, for all variables, {\tool}
+achieves high top-1 accuracy of {\bf 79\%} for exact-matches of the
+types and {\bf 89\%} for the parametric matches. That is, in 79\% of
+the cases, it can recover the correct variable types with a single
+prediction.
+%For 89\% of the cases, the output type is correct without
+%comparing the parameters' types.
 %
 The relative improvements in top-1 accuracy in exact-matching over
 Ivanov {\em et al.}~\cite{ivanov21predicting},
@@ -55,22 +57,24 @@ Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
 Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
 {\bf 51.9\%, 43.6\%}, {\bf 31.6\%}, {\bf 27.4\%}, and {\bf
   14.5\%}, respectively. The absolute improvements in top-1 accuracy
-over the state-of-the-art approaches are from
+over those state-of-the-art type prediction approaches are from
 10\%--27\%.
 
 Regarding the parametric matches (disregarding the types of the
-parameters), {\tool} achieves higher top-1 accuracy. In 79\% of the
+parameters), {\tool} achieves higher top-1 accuracy. In 89\% of the
 cases, it can recover the correct variable types (discarding those of
 parameters) with a single prediction. The relative improvements in
 top-1 accuracy in parametric-matching over Ivanov {\em et
   al.}~\cite{ivanov21predicting}, Typilus~\cite{typilus-pldi20},
 TypeWriter\cite{typewriter-fse20}, Type4Py~\cite{Type4Py-icse22}, and
 HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 39\%},
-{\bf 34.8\%}, and {\bf 15.5\%}, respectively.
+{\bf 34.8\%}, and {\bf 15.5\%}, respectively. The absolute
+improvements in top-1 accuracy with parametric matching over the
+state-of-the-art approaches are from 12\%--31\%.
 
 Moreover, {\tool} also achieves high top-$k$ ($k$=3,5) accuracies: as
 seen in Table~\ref{type-result}, in 88\% of the variables, the correct
-types of the variables are in the list of 5 candidate types. The
+types of the variables are in the list of five candidate types. The
 relative improvements in top-5 accuracy in parametric-matching over
 Ivanov {\em et al.}~\cite{ivanov21predicting},
 Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
@@ -99,19 +103,19 @@ perform better in the cases in which the embeddings for types are not
 sufficiently distinguishable from one another, leading to low accuracy
 for Type4Py. Regarding the used neural networks, it uses Recurrent
 Neural Network (RNN) operating on the code token embeddings built from
-the Asbstract Syntax Tree (AST). In contrast, we use GCNmf that could
+the Abstract Syntax Tree (AST). In contrast, we use GCNmf that could
 capture better the dependencies with different types of edges.
 
 Compared to Typilus~\cite{typilus-pldi20}, {\tool} relatively improves
 31.6\% in top-1 accuracy. Similar to Type4Py, Typilus builds a vector
 space for type embeddings. It uses a graph neural network to learn to
 map variables, parameters, and function returns to a type embedding
-using deep similarity learning. For type inference, using the type
-map, it accepts unannotated code, computes type embeddings with the
-trained GNN and finds the concrete $k$ nearest neighboring types as
-the candidates. There are two key limitations in Typilus that {\tool}
-overcomes. First, their graph representation does not directly encode
-the type dependencies. It encodes among the code tokens the
+space using deep similarity learning. For type inference, using the
+type map, it accepts unannotated code, computes type embeddings with
+the trained GNN and finds the concrete $k$ nearest neighboring types
+as the candidates. There are two key limitations in Typilus that
+{\tool} overcomes. First, their graph representation does not directly
+encode the type dependencies. It encodes among the code tokens the
 next-lexical-token relation, structural/syntactical relations, and
 data dependencies. Second, it does not have the assistance of the
 learning of variable names as the above explanation in the comparative
@@ -119,7 +123,7 @@ analysis with HiTyper.
 
 TypeWriter~\cite{typewriter-fse20} extracts code tokens to build token
 embeddings and uses two RNNs for identifiers and for code to merge
-them to form type vectors. It then uses feedback-directted search on
+them to form type vectors. It then uses feedback-directed search on
 the results from a static type checker to search for consistent types.
 The key limitation is that the type dependencies are not encoded
 during the learning. Instead, TypeWriter leverages an external static

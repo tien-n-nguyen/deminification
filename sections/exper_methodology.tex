@@ -47,9 +47,10 @@ Type4Py.
 the ManyTypes4Py dataset, we directly used the type information for
 the variables as the ground truth for all the approaches. We used the
 same data splitting for training, tuning, and testing as in RQ1. We
-ran the baselines with the parameters in their source code. We fed to
-{\tool} the minified code, and obtained the
-output types from the variable type generation (VTG) model for all the
+ran the baselines on the original source code with the parameters in
+their documentation. We fed to {\tool} the minified code but with the
+original names and no types (i.e., the original code), and obtained
+the types from the variable type generation (VTG) model for all the
 variables/expressions in the code.
 
 %Tien paid attention to this
