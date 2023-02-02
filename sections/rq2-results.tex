@@ -19,17 +19,17 @@ prediction.
 %comparing the parameters' types.
 %
 The relative improvements in top-1 accuracy in exact-matching over
-Ivanov {\em et al.}~\cite{ivanov21predicting},
-Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
+Ivanov {\em et al.}~\cite{ivanov21predicting}, TypeWriter\cite{typewriter-fse20},
+Typilus~\cite{typilus-pldi20}, 
 Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
-{\bf 51.9\%, 43.6\%}, {\bf 31.6\%}, {\bf 27.4\%}, and {\bf
+{\bf 51.9\%, 43.6\%}, {\bf 33.8\%}, {\bf 27.4\%}, and {\bf
   14.5\%}, respectively. The absolute improvements in top-1 accuracy
 over those state-of-the-art type prediction approaches are from
 10\%--27\%.
 
 \begin{figure}[t]%[thbp]
 \begin{center}
-\includegraphics[width=3.2in]{figures/type-prediction-result}
+\includegraphics[width=3.1in]{figures/type-prediction-result-2}
 \vspace{-8pt}
 \caption{RQ2. Top-1 Accuracy on Type Prediction}
 \label{type-prediction-result}
@@ -41,9 +41,9 @@ parameters), {\tool} achieves higher top-1 accuracy. In 89\% of the
 cases, it can recover the correct variable types (discarding those of
 parameters) with a single prediction. The relative improvements in
 top-1 accuracy in parametric-matching over Ivanov {\em et
-  al.}~\cite{ivanov21predicting}, Typilus~\cite{typilus-pldi20},
-TypeWriter\cite{typewriter-fse20}, Type4Py~\cite{Type4Py-icse22}, and
-HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 39\%},
+  al.}~\cite{ivanov21predicting}, TypeWriter\cite{typewriter-fse20},
+Typilus~\cite{typilus-pldi20}, Type4Py~\cite{Type4Py-icse22}, and
+HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 34.8\%},
 {\bf 34.8\%}, and {\bf 15.5\%}, respectively. The absolute
 improvements in top-1 accuracy with parametric matching over the
 state-of-the-art approaches are from 12\%--31\%.
@@ -54,10 +54,10 @@ Moreover, {\tool} also achieves high top-$k$ ($k$=3,5) accuracies: as
 seen in Table~\ref{type-result}, in 88\% of the variables, the correct
 types of the variables are in the list of five candidate types. The
 relative improvements in top-5 accuracy in parametric-matching over
-Ivanov {\em et al.}~\cite{ivanov21predicting},
-Typilus~\cite{typilus-pldi20}, TypeWriter\cite{typewriter-fse20},
+Ivanov {\em et al.}~\cite{ivanov21predicting}, TypeWriter\cite{typewriter-fse20},
+Typilus~\cite{typilus-pldi20}, 
 Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
-{\bf 46.6\%, 42\%}, {\bf 35.3\%}, {\bf 31.3\%}, and {\bf 22.2\%},
+{\bf 46.6\%, 42\%}, {\bf 37.5\%}, {\bf 31.3\%}, and {\bf 22.2\%},
 respectively.
 
 %1. {\tool} performs the best comparing with all baselines by increasing the top-1, top-3, and top-5 accuracy by XX\%, XX\%, and XX\%
@@ -97,8 +97,8 @@ capture better the dependencies with different types of edges.
                        & EM & PM & EM & PM & EM & PM  \\ 
 			\hline
 		        Ivanov {\em et al.}~\cite{ivanov21predicting} &  52    & 58     &   55   &  63     &  60     &   67    \\
-			Typilus~\cite{typilus-pldi20}  &   55   &  61    &  59    &   66   &  62    &  70     \\
-			TypeWriter~\cite{typewriter-fse20}  &   60   &  64    &  63    &  69    &  65    & 71      \\
+			TypeWriter~\cite{typewriter-fse20}  &   55   &  61    &  59    &   66   &  62    &  70     \\
+			Typilus~\cite{typilus-pldi20}  &   59   &  66    &  63    &  71    &  64    & 73      \\
                        	Type4Py~\cite{Type4Py-icse22}  & 62 & 66 & 66 & 72 & 67 & 73 \\
                         HiTyper~\cite{HiTyper-icse22}  & 69 & 77 & 72 & 81 & 72 & 82 \\
 			\hline
