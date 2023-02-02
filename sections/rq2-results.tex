@@ -1,40 +1,7 @@
-\subsection{{\bf RQ2. Comparative Study on Variable Type Prediction}}
+\subsection{{\bf Comparison on Type Prediction (RQ2)}}
 \label{empirical-rq2}
 
-\begin{figure}[thbp]
-\begin{center}
-\includegraphics[width=3.2in]{figures/type-prediction-result}
-\vspace{-8pt}
-\caption{RQ2. Top-1 Accuracy on Variable Type Prediction}
-\label{type-prediction-result}
-\end{center}
-\end{figure}
 
-\begin{table}[htbp]
-  \caption{RQ2. Comparison on Variable Type Prediction.}
-  \vspace{-5pt}
-	\begin{center}
-		\small
-		\renewcommand{\arraystretch}{1} \begin{tabular}{|p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|}
-			
-			\hline
-                       & \multicolumn{2}{c|}{Top-1}         & \multicolumn{2}{c|}{Top-3}         & \multicolumn{2}{c|}{Top-5} \\
-			\hline
-                       & EM & PM & EM & PM & EM & PM  \\ 
-			\hline
-		        Ivanov {\em et al.}~\cite{ivanov21predicting} &  52    & 58     &   55   &  63     &  60     &   67    \\
-			Typilus~\cite{typilus-pldi20}  &   55   &  61    &  59    &   66   &  62    &  70     \\
-			TypeWriter~\cite{typewriter-fse20}  &   60   &  64    &  63    &  69    &  65    & 71      \\
-                       	Type4Py~\cite{Type4Py-icse22}  & 62 & 66 & 66 & 72 & 67 & 73 \\
-                        HiTyper~\cite{HiTyper-icse22}  & 69 & 77 & 72 & 81 & 72 & 82 \\
-			\hline
-			{\bf {\tool}}                        & 79 & 89 & 87 & 90 & 88 & 94 \\
-			\hline
-		\end{tabular}
-		\label{type-result}
-		{\bf EM}: Exact Match, {\bf PM}: Parametric Match
-	\end{center}
-\end{table}
 
 %{\color{red}{I found that the hityper and type4py have results on the dataset ManyTypes4PY. Our results are a little bit different from theirs. I think the reason is that we only use 25k+ while they use the full dataset. To make it consistent, I changed the numbers here in the table to the results that they got on the full dataset. But I still keep our results on google slides in case we need them.}}
 
@@ -60,6 +27,15 @@ Type4Py~\cite{Type4Py-icse22}, and HiTyper~\cite{HiTyper-icse22} are
 over those state-of-the-art type prediction approaches are from
 10\%--27\%.
 
+\begin{figure}[t]%[thbp]
+\begin{center}
+\includegraphics[width=3.2in]{figures/type-prediction-result}
+\vspace{-8pt}
+\caption{RQ2. Top-1 Accuracy on Type Prediction}
+\label{type-prediction-result}
+\end{center}
+\end{figure}
+
 Regarding the parametric matches (disregarding the types of the
 parameters), {\tool} achieves higher top-1 accuracy. In 89\% of the
 cases, it can recover the correct variable types (discarding those of
@@ -71,6 +47,8 @@ HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 39\%},
 {\bf 34.8\%}, and {\bf 15.5\%}, respectively. The absolute
 improvements in top-1 accuracy with parametric matching over the
 state-of-the-art approaches are from 12\%--31\%.
+
+
 
 Moreover, {\tool} also achieves high top-$k$ ($k$=3,5) accuracies: as
 seen in Table~\ref{type-result}, in 88\% of the variables, the correct
@@ -105,6 +83,32 @@ for Type4Py. Regarding the used neural networks, it uses Recurrent
 Neural Network (RNN) operating on the code token embeddings built from
 the Abstract Syntax Tree (AST). In contrast, we use GCNmf that could
 capture better the dependencies with different types of edges.
+
+\begin{table}[t]%[htbp]
+  \caption{RQ2. Comparison on Type Prediction}
+  \vspace{-7pt}
+	\begin{center}
+		\small
+		\renewcommand{\arraystretch}{1} \begin{tabular}{|p{1.9cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|p{0.65cm}<{\centering}|}
+			
+			\hline
+                       & \multicolumn{2}{c|}{Top-1}         & \multicolumn{2}{c|}{Top-3}         & \multicolumn{2}{c|}{Top-5} \\
+			\hline
+                       & EM & PM & EM & PM & EM & PM  \\ 
+			\hline
+		        Ivanov {\em et al.}~\cite{ivanov21predicting} &  52    & 58     &   55   &  63     &  60     &   67    \\
+			Typilus~\cite{typilus-pldi20}  &   55   &  61    &  59    &   66   &  62    &  70     \\
+			TypeWriter~\cite{typewriter-fse20}  &   60   &  64    &  63    &  69    &  65    & 71      \\
+                       	Type4Py~\cite{Type4Py-icse22}  & 62 & 66 & 66 & 72 & 67 & 73 \\
+                        HiTyper~\cite{HiTyper-icse22}  & 69 & 77 & 72 & 81 & 72 & 82 \\
+			\hline
+			{\bf {\tool}}                        & 79 & 89 & 87 & 90 & 88 & 94 \\
+			\hline
+		\end{tabular}
+		\label{type-result}
+		{\bf EM}: Exact Match, {\bf PM}: Parametric Match
+	\end{center}
+\end{table}
 
 Compared to Typilus~\cite{typilus-pldi20}, {\tool} relatively improves
 31.6\% in top-1 accuracy. Similar to Type4Py, Typilus builds a vector
