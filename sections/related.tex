@@ -1,12 +1,14 @@
 \section{Related Work}
 \label{related_section}
 
-The automated approaches for variable name recovery in the minified
-source code can be broadly classified into two categories: {\em
-  information retrieval} (IR), statistical learning, and {\em machine
-  learning} (ML).  JSNeat~\cite{icse19} follows an IR approach to search
-for the names in large code corpus, but is not effective
-for un-seen names.
+%The automated approaches for variable name recovery in the minified
+%source code can be broadly classified
+
+\noindent {\bf Variable name recovery approaches} in minified code
+follow the three categories: {\em information retrieval} (IR),
+statistical learning, and {\em machine learning} (ML).
+JSNeat~\cite{icse19} follows an IR approach to search for the names in
+large code corpus, but is not effective for un-seen names.
 %with the idea that the names of a minified variable could be found in
 %an ultra-large-scaled code corpus.  The key issue is that JSNeat is
 %not effective if a name has never been seen before in the training
@@ -14,10 +16,10 @@ for un-seen names.
 JSNice~\cite{JSNice2015}
 %uses the graph representation of variables
 %and surrounding program entities via program dependencies. It
-infers the variable names as a problem of structured prediction with
+infers the variable names via structured prediction with
 conditional random fields (CRFs)~\cite{JSNice2015}. We showed that
 deriving missing features via a neural network yields higher accuracy
-than predicting program properties with statistical learning. However,
+than predicting program properties with statistical learning.
 {\tool} is computationally heavier than those approaches.
 
 %IR-based and statistical
@@ -39,6 +41,7 @@ static/dynamic
 analyses~\cite{Christodorescu:2003:SAE:1251353.1251365,Moser:2007:EME:1263552.1264210,Udupa05deobfuscation:reverse}.
 
 
+\noindent {\bf ML-based Type Inference Approaches.}
 HiTyper~\cite{HiTyper-icse22} is a hybrid approach between static
 inference and deep learning. It uses TDG to encode type inference
 rules to conduct type rejection to inspect the output predictions. It
@@ -58,12 +61,12 @@ similar and dissimilar types in a high-dimensional space.
 We formulate the problem as missing feature recovery,
 avoiding finding similar types via embeddings.
 %rather than finding similar types in high-dimensional space.
-In a similar vein, Typilus~\cite{typilus-pldi20} proposes TypeSpace
+Similarly, Typilus~\cite{typilus-pldi20} proposes TypeSpace
 containing the embeddings with type properties of a
 symbol. TypeWriter~\cite{typewriter-fse20} learns to infer the return
 and argument types for functions from partially annotated code bases
 by combining the natural language properties of code with programming
-language-level information. {\tool} does not use natural-language
+languages. {\tool} does not use natural-language
 properties. Ivanov {\em et al.}~\cite{ivanov21predicting} demonstrate
 that graph-based embeddings could improve the quality of type
 prediction. We use GCNmf to predict the missing features.
@@ -87,15 +90,15 @@ prediction. We use GCNmf to predict the missing features.
 %results are more accurate as shown in
 %ection~\ref{empirical_result_section}.
 
-Statistical NLP approaches have been used in SE.
+%Statistical NLP approaches have been used in SE.
 %Allamanis {\em et al.}~\cite{sutton-fse15} propose a neural
 %probabilistic language model to suggest method/class names.
 %Tien
 %The code tokens with statistical co-occurrences are projected into a
 %continuous space together with the text tokens from the names.
 %
-Naturalize~\cite{barr-codeconvention-fse14}  enforces a
-consistent naming style.
+Statistical NLP approaches have been used for name and code style
+suggestions~\cite{sutton-fse15,barr-codeconvention-fse14}.
 %by providing better names.
 %Their specialized model handles well the method/class naming problem
 %and is not suitable to capture the relations among (much more) texts
