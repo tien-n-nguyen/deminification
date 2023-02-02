@@ -195,7 +195,7 @@ the types, we adopt Type Dependency Graph
 (TDG)~\cite{type-graph-icse22}, which aims to capture the type
 inference rules for variables/expressions.
 
-\begin{definition}{\bf Type Dependency Graph]}~\cite{type-graph-icse22}
+\begin{definition}{\bf [Type Dependency Graph]}~\cite{type-graph-icse22}
     \label{tdg-def}
 A Type Dependency Graph is a graph $G$ = $(N,E)$ in which $N$ is the
 set of nodes representing all the variables and expresions, and $E$ is
@@ -228,10 +228,14 @@ that of variable~\code{b}.
 %\code{this.get\-Index\-Relative\-To\-Adjacent\-Empty\-Blocks(...)}.
 %another dependency between the type of \code{emptyBlocksIndex} and the
 %type of \code{selectState.emptyBlocksIndex} at line 25.
+
 Connecting all the dependencies among the types of variables and
 expressions, we have the type dependency graph for a
-function/method. Note that both the Type Dependency Graph and the
-Relation Graph can be built for either the original or minified code.
+function/method. Note that both RG and TDG can be built for either
+the original or minified code. The merging of RG and TDG is
+straightforward. The nodes of the same variables, method calls, field
+accesses in two graphs are unified.  The other nodes in two graphs are
+kept. All edges are combined including the type-dependency edges.
 
 %We leverage the graph building algorithm from HiTyper to parse the
 %code and transform every variable occurrence and expression into nodes
