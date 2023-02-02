@@ -1,48 +1,60 @@
 \subsubsection{Examples}
 \label{sec:eval-example}
 
+Figure~\ref{example1} shows an example of correct predictions from
+{\tool}.  At line 16 (minified code), our model can derive the
+type \code{bool} for \code{p} due to the \code{if} statement. At line
+15, \code{p} has a relation via an assignment
+with \code{check\_request\_limit()}, then our model can produce the
+name \code{is\_limited} (instead of \code{limit}) for \code{p}. At
+line 14, the variable \code{q} has a relation
+with \code{extract\_ip\_from}, {\tool} can use the name relevant to
+{\em ip} for \code{q}, e.g., \code{client\_ip}.
+
+At line 18 with a minus operation, {\tool} can derive the type of the
+variable \code{m} as \code{int}. It also has a relation
+with \code{BirdNameDatabase.\-objects.\-count()}, thus, our model
+can derive the name \code{count} for \code{m}.
+
+At line 20, \code{n} is used as the index of an array type.
+Moreover, at line 19, our model can derive its type of \code{int}
+due to the relation with \code{randInt()}. Thus, our model
+can assign the name \code{index} for \code{n}. Moreover,
+due to the not-so-much-meaningful name \code{bn} at line 8,
+our model did not produce the name for \code{t} at line 20.
 
 
 \begin{figure}[t]
-	\centering
-	\lstset{
-		numbers=left,
-		numberstyle= \tiny,
-		keywordstyle= \color{blue!70},
-		commentstyle= \color{red!50!green!50!blue!50},
-		frame=shadowbox,
-		rulesepcolor= \color{red!20!green!20!blue!20} ,
-		xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
-		framexleftmargin=1.5em,
-                numbersep= 5pt,
-		language=Python,
-    basicstyle=\scriptsize\ttfamily,
-    numberstyle=\scriptsize\ttfamily,
-    emphstyle=\bfseries,
-                moredelim=**[is][\color{red}]{@}{@},
-		escapeinside= {(*@}{@*)}
-	}
-	\begin{lstlisting}[]
+	\centering \lstset{ numbers=left, numberstyle= \tiny,
+	keywordstyle= \color{blue!70},
+	commentstyle= \color{red!50!green!50!blue!50},
+	frame=shadowbox, rulesepcolor= \color{red!20!green!20!blue!20}
+	, xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+	framexleftmargin=1.5em, numbersep= 5pt, language=Python,
+	basicstyle=\scriptsize\ttfamily,
+	numberstyle=\scriptsize\ttfamily, emphstyle=\bfseries,
+	moredelim=**[is][\color{red}]{@}{@}, escapeinside= {(*@}{@*)}
+	} \begin{lstlisting}[]
 def get(self, request):
-  client_ip = self.extract_ip_from(request)
-  is_limited = self.check_request_limit(client_ip)
-  if is_limited:
+  (*@{\color{purple}{client\_ip = self.extract\_ip\_from(request)}@*)
+  (*@{\color{violet}{is\_limited = self.check\_request\_limit(client\_ip)}@*)
+  (*@{\color{violet}{if is\_limited:}@*)
     return Response({}, status=rest_framework.status.HTTP_403_FORBIDDEN)
-  count = BirdNameDatabase.objects.count() - 1
-  index = randint(0, count)
-  bn = BirdNameDatabase.objects.all()[index]
+  (*@{\color{orange}{count = BirdNameDatabase.objects.count() - 1}@*)
+  (*@{\color{blue}{index = randint(0, count)}@*)
+  (*@{\color{blue}{bn = BirdNameDatabase.objects.all()[index]}@*)
   serialized = BirdNameSerializer(bn, many=False)
   self.save_general_statistics(client_ip, bn)
   return Response(serialized.data)
 
 def get(self, r):
-  q = self.extract_ip_from(r)
-  p = self.check_request_limit(q)
-  if p:
+  (*@{\color{purple}{q = self.extract\_ip\_from(r)}@*)
+  (*@{\color{violet}{p = self.check\_request\_limit(q)}@*)
+  (*@{\color{violet}{if p:}@*)
     return Response({}, status=rest_framework.status.HTTP_403_FORBIDDEN)
-  m = BirdNameDatabase.objects.count() - 1
-  n = randint(0, m)
-  t = BirdNameDatabase.objects.all()[n]
+  (*@{\color{orange}{m = BirdNameDatabase.objects.count() - 1}@*)
+  (*@{\color{blue}{n = randint(0, m)}@*)
+  (*@{\color{blue}{t = BirdNameDatabase.objects.all()[n]}@*)
   s = BirdNameSerializer(t, many=False)
   self.save_general_statistics(q, t)
   return Response(s.data)       
