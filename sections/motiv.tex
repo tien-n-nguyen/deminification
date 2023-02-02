@@ -201,18 +201,21 @@ variables and types in the function/method.
   must also be in accordance with the names of the accessed fields and
   called methods}. For example, in the original code in
 Figure~\ref{example_org}, the variable name \code{range\_} makes sense
-in \code{range\_.startOffset} and \code{range\_.endOffset} because a range
-could have a start offset and an ending offset. The rationale is that
-in the orignal code, for easy code comprehension, developers tend to
-use the naming conventions and meaningful names with respect to the
+in \code{range\_.startOffset} and \code{range\_.endOffset} because a
+range could have a starting offset and an ending offset. The rationale
+is that in the orignal code, for easy comprehension, developers tend
+to use the naming conventions and meaningful names with respect to the
 surrounding names in the code. In other words, the predicted name of a
 variable and those of its properties (fields and methods) are in
 accordance. As another example, \code{preSelectionRange} and
 \code{setEnd} are in accordance with each other in
-\code{preSelectionRange.setEnd} at line 9. In fact, there exist
-approaches to explore the concordance between the method's name and
-the names of its arguments to detect name-based bugs in a
-program~\cite{deepbugs-oopsla18}.
+\code{preSelectionRange.setEnd} ({\em ``Setting the end of the
+  selected range''}). In fact, Pradel {\em et
+  al.}~\cite{deepbugs-oopsla18} explore the concordance between the
+method's name and the names of its arguments to detect name-based bugs
+in a program.
+
+% at line 9
 
 \vspace{2pt}
 \textbf{Observation 4}. {\em The fields and methods of a variable are
