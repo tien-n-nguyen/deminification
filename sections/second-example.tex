@@ -1,0 +1,41 @@
+Figure~\ref{example2} shows another example in the project
+\code{EventBus} in our dataset. At line 12, our model can recognize
+the variable \code{D} used in a \code{for} loop with an array of
+\code{listeners}, thus, can assign for \code{D} the name
+\code{listener}. From line 8, our model can learn that \code{B} is of
+the type \code{Subcribable} and at line 13 and it knows that \code{B}
+is related to \code{D} (\code{listener}). Thus, from {\em Subcribable}
+and \emph{listener}, it could derive the name for \code{B} as
+\code{event}. At line 9, if our model can learn \code{type} is to
+return the class of the variable, it can assign the name
+\code{event\_class} for \code{C} due to the assignment.
+
+\begin{figure}[t]
+	\centering \lstset{ numbers=left, numberstyle= \tiny,
+	keywordstyle= \color{blue!70},
+	commentstyle= \color{red!50!green!50!blue!50},
+	frame=shadowbox, rulesepcolor= \color{red!20!green!20!blue!20}
+	, xleftmargin=1.5em,xrightmargin=0em, aboveskip=1em,
+	framexleftmargin=1.5em, numbersep= 5pt, language=Python,
+	basicstyle=\scriptsize\ttfamily,
+	numberstyle=\scriptsize\ttfamily, emphstyle=\bfseries,
+	moredelim=**[is][\color{red}]{@}{@}, escapeinside= {(*@}{@*)}
+	} \begin{lstlisting}[]
+def post(self, (*@{\color{orange}{event: Subscribable}@*)) -> None:
+  event_class = type(event)
+  if event_class not in self._listeners:
+    return
+  (*@{\color{violet}{for listener in self.\_listeners[event\_class]:}@*)
+    (*@{\color{orange}{listener(event)}@*)
+
+def post(self, (*@{\color{orange}{B:Subscribable}@*))->None:
+  C=type(B)
+  if C not in self._listeners:
+    return
+  (*@{\color{violet}{for D in self.\_listeners[C]:}@*)
+    (*@{\color{orange}{D(B)}@*)
+\end{lstlisting}
+\vspace{-16pt}
+\caption{Another Correct Prediction Example in Dataset}
+\label{example2}
+\end{figure}
