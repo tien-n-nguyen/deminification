@@ -4,13 +4,13 @@ the missing features} using GCNmf~\cite{GCNmf}. A variable with a
 minified name is modeled as a nodel in our graph, e.g., $r$, $q$, and
 $d$.  The prior works based on machine translation (e.g.,
 JSNaughty~\cite{JSNaughty2017}) aiming to translate the minified code
-to the orginal code, face an issue of different naming schemes using
+to the orginal code, face an issue of different naming schemes used
 by different minification tools. For example, the
 variable \code{range} might become $r_1$, instead of $r$, by a
 different minification tool or by alpha-renaming. In {\tool}, the
 minified names themselves do not play a crucial role in deciding the
-orignal names as in prior work. They help in recognizing the
-occurrences of the same variable/object.  In our graph $G$, {\tool}
+original names as in prior work. They help in recognizing the
+occurrences of the same variable. In our graph $G$, {\tool}
 considers a node for a minified variable as a placeholder with a
 missing feature that it aims to fill in.  In prediction, GCNmf will
 create the vectors $v_r$, $v_q$, and $v_d$ for the nodes. During the

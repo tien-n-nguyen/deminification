@@ -12,7 +12,7 @@
 
 This section presents the Variable Type Generation Model (VTG).  The
 input is the minified code with all the original variables' names and
-types during training, and without the names during
+types during training, and without the types during
 prediction. Similar to VNG model, the combined graph $G$ is processed
 in which the names in the code sequence of each node $n$ is tokenzed
 and an embedding model is applied to build the vector for $n$
@@ -27,20 +27,21 @@ considering each sequence of sub-tokens for $n$ as a sentence.
 %embedding model (e.g., GloVe~\cite{pennington2014glove}) to build the
 %representation vector for each node in $G$.
 
-Next, we feed the graph $G$ with those vectors to the
-EE-GCN~\cite{ee-gcn}. EE-GCN could accept both node and edge features.
-We use the above vectors as node features, and the edge types in the
-graph $G$ (built from the TDG and the RG) as the edge features. A key
-characteristic of EE-GCN is that it has an edge-aware node update
-module and a node-aware edge update module, and two modules works in a
-mutual way by updating each other iteratively. Specifically, ``for
-each layer, the edge-aware node update module is firstly performed for
-aggregating information from neighbors of each node through specific
-edges. Then, a node-aware edge update module is used to dynamically
-refine the edge representation with its connected node
-representations, making the edge representation more informative.''
-The output of the EE-GCN model includes the list of the representation
-vectors $V_n$ for all the nodes in the graph $G$.
+Next, we feed the graph $G$ with those vectors to Edge-Enhanced Graph
+Convolutional Network (EE-GCN)~\cite{ee-gcn}. EE-GCN could accept both
+node and edge features.  We use the above vectors as node features,
+and the edge types in the graph $G$ (built from TDG and RG) as
+the edge features. A key characteristic of EE-GCN is that it has an
+edge-aware node update module and a node-aware edge update module, and
+two modules works in a mutual way by updating each other
+iteratively. Specifically, ``for each layer, the edge-aware node
+update module is firstly performed for aggregating information from
+neighbors of each node through specific edges. Then, a node-aware edge
+update module is used to dynamically refine the edge representation
+with its connected node representations, making the edge
+representation more informative.''  The output of the EE-GCN model
+includes the list of the representation vectors $V_n$ for all the
+nodes in the graph $G$.
 
 To further propagate the impact from variable name learning to type
 learning, we combine the above vectors $V_n$ with the vectors obtained
@@ -62,9 +63,9 @@ variables.
 
 %1> Graph edge represent different relations (This may change depends on the graph we finally want to use). Each node is a variable, method call, or a field of an object. We use the name of the variable (minified), method call, or the field as the node feature and use GloVe to learn the representation vector.
 
-%2> We use EGCN that accepts graphs with both node features and edges features as input. Here the edge feature is the edge type. 
+%2> We use EGCN that accepts graphs with both node features and edges features as input. Here the edge feature is the edge type.
 
-%3> The output of EGCN is the generated representation vector $V_r$ for each node. 
+%3> The output of EGCN is the generated representation vector $V_r$ for each node.
 
 %4> We combined the representation vector we get from EGCN with the generated from the next step $V'_r$ (variable name generation) by using the cross-product and get the final generated representation vector for type prediction ($V_f$)
 

@@ -14,8 +14,8 @@
 This section presents the Variable Name Generation Model (VNG).
 During training, the input is the minified code with all the original
 variables' names and types, and during predicting, the input does not
-have names and types. First, we build the TDG and the RG for the given
-minified code. The two graphs are combined into a representation
+have names and types. First, we build TDG and RG for the given
+code. The two graphs are combined into a representation
 graph $G$. For each node in $G$, we tokenize the names in the
 corresponding code sequence of the node. We consider each of them as a
 sentence and use an embedding model (e.g.,
@@ -25,33 +25,36 @@ for each node in $G$.
 Next, for training, we process the graph $G$ with the node vectors as
 follows. For the node $n$ that represents a variable with minified
 name, we perform masking the node feature with a special mask token
-for the variable name and consider it as a missing feature. Unlike the
-VTG model, the VNG model leverages an advanced neural network called
-Graph Convolution Network - Missing Features (GCNmf)~\cite{GCNmf}.
-The actual names are used as the ground truth labels to train the
-GCNmf model. The key characteristic of GCNmf is its ability to deal
-with incomplete and missing features in a GCN. It represents the
-missing data by Gaussian Mixture Model (GMM) and calculates the
-expected activation of neurons in the first hidden layer of GCN, while
-keeping the other GCN layers unchanged. The GMM parameters and GCNmf
-weight parameters are learned within the same architecture, enabling
-the learning of missing features. The GCNmf model is trained with the
+for the variable name and consider it as a missing feature. In the VNG
+model, we leverage an advanced neural network called Graph
+Convolutional Network--Missing Features (GCNmf)~\cite{GCNmf}.  The
+actual names are used as the ground truth labels to train the GCNmf
+model. The key characteristic of GCNmf is its ability to deal with
+incomplete and missing features in a GCN. It represents the missing
+data by Gaussian Mixture Model (GMM) and calculates the expected
+activation of neurons in the first hidden layer of GCN, while keeping
+the other GCN layers unchanged. The GMM parameters and GCNmf weight
+parameters are learned within the same architecture, enabling the
+learning of missing features. The GCNmf model is trained with the
 masks for the minified variable names. For prediction, applying on the
-minified code (without names), the GCMmf model outputs the vectors for
+minified code (without names), the GCNmf model outputs the vectors for
 the nodes in the graph $G$ and the vectors for the missing features.
 
 The vectors representing the missing features, i.e., the missing
-variables' names in the input graph $G$ are used next to be fed into a
-GRU decoder as in the VTG model (Figure~\ref{fig:name-gen}). The
-decoder accepts the vectors for missing names as input and generates
-the names for the variable nodes (During training, the name labels are
-known and used). Finally, we apply the semantic checkers to make sure
-that the variables' names are valid in the scope and that the same
-variable is assigned with a consistent name.
+variables' names in the input graph $G$ are used next.  We leverage an
+Gate Recurrent Unit (GRU) as a decoder.
+%, which accepts those vectors as input and generates the variables'
+%names.  to be fed into a GRU decoder as in the VTG model
+%(Figure~\ref{fig:name-gen}).
+The decoder accepts those vectors for missing names as input and
+generates the names for the variable nodes (During training, the name
+labels are known and used). Finally, we apply the semantic checkers to
+make sure that the variables' names are valid in the scope and that
+the same variable is assigned with a consistent name.
 
 \input{sections/missing_feature}
 
-Next, let us present the variable name generation model, and then
+Next, let us present the variable type generation model, and then
 the dual-task learning between VNG and VTG models.
 
 %1> Similar to step 2, we use GloVe to learn the representation vector.
