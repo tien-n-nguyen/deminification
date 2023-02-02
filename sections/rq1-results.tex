@@ -79,21 +79,21 @@ names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 
 As seen in Table~\ref{name-result}, the result is also consistent for
-top-3 and top-5 accuracies for {\tool}. The relative improvements with
-same trends are also at the same level with respect to the baselines.
+top-3 and top-5 accuracies for {\tool}. The relative improvements are
+with same trends in comparison with the baselines.
 
 We examined the predicted names from all the baselines. Compared to
 JSNeat, an information retrieval approach, we found that it often
 failed in the following cases. (1) It has not seen the names before in
-the database. {\tool} can generate a new name with its decoder. Due to
-explicitly setting of similarity thresholds, it faces two other
-issues. (2) The correct name was not returned because the relations
+the database. {\tool} can generate a new name with its decoder. Due to its
+explicitly setting of similarity thresholds, JSNeat faces two other
+issues. (2) The correct name was not returned since the relations
 and contexts are not similar enough with pre-defined thresholds.  (3)
 if two variables in the same function are assigned with the same name
 via the similarity measure, JSNeat cannot decide one, turning to a
-random selection. Avoiding feature matching with explicit similarity
+random selection. Avoiding feature matching and explicit similarity
 threshold, {\tool} with its neural network can implicitly do so
-without any similarity threshold.
+without any pre-defined threshold.
 
 Compared to JSNaughty~\cite{JSNaughty2017} with statistical machine
 translation from minified code to original code, we found that it
@@ -102,11 +102,11 @@ the {\em phrase mapping table}, a byproduct of their machine
 translation model, which contains the knowledge it learned from
 training. We reported that JSNaughty learns {\em inconsistent
   mappings} between the minified names and original ones. That is,
-there are several mappings for the same minfied names with different
+there are several mappings for the same minified names with different
 weights depending on their occurrences in the corpus. For example,
 \code{b} $\leftrightarrow$ \code{doc}, \code{b} $\leftrightarrow$
 \code{book}, etc. In contrast, {\tool} does not rely on the minified
-names themselves, by considering modeling them as the nodes with
+names themselves, by modeling them as the nodes with
 missing features (i.e., missing names and types) in the GCNmf
 model~\cite{GCNmf}.
 
