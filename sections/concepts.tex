@@ -29,7 +29,7 @@ of variables. Let us explain those concepts used in {\tool}.
 
 In Figure~\ref{example_sim}, at lines 7--9, we explore the
 field accesses and method calls of the variable \code{r} in
-\code{r.cloneRange()}, \code{r.startOffset}, and \code{r.endOffset}.
+\code{r.cloneRange()}, \code{r.startOffset}, \code{r.startContainer}.
 
 We denote an instance of field access and method call as a triple $(v,
 p, t)$, where $v$ is the variable, $p$ is the name of the field or
@@ -65,8 +65,8 @@ startOffset, fieldAccess)$.
 
 The idea is that the name of the minified variable $v$ in the original
 code is often in accordance with the names of the method or the field
-in such an assignment or an argument. For example, \code{range} and
-\code{getRangeAt} are in accordance with each other in \code{range =
+in such an assignment or an argument. For example, \code{range\_} and
+\code{getRangeAt} are in accordance with each other in \code{range\_ =
   selection.getRangeAt(0)}; or \code{selectNodeContents} and
 \code{root} are in accordance with each other in
 \code{preSelectionRange.selectNodeContents(root)}.  We will use the
@@ -209,13 +209,13 @@ In Figure~\ref{example_sim}, let us consider line 4: \code{q =
 \code{b.getSelection()} connecting to a node for the variable \code{q}
 because its type can be derived from the return type of the method
 call \code{getSelection}. We also have a node for the variable
-\code{b} connecting to a node the method \code{getSelection}
-because the type of \code{getSelection} can be derived from
-that of the variable \code{b}.
+\code{b} connecting to a node of the method \code{getSelection}
+since the type of \code{getSelection} can be derived from
+that of variable~\code{b}.
 
 \fbox{\code{b.getSelection}} $\rightarrow$ \fbox{\code{q}}
 
-\fbox{\code{getSelection}} $\rightarrow$ \fbox{\code{b}}
+\fbox{\code{b}} $\rightarrow$  \fbox{\code{getSelection}}
 
 %For example, from line 10 of Figure~\ref{example_org}, \code{start} =
 %\code{preSelectionRange.} \code{toString().} \code{length}, our model
@@ -249,7 +249,7 @@ Relation Graph can be built for either the original or minified code.
 	\end{center}
 \end{figure}
 
-Figure~\ref{tdg} displays the TDG for the running example. While the
+Figure~\ref{tdg} displays the TDG for the running example. The
 type of the variable $m$ at line 10 (Figure~\ref{example_sim}) can be
 derived by the function call \code{len}. The subscript is used to to
 denote the same variable at different locations. At line 11
