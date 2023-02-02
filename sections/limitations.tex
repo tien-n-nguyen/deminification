@@ -1,16 +1,17 @@
 \subsubsection{Limitations}
 \label{sec:limitations}
 
-THere are rooms for improvements in {\tool}. First, it does not
+There are rooms for improvements in {\tool}. First, it does not
 perform well in name prediction for the original code with the short
 and meaningless names, e.g., \code{i}, \code{j}, etc. In this case,
 the type of the variable could not help because the name and type are
 not in accordance. The relations among the variables do not help
-either because there does not exist the semantic connections among
-their names. Second, {\tool} does not produce well long variable names
-with several sub-tokens. One solution could be replacing the GRU
-decoder with a better model that can predict the length of the name
-and the name itself. Third, for the type prediction, {\tool} works not
-so well for the user-defined types with long names. Fourth, in some cases,
-the type information did not help the model learn the variable name
-because the type is generic and any variable name could be used.
+either because there does not exist the natural-language semantic
+connections among their names. Second, {\tool} does not produce well
+long variable names with several sub-tokens. One solution could be to
+replace the GRU decoder with a better model that can predict the
+length of the name and the name itself. Third, for the type
+prediction, {\tool} works not so well for the user-defined types with
+long names. Fourth, in some cases, the type information did not help
+the model learn the variable name because the type is generic and any
+variable name could be used.
