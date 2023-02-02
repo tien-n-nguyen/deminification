@@ -31,17 +31,17 @@
         EE-GCN+GCNmf (DeMinify) & 76.7 & 79 \\ \hline
     \end{tabular}
     {\bf Label-GCN}: Label Graph Convolutional Network, {\bf EE-GCN}: Edge-Enhanced Graph Convolutional Network, {\bf GCNmf}: Graph Convolutional Network - Missing Features
-    \caption{Impact of EE-GCN on Accuracy}
+    \caption{Impact of EE-GCN on Top-1 Accuracy}
     \label{tab:sensi-graph}
 \end{table}
 
-Table~\ref{tab:sensi-graph} shows the accuracies of the variant model
+Table~\ref{tab:sensi-graph} shows the accuracy of the variant model
 as we replaced the graph neural network EE-GCN with the Label Graph
 Convolutional Network (Label-GCN)~\cite{label-gcn}. We did not replace
 GCNmf because it is the core component in our solution, which
 formulates the name/type recovery as the prediction of missing
 features. As seen, Edge-Enhanced GCN helps improve accuracy more than
-Label-GCN. EE-GCN enables the modeling of different types of edges
+Label-GCN. EE-GCN enables the modeling of different types of relations
 because it handles different edge types in different channels, while
 Label-GCN just integrates the edge information as simple labels.
 This is crucial for our problem in which the type dependencies
