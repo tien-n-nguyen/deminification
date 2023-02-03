@@ -1,13 +1,20 @@
-%\section{Important Concepts}
+\section{Important Concepts}
 \label{sec:concepts}
 
-To identify the names of a variable, our approach first is to examine
-its own {\bf attributes and behaviors} via field accesses and method calls
-in the given source code. Then, we examine the {\bf relations} of the
-variables within the context of the method/function to learn the
-concordance among the variables' names via the usages of the variables
-in the code. Finally, we examine the {\bf relations among the types}
-of variables. Let us explain those concepts used in {\tool}.
+To identify the name of a variable, first, {\tool} examines its own
+{\bf attributes and behaviors} via field accesses and method calls,
+then the {\bf relations} of the variables to learn the concordance
+among the variables' names. At the same time, it examines {\bf
+relations among their types}. Let us explain those concepts
+used in {\tool}.
+
+%To identify the name of a variable, first, {\tool} examines
+%its own {\bf attributes and behaviors} via field accesses and method calls
+%in the given source code. Then, we examine the {\bf relations} of the
+%variables within the context of the method/function to learn the
+%concordance among the variables' names via the usages of the variables
+%in the code. Finally, we examine the {\bf relations among the types}
+%of variables. Let us explain those concepts used in {\tool}.
 
 \begin{definition}{\bf [Attributes and Behaviors]}
   The fields and methods of the object represented by a variable are
