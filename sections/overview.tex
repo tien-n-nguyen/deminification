@@ -1,10 +1,10 @@
-\subsection*{Approach Overview}
+\section{Approach Overview}
 
 
 \begin{figure}[t]
 	\begin{center}
-	  \includegraphics[width=3in]{figures/overview-2.png}
-          \vspace{-10pt}
+	  \includegraphics[width=3.2in]{figures/overview-2.png}
+          \vspace{-8pt}
 		\caption{{\tool}: Architecture Overview}
 		\label{overview}
 	\end{center}
@@ -21,9 +21,11 @@
 
 %There are two main processes in {\tool}: training and predicting.
 
-{\tool} accepts minified Python code and at the same time, recovers
-the variable names and derives the types for variables/expressions. It
-also can take regular Python code and derive the types.
+{\tool} accepts minified
+%Python
+code and at the same time, recovers the variable names and derives the
+types for variables/expressions. It also can take regular code and
+derive the types.
 %
 Figure~\ref{overview} illustrates the overall process. The input is
 the minified code with all the original variables' names and types
@@ -78,7 +80,7 @@ target.
 To infer types for non-minified code, the representation graph is
 extracted as explained, and then fed to {\tool} whose VTG will produce
 the types for variables/expressions. The full variable names will help
-VNG improve the type inference task by VTG.
+VNG improve VTG's type inference task.
 
 %Step 1. Generate graphs...
 

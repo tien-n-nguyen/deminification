@@ -41,7 +41,7 @@ field accesses and method calls of the variable \code{r} in
 We denote an instance of field access and method call as a triple $(v,
 p, t)$, where $v$ is the variable, $p$ is the name of the field or
 method, and $t$ is either \code{fieldAccess} or \code{methodCall}.
-The examples include $(r, cloneRange, methodCall)$ and $(r,
+The examples are $(r, cloneRange, methodCall)$ and $(r,
 startOffset, fieldAccess)$.
 
 
@@ -77,9 +77,9 @@ in such an assignment or an argument. For example, \code{range\_} and
   selection.getRangeAt(0)}; or \code{selectNodeContents} and
 \code{root} are in accordance with each other in
 \code{preSelectionRange.selectNodeContents(root)}.  We will use the
-triple notations $(v, p, argument)$, $(v, p, assignment)$, and
+triple notations $(v, m, argument)$, $(v, m, assignment)$, and
 $(v, f, assignment)$ to denote those three cases, where $v$ is a
-variable, $p$ is a method name, and $f$ is a field name.
+variable, $m$ is a method name, and $f$ is a field name.
 
 %The rationale is that the names of $m$ and its argument are often in
 %conformance with each other, \eg
@@ -163,7 +163,7 @@ relations among nodes and are labeled with relation types.
 	\begin{center}
 	  \includegraphics[width=0.9\columnwidth]{figures/relation-graph}
           \vspace{-6pt}
-		\caption{Relation Graph for Figure~\ref{example_sim}}
+		\caption{Relation Graph for the Code in Figure~\ref{example_sim}}
 		\label{rel-graph}
 	\end{center}
 \end{figure}
@@ -195,12 +195,12 @@ $assign$ edge from the variable \code{r} to the node
 \label{python-types}
 \end{figure}
 
-In this work, we focus on Python source
-code. Figure~\ref{python-types} shows Python's type
-system~\cite{HiTyper-icse22}. To represent the dependencies among
-the types, we adopt Type Dependency Graph
-(TDG)~\cite{HiTyper-icse22}, which aims to capture the type
-inference rules for variables/expressions.
+%In this work, we focus on Python source code.
+Regarding type inference, Figure~\ref{python-types} shows Python's
+type system~\cite{HiTyper-icse22}. To represent the dependencies among
+the types, we adopt Type Dependency Graph (TDG)~\cite{HiTyper-icse22},
+which aims to capture the type inference rules for
+variables/expressions.
 
 \begin{definition}{\bf [Type Dependency Graph]}~\cite{HiTyper-icse22}
     \label{tdg-def}
@@ -255,7 +255,7 @@ kept. All edges are combined including the type-dependency edges.
 	\begin{center}
 	  \includegraphics[width=2in]{figures/type-dep-graph-2}
           \vspace{-8pt}
-		\caption{Type Dependency Graph for Figure~\ref{example_sim}}
+		\caption{Type Dependency Graph for the Code in Figure~\ref{example_sim}}
 		\label{tdg}
 	\end{center}
 \end{figure}
