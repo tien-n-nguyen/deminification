@@ -1,7 +1,7 @@
 \subsection{Experimental Methodology}
 \label{empirical-method}
 
-\subsubsection{RQ1. Comparative Study on Variable Name Prediction\\}
+\subsubsection{RQ1. Comparative Study on Variable Name Prediction (Python)\\}
 {\em Baselines.} We compared {\tool} against the state-of-the-art
 variable name recovery approaches for minified code including
 JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
@@ -23,7 +23,31 @@ Learning rate (0.001, 0.005, 0.010); (4) Vector length of feature
 embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 8, 16).
 
-\subsubsection{RQ2. Comparative Study on Variable Type Prediction\\}
+{\color{blue}{
+\subsubsection{RQ2. Comparative Study on Variable Name Prediction (JS)\\}
+{\em Baselines.} We compared {\tool} against the state-of-the-art
+variable name recovery approaches for minified code including
+JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
+JSNaughty~\cite{JSNaughty2017}.
+
+\textit{Procedure.} We took all the methods in the JS dataset
+and used UglifyJS to produce the minified code with variable name
+mininification. We randomly split all the methods into 80\%, 10\%,
+10\% in which 80\% of the methods as the training dataset, 10\% of the
+methods as the tuning dataset, and 10\% of the methods as the testing
+dataset for all baselines and {\tool}.
+
+%We took all the methods in the ManyTypes4Py dataset and ran the pyminifier \cite{pyminifier} tool that is used for variable name minification to minify all the variables in each method. Then we use 80\% of the methods as the training dataset, 10\% of the methods as the tuning dataset, and 10\% of the methods as the testing dataset for all baselines and {\tool}.
+
+{\em Parameter Tuning.} We tuned {\tool} via autoML~\cite{NNI} as in RQ1.}}
+%on the same set of parameters as in RQ1.}}
+%for the following key hyper-parameters to have the best performance:
+%(1) Epoch size (100, 150, 200); (2) Batch size (64, 128, 256); (3)
+%Learning rate (0.001, 0.005, 0.010); (4) Vector length of feature
+%embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
+%8, 16).
+
+\subsubsection{RQ3. Comparative Study on Variable Type Prediction\\}
 
 {\em Baselines.} We compared {\tool} against the state-of-the-art
   variable type prediction approaches: Ivanov {\em et
@@ -69,7 +93,7 @@ performance as in RQ1.
 %tuned {\tool} with autoML~\cite{NNI} for the same key hyper-parameters
 %to have the best performance as in RQ1.
 
-\subsubsection{RQ3. Ablation Study}
+\subsubsection{RQ4. Ablation Study}
 
 We built several variants of {\tool} to evaluate different factors in
 its components by measuring their accuracies and making comparisons.
