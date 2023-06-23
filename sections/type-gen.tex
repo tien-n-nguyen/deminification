@@ -31,30 +31,49 @@ Next, we feed the graph $G$ with those vectors to Edge-Enhanced Graph
 Convolutional Network (EE-GCN)~\cite{ee-gcn}. EE-GCN could accept both
 node and edge features.  We use the above vectors as node features,
 and the edge types in the graph $G$ (built from TDG and RG) as
-the edge features. A key characteristic of EE-GCN is that it has an
-edge-aware node update module and a node-aware edge update module, and
-two modules works in a mutual way by updating each other
+the edge features.
+%
+{\color{blue}{The rationale for choosing EE-GCN is its capability
+    producing the embeddings emphasizing on the edges in $G$, which
+    represent the relations/dependencies among the data types.
+%
+A key characteristic of EE-GCN is that it has an edge-aware node
+update module and a node-aware edge update module, and two modules
+works in a mutual way by updating each other
 iteratively. Specifically, ``for each layer, the edge-aware node
 update module is firstly performed for aggregating information from
 neighbors of each node through specific edges. Then, a node-aware edge
 update module is used to dynamically refine the edge representation
 with its connected node representations, making the edge
-representation more informative.''  The output of the EE-GCN model
+representation more informative.''}}  The output of the EE-GCN model
 includes the list of the representation vectors $V_n$ for all the
-nodes in the graph $G$.
+nodes in $G$.
 
 To further propagate the impact from variable name learning to type
 learning, we combine the above vectors $V_n$ with the vectors obtained
 from the GCNmf in the Variable Name Generation model. Specifically, we
 use the cross-product between the two vectors to produce the final
 vectors $V_f$ for the type prediction for all the nodes. Next, we
-leverage an Gate Recurrent Unit (GRU) as a decoder, which accepts the
+leverage a Gate Recurrent Unit (GRU) as a decoder, which accepts the
 vectors $V_f$s as input and generates the type for the node. (During
-training, the type labels are used). Finally, we also apply the
-rule-based filter, which performs type-checking to eliminate the
-candidates that violate the type inference rules. The final
-result include the types for all the nodes including the ones for
-variables.
+training, the type labels are used). {\color{blue}{{\tool} handles the
+    primitive and non-primitive types in the same way as the decoder
+    generates them as texts for the type names}}.
+%
+Finally, we also apply the rule-based filter, which performs
+type-checking to eliminate the candidates that violate the type
+inference rules.
+%
+{\color{blue}{In the current implementation, we used a small subset of
+the static type inference rules for
+    Python~\cite{type-system-python}. For example, we check the types
+    of the left-hand-side and the right-hand-side of an assigment, the
+    type of the condition in an \code{if} statement, the type of a
+    comparison operation, the simple sub-typing rules for primitive
+    types and for lists, tuples, and dictionaries, etc.}}
+%
+The final result include the types for all the nodes including the
+ones for variables.
 
 %6> When generating the type, we use some basic rule from parser to
 %reduce the possible candidates.
