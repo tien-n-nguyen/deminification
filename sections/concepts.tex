@@ -1,6 +1,19 @@
 \section{Important Concepts}
 \label{sec:concepts}
 
+\begin{figure}[t]
+	\begin{center}
+	  \includegraphics[width=0.9\columnwidth]{figures/relation-graph}
+          \vspace{-6pt}
+		\caption{Relation Graph for the Code in Figure~\ref{example_sim}}
+		\label{rel-graph}
+	\end{center}
+\end{figure}
+
+
+
+
+
 In this section, we present the important concepts used in {\tool}.
 To identify the name of a variable, first, {\tool} examines its own
 {\bf attributes and behaviors} via field accesses and method calls,
@@ -45,14 +58,7 @@ The examples are $(r, cloneRange, methodCall)$ and $(r,
 startOffset, fieldAccess)$.
 
 
-\begin{figure}[t]
-	\begin{center}
-	  \includegraphics[width=0.9\columnwidth]{figures/relation-graph}
-          \vspace{-6pt}
-		\caption{Relation Graph for the Code in Figure~\ref{example_sim}}
-		\label{rel-graph}
-	\end{center}
-\end{figure}
+
 
 \begin{definition}{\bf [Argument Relation]}
   A variable $v$ is said to have an argument relation with a method
@@ -250,7 +256,6 @@ kept. All edges are combined including the type-dependency edges.
 %notion and the algorithm to build the type dependency graph (TDG) for
 %the JavaScript code. Details on TDG is in~\cite{HiTyper-icse22}.
 
-
 \begin{figure}[t]
 	\begin{center}
 	  \includegraphics[width=2in]{figures/type-dep-graph-2}
@@ -259,6 +264,7 @@ kept. All edges are combined including the type-dependency edges.
 		\label{tdg}
 	\end{center}
 \end{figure}
+
 
 Figure~\ref{tdg} displays the TDG for the running example. The
 type of the variable $m$ at line 10 (Figure~\ref{example_sim}) can be

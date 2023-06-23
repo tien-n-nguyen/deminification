@@ -1,4 +1,4 @@
-\subsection{{\bf Comparison on Name Prediction (Python)}}
+\subsection{{\bf Comparison on Name Prediction (JS)}}
 \label{empirical-rq1}
 
 %\begin{table}[t]
@@ -23,9 +23,9 @@
 
 \begin{figure}[t] %[thbp]
 \begin{center}
-\includegraphics[width=3.3in]{figures/name-prediction-result-2}
+\includegraphics[width=3.2in]{figures/name-prediction-result-2}
 \vspace{-8pt}
-\caption{RQ1. Top-1 Accuracy on Name Prediction (Python)}
+\caption{RQ1. Top-1 Accuracy on Variable Name Prediction}
 \label{name-prediction-result}
 \end{center}
 \end{figure}
@@ -54,9 +54,8 @@ names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 {\bf 15.9\%}, respectively. The absolute improvements in top-1
 accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 
-
 \begin{table}[t]%[thbp]
-  \caption{RQ1. Comparison on Name Prediction (Python)}
+  \caption{RQ1. Comparison on Variable Name Prediction}
   \vspace{-8pt}
 	\begin{center}
 		\small
@@ -74,56 +73,13 @@ accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 			{\bf {\tool}} & 67.5 & 76.7 & 75.4 & 84.3 & 82.1 & 90.2 \\
 			\hline
 		\end{tabular}
-		\label{name-result}
+		\label{name-JS-result}
 	\end{center}
 \end{table}
 
-As seen in Table~\ref{name-result}, the result is also consistent for
-top-3 and top-5 accuracies for {\tool}. The relative improvements are
-with same trends in comparison with the baselines.
-
-We examined the predicted names from all the baselines. Compared to
-JSNeat, an information retrieval approach, we found that it often
-failed in the following cases. (1) It has not seen the names before in
-the database. {\tool} can generate a new name with its decoder. Due to its
-explicitly setting of similarity thresholds, JSNeat faces two other
-issues. (2) The correct name was not returned since the relations
-and contexts are not similar enough with pre-defined thresholds.  (3)
-if two variables in the same function are assigned with the same name
-via the similarity measure, JSNeat cannot decide one, turning to a
-random selection. Avoiding feature matching and explicit similarity
-threshold, {\tool} with its neural network can implicitly do so
-without any pre-defined threshold.
-
-%===Tables for RQ2============
-
-
-
-
-%===============
-
-
-Compared to JSNaughty~\cite{JSNaughty2017} with statistical machine
-translation from minified code to original code, we found that it
-relies much on the {\em minified names} in minified code. We examine
-the {\em phrase mapping table}, a byproduct of their machine
-translation model, which contains the knowledge it learned from
-training. We reported that JSNaughty learns {\em inconsistent
-  mappings} between the minified names and original ones. That is,
-there are several mappings for the same minified names with different
-weights depending on their occurrences in the corpus. For example,
-\code{b} $\leftrightarrow$ \code{doc}, \code{b} $\leftrightarrow$
-\code{book}, etc. In contrast, {\tool} does not rely on the minified
-names themselves, by modeling them as the nodes with
-missing features (i.e., missing names and types) in the GCNmf
-model~\cite{GCNmf}.
-
-{\tool} is similar in spirit to JSNice~\cite{JSNice2015} in which both
-formulates the problem as predicting the features/attributes of the
-nodes in a graph. The Conditional Random Field in JSNice uses
-probabilistic name prediction graph. In comparison, {\tool} leverages
-more advanced neural network in GCNmf~\cite{GCNmf} as well as a more
-specialized graph with the help of the type prediction model.
+As seen in Table~\ref{name-result} and Table~\ref{name-JS-result}, the
+results are consistent for both languages. The relative improvements
+are with same trends in comparison with the baselines.
 
 %which is not as powerful as the advanced neural network
 %GCNmf~\cite{GCNmf}.

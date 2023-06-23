@@ -26,18 +26,21 @@ embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 {\color{blue}{
 \subsubsection{RQ2. Comparative Study on Variable Name Prediction (JS)\\}
 {\em Baselines.} We compared {\tool} against the state-of-the-art
-variable name recovery approaches for minified code including
-JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
+approaches JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
 JSNaughty~\cite{JSNaughty2017}.
 
-\textit{Procedure.} We took all the methods in the JS dataset
-and used UglifyJS to produce the minified code with variable name
-mininification. We randomly split all the methods into 80\%, 10\%,
-10\% in which 80\% of the methods as the training dataset, 10\% of the
-methods as the tuning dataset, and 10\% of the methods as the testing
-dataset for all baselines and {\tool}.
+%variable name recovery approaches for minified code including
+%JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
+%JSNaughty~\cite{JSNaughty2017}.
 
-%We took all the methods in the ManyTypes4Py dataset and ran the pyminifier \cite{pyminifier} tool that is used for variable name minification to minify all the variables in each method. Then we use 80\% of the methods as the training dataset, 10\% of the methods as the tuning dataset, and 10\% of the methods as the testing dataset for all baselines and {\tool}.
+\textit{Procedure.} We took the code in the JS dataset
+and used UglifyJS for code minification. We used the same splitting
+as in RQ1.
+
+%with variable name mininification. We randomly split all the methods
+%into 80\%, 10\%, 10\% in which 80\% of the methods as the training
+%dataset, 10\% of the methods as the tuning dataset, and 10\% of the
+%methods as the testing dataset for all baselines and {\tool}.
 
 {\em Parameter Tuning.} We tuned {\tool} via autoML~\cite{NNI} as in RQ1.}}
 %on the same set of parameters as in RQ1.}}
