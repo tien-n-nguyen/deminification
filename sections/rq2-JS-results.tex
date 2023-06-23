@@ -1,44 +1,17 @@
+{\color{blue}{
 \subsection{{\bf Comparison on Name Prediction (JS)}}
 \label{empirical-rq1}
-
-%\begin{table}[t]
-%	\caption{RQ1. Comparative Study on Variable Name Prediction.}
-%	\begin{center}
-%		\small
-%		\renewcommand{\arraystretch}{1} 
-%		\begin{tabular}{p{2cm}<{\centering}|p{2cm}<{\centering}|p{2cm}<{\centering}}
-%			\hline
-%		                & Local Variables & All Variables\\
-%			\hline
-%			JSNice~\cite{JSNice2015}      &                 &         \\
-%			JSNaughty~\cite{JSNaughty2017}   &                 &         \\
-%                       JSNeat~\cite{icse19}      & 0.64            & 0.66    \\
-%			\hline
-%			{\tool}     & 0.67            & 0.76    \\
-%			\hline
-%		\end{tabular}
-%		\label{RQ1-result}
-%	\end{center}
-%\end{table}
 
 \begin{figure}[t] %[thbp]
 \begin{center}
 \includegraphics[width=3.2in]{figures/name-prediction-result-2}
 \vspace{-8pt}
-\caption{RQ1. Top-1 Accuracy on Variable Name Prediction}
-\label{name-prediction-result}
+\caption{{\color{blue}{RQ2. Top-1 Accuracy on Name Prediction (JS)}}}
+\label{name-JS-prediction-result}
 \end{center}
 \end{figure}
 
-
-
-
-
-%In this study, we evaluate {\tool}'s accuracy and compare it with the
-%state-of-the-art approaches in variable name prediction for minified
-%code.
-%In this study, we evaluate {\tool} in variable name prediction.
-As seen in Figure~\ref{name-prediction-result}, for all variables in
+As seen in Figure~\ref{name-JS-prediction-result}, for all variables in
 minified code, {\tool} achieves high top-1 accuracy of {\bf 76.7\%}:
 in 76.7\% of the cases, it can recover the correct variable names with
 a single prediction. The relative improvements in top-1 accuracy for
@@ -55,7 +28,7 @@ names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 
 \begin{table}[t]%[thbp]
-  \caption{RQ1. Comparison on Variable Name Prediction}
+  \caption{{\color{blue}{RQ2. Comparison on Name Prediction (JS)}}}
   \vspace{-8pt}
 	\begin{center}
 		\small
@@ -80,31 +53,4 @@ accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 As seen in Table~\ref{name-result} and Table~\ref{name-JS-result}, the
 results are consistent for both languages. The relative improvements
 are with same trends in comparison with the baselines.
-
-%which is not as powerful as the advanced neural network
-%GCNmf~\cite{GCNmf}.
-
-
-%1. On both local variables and all variables, {\tool} performs XXX\%
-%better than the baselines.
-
-%2. JSNeat uses information retrieval techniques to find the possible
-%variable names based on the training data. {\tool} can perform better
-%because sometimes it is hard to find similar variable names with
-%similar variable relationships, and sometimes the same variable names
-%may have different variable relationships. JSNeat cannot perform well
-%in these cases, but {\tool} can still work as designed.
-
-%3. JSNice uses conditional random field models to predict variable
-%names based on dependency graphs. {\tool} can outperform {\tool} by
-%XX\% because {\tool} uses combine graph from relation graph and
-%TDG. The combined graphs contain more detailed information between
-%variables compared with dependency graphs.
-
-%4. JSNaughty regards the name prediction problem as the translation
-%problem. {\tool} can outperform JSNaughty XX\% because different
-%minification tools can provide different minified variable names for
-%the same source code, but {\tool} regards the minified variable names
-%as missing features in GCNmf. In this case, the minified variable
-%names will not influence the performance of {\tool}, but it will
-%influence JSNaughty performance.
+}}
