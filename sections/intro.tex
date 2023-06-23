@@ -25,9 +25,13 @@ In modern software development, some technologies require the exposure
 of source code, e.g., in the client-server paradigm, the client code
 need to executed in the client side. To avoid the exposure, the source
 code is obfuscated and/or minified such that the variable names are
-replaced with short, opaque, and meaningless names.  The minification
+replaced with short, opaque, and meaningless names. The minification
 of the variable names hides the business logics from the readers while
-maintaining the essence of the code.
+maintaining the essence of the code. {\color{blue}{Code minification
+    is a code protection mechanism that at least slows down those who
+    have bad intentions because program code is a valuable asset to
+    companies. In other cases, code minification improves rendering
+    times because of payload size.}}
 
 %For Web programming, the JS files are also more quickly loaded from
 %the servers for better performance.
@@ -73,13 +77,16 @@ approaches can be broadly classified into two directions: {\em
 (IR) approach to recover names by searching for them in a large corpus
 of open-source JS code. JSNeat integrates three types of contexts to
 match a variable in given minified code against the corpus including
-1) the context of the properties and roles of the variable, 2) the
-context of that variable and relations with other variables under
-recovery, and 3) the context of the task of the function to which the
-variable contributes.  Despite its successes, due to the inherent
-limitation of the information retrieval direction, JSNeat {\em cannot
-  generate a new variable name} that was not encountered in the
-corpus.
+%1) the context of
+1) the properties and roles of the variable, 2)
+%the context of that variable and
+its relations with other variables under
+recovery, and 3)
+%the context of
+the task of the function to which the variable contributes.  Despite
+its successes, due to the inherent limitation of the information
+retrieval direction, JSNeat {\em cannot generate a new variable name}
+that was not encountered in the corpus.
 
 JSNice~\cite{JSNice2015}, following a statistical direction, is an
 automatic variable name recovery approach that represents the program

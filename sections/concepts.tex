@@ -1,12 +1,12 @@
 \section{Important Concepts}
 \label{sec:concepts}
 
+In this section, we present the important concepts used in {\tool}.
 To identify the name of a variable, first, {\tool} examines its own
 {\bf attributes and behaviors} via field accesses and method calls,
 then the {\bf relations} of the variables to learn the concordance
 among the variables' names. At the same time, it examines {\bf
-relations among their types}. Let us explain those concepts
-used in {\tool}.
+relations among their types}.
 
 %To identify the name of a variable, first, {\tool} examines
 %its own {\bf attributes and behaviors} via field accesses and method calls
@@ -45,7 +45,14 @@ The examples are $(r, cloneRange, methodCall)$ and $(r,
 startOffset, fieldAccess)$.
 
 
-%Tien
+\begin{figure}[t]
+	\begin{center}
+	  \includegraphics[width=0.9\columnwidth]{figures/relation-graph}
+          \vspace{-6pt}
+		\caption{Relation Graph for the Code in Figure~\ref{example_sim}}
+		\label{rel-graph}
+	\end{center}
+\end{figure}
 
 \begin{definition}{\bf [Argument Relation]}
   A variable $v$ is said to have an argument relation with a method
@@ -159,14 +166,7 @@ relations among nodes and are labeled with relation types.
 %\texttt{assignment})$, $( \texttt{r}, \texttt{dataTransfer},
 %\texttt{assignment})$ in our example.
 
-\begin{figure}[t]
-	\begin{center}
-	  \includegraphics[width=0.9\columnwidth]{figures/relation-graph}
-          \vspace{-6pt}
-		\caption{Relation Graph for the Code in Figure~\ref{example_sim}}
-		\label{rel-graph}
-	\end{center}
-\end{figure}
+
 
 Figure~\ref{rel-graph} shows the relation graph for the variables in
 the code in Figure~\ref{example_sim}. For example, there are an
