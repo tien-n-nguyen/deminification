@@ -12,20 +12,20 @@
 \end{figure}
 
 As seen in Figure~\ref{name-JS-prediction-result}, for all variables in
-minified code, {\tool} achieves high top-1 accuracy of {\bf 76.7\%}:
-in 76.7\% of the cases, it can recover the correct variable names with
+minified code, {\tool} achieves high top-1 accuracy of {\bf 79.9\%}:
+in almost 4 out 5 cases, it can recover the correct variable names with
 a single prediction. The relative improvements in top-1 accuracy for
-all variables over JSNice, JSNaughty, and JSNeat are {\bf 40.7\%,
-  28.7\%}, and {\bf 15.3\%}, respectively. The absolute improvements
+all variables over JSNice, JSNaughty, and JSNeat are {\bf 46.6\%,
+  34.0\%}, and {\bf 5.4\%}, respectively. The absolute improvements
 in top-1 accuracy over the state-of-the-art approaches are from
-10.2\%--22.2\%.
+4.1\%--25.4\%.
 
-Considering only local variables, in {\bf 67.5\%} of them, {\tool}
+Considering only local variables, in {\bf 73.8\%} of them, {\tool}
 correctly predicts their original names with a single result. The
 relative improvements in top-1 accuracy in recovering local variables'
-names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
-{\bf 15.9\%}, respectively. The absolute improvements in top-1
-accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
+names over JSNice, JSNaughty, and JSNeat are {\bf 77.4\%, 52.7\%}, and
+{\bf 6.8\%}, respectively. The absolute improvements in top-1
+accuracy over the state-of-the-art approaches are from 4.7\%--32.2\%.
 
 \begin{table}[t]%[thbp]
   \caption{{\color{blue}{RQ2. Comparison on Name Prediction (JS)}}}
@@ -39,16 +39,18 @@ accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
 			\hline
                        & Local & All & Local & All & Local & All  \\ 
 			\hline
-		        JSNice~\cite{JSNice2015} &  41.6    & 54.5  & 52.2 &    63.0   & 59.5      &   67.8    \\
-			JSNaughty~\cite{JSNaughty2017}  &   48.3   &  59.6    &  59.8    &  69.7    &  66.3    &   75.0    \\
-			JSNeat~\cite{icse19}  &   69.1   &  75.8    &  65.3    & 75.4     &  71.6    & 80.1     \\
+		        JSNice~\cite{JSNice2015} &  41.6    & 54.5  & 56.4 &    68.2   & 64.2      &   72.4    \\
+			JSNaughty~\cite{JSNaughty2017}  &   48.3   &  59.6    &  64.1    &  74.5    &  71.8    &   79.6    \\
+			JSNeat~\cite{icse19}  &   69.1   &  75.8    &  69.6    & 79.5     &  76.9    & 86.0     \\
 			\hline
-			{\bf {\tool}} & 73.8 & 79.9 & 75.4 & 84.3 & 82.1 & 90.2 \\
+			{\bf {\tool}} & 73.8 & 79.9 & 79.2 & 89.6 & 87.3 & 96.8 \\
 			\hline
 		\end{tabular}
 		\label{name-JS-result}
 	\end{center}
 \end{table}
+
+%Tien
 
 As seen in Table~\ref{name-result} and Table~\ref{name-JS-result}, the
 results are consistent for both languages. The relative improvements
