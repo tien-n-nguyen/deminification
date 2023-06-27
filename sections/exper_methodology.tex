@@ -24,7 +24,10 @@ embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 8, 16).
 
 {\color{blue}{
-\subsubsection{RQ2. Comparative Study on Variable Name Prediction (JS)\\}
+    \subsubsection{RQ2. Comparative Study on Variable Name Prediction (JS)\\}
+
+We build the JS representation graph and use the same model.
+    
 {\em Baselines.} We compared {\tool} against the state-of-the-art
 approaches JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
 JSNaughty~\cite{JSNaughty2017}.
@@ -33,16 +36,18 @@ JSNaughty~\cite{JSNaughty2017}.
 %JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
 %JSNaughty~\cite{JSNaughty2017}.
 
-\textit{Procedure.} We took the code in the JS dataset
-and used UglifyJS for code minification. We used the same splitting
-as in RQ1.
+\textit{Procedure and Tuning.} We used UglifyJS for code minification
+in the JS dataset. We used the same splitting and tuning as in RQ1.
+
+
+}}
 
 %with variable name mininification. We randomly split all the methods
 %into 80\%, 10\%, 10\% in which 80\% of the methods as the training
 %dataset, 10\% of the methods as the tuning dataset, and 10\% of the
 %methods as the testing dataset for all baselines and {\tool}.
 
-{\em Parameter Tuning.} We tuned {\tool} via autoML~\cite{NNI} as in RQ1.}}
+%{\em Parameter Tuning.} We tuned {\tool} via autoML~\cite{NNI} as in RQ1.}}
 %on the same set of parameters as in RQ1.}}
 %for the following key hyper-parameters to have the best performance:
 %(1) Epoch size (100, 150, 200); (2) Batch size (64, 128, 256); (3)
@@ -66,8 +71,10 @@ We did not compare our tool with Xu {\em et al.}~\cite{xu-fse16},
 DeepTyper~\cite{DeepTyper-fse18}, NL2Type~\cite{nl2type-icse19},
 LAMBDANET~\cite{LambdaNet-iclr20}, OptTyper~\cite{optyper20}, and
 TypeBERT~\cite{typeBERT-fse21}, because in its paper, Type4Py has been
-shown to perform better than those tools, and we are comparing against
-Type4Py.
+shown to perform better than those tools.
+%, and we are comparing against Type4Py.
+We did not compare on JS code because JS variables do not have to have
+a type declaration.
 
 
 \textit{Procedure.}  With all variable type information summarized in
@@ -83,9 +90,9 @@ variables/expressions in the code.
 %Tien paid attention to this
 %We fed to DeMinify the minified code but with ***all the names***
 
-{\em Parameter Tuning.} We tuned our model with
-autoML~\cite{NNI} for the same hyper-parameters to have the best
-performance as in RQ1. 
+{\em Parameter Tuning.} Tuning was done via
+autoML~\cite{NNI} as in RQ1.
+%for the same hyper-parameters to have the best performance as in RQ1. 
 
 %Because {\tool} is a dual-learning approach, to make {\tool} work
 %correctly, we took the same data splitting for training, tuning, and
