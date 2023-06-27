@@ -16,9 +16,9 @@ minified code, {\tool} achieves high top-1 accuracy of {\bf 79.9\%}:
 in almost 4 out 5 cases, it can recover the correct variable names with
 a single prediction. The relative improvements in top-1 accuracy for
 all variables over JSNice, JSNaughty, and JSNeat are {\bf 46.6\%,
-  34.0\%}, and {\bf 5.4\%}, respectively. The absolute improvements
-in top-1 accuracy over the state-of-the-art approaches are from
-4.1\%--25.4\%.
+  34.0\%}, and {\bf 5.4\%}, respectively.
+The absolute improvements in top-1 accuracy over the state-of-the-art
+approaches are from 4.1\%--25.4\%.
 
 Considering only local variables, in {\bf 73.8\%} of them, {\tool}
 correctly predicts their original names with a single result. The
@@ -52,7 +52,14 @@ accuracy over the state-of-the-art approaches are from 4.7\%--32.2\%.
 
 %Tien
 
-As seen in Table~\ref{name-result} and Table~\ref{name-JS-result}, the
-results are consistent for both languages. The relative improvements
-are with same trends in comparison with the baselines.
+As seen in Figures~\ref{name-prediction-result}
+and~\ref{name-JS-prediction-result}, the results are consistent for
+both languages. However, the relative improvement of {\tool} over the
+top baseline, JSNeat, for Python is higher than that for JS. The
+reason is that JSNeat, an IR approach, was able to find more variable
+names in the JS dataset than in the Python dataset.  Note that JSNeat
+was built on JS code. Moreover, there are less variable names that
+need predictions in JS dataset than in Python dataset.
+
+
 }}
