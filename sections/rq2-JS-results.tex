@@ -1,6 +1,6 @@
 {\color{blue}{
 \subsection{{\bf Comparison on Name Prediction (JS)}}
-\label{empirical-rq1}
+\label{empirical-rq-js}
 
 \begin{figure}[t] %[thbp]
 \begin{center}
@@ -50,16 +50,23 @@ accuracy over the state-of-the-art approaches are from 4.7\%--32.2\%.
 	\end{center}
 \end{table}
 
-%Tien
-
 As seen in Figures~\ref{name-prediction-result}
-and~\ref{name-JS-prediction-result}, the results are consistent for
-both languages. However, the relative improvement of {\tool} over the
-top baseline, JSNeat, for Python is higher than that for JS. The
-reason is that JSNeat, an IR approach, was able to find more variable
-names in the JS dataset than in the Python dataset.  Note that JSNeat
-was built on JS code. Moreover, there are less variable names that
-need predictions in JS dataset than in Python dataset.
+and~\ref{name-JS-prediction-result}, {\tool} improves over the
+baselines in both languages. However, its relative improvement over
+the top baseline, JSNeat~\cite{icse19}, for Python is higher than that
+for JS. The reason is that JS is a weakly typed language. In the JS
+code, the types of variables do not need to be specified, and can be
+changed (that is, type information is not always available). {\tool}
+is less effective in those cases, while JSNeat~\cite{icse19}, an IR
+approach, is still effective since the variable names might be seen in
+the JS dataset.
 
+%to specify what type of information will be stored in a variable in
+%advance.
+
+%The reason is that JSNeat, an IR approach, was able to find more
+%variable names in the JS dataset than in the Python dataset.  Note
+%that JSNeat was built on JS code. Moreover, there are less variable
+%names that need predictions in JS dataset than in Python dataset.
 
 }}

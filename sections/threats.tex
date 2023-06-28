@@ -1,18 +1,22 @@
+\vspace{-8pt}
 \subsubsection{Threats to Validity}
 \label{sec:threats}
 
 We evaluated in one dataset, which might not be
 representative. However, the dataset has been verified and used in
 prior work. {\tool} currently works for Python only. Other programming
-languages could be supported. One needs to implement the tools to
-extract the relation graph and type dependency graph for the new
-language. The model itself is intact. Because some of the baselines
-for variable name recovery were designed for JavaScript, we
-re-implemented based on their source code. We also got helps from one
-of the authors of JSNeat during re-implementation. We kept all the
-parameters in their tools as in their documentation or original source code.
+languages could be supported as explained above.
+%
+%One needs to implement the tools to extract the relation graph and
+%type dependency graph for the new language. The model itself is
+%intact.
+Because some of the baselines for variable name recovery were designed
+for JavaScript, we re-implemented for Python based on their source code. We also
+got helps from one of the authors of JSNeat during
+re-implementation. We kept all the parameters in their tools as in
+their documentation or original source code.
 
-%Because all of these three
+
 %baselines are designed for JavaScript, we reimplement them based on
 %their source code and design to make them can work on python. To keep
 %the baselines in their original track, we keep all parameters the same

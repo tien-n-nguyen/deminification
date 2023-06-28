@@ -1,21 +1,60 @@
+\vspace{-2pt}
 \subsubsection{Limitations}
 \label{sec:limitations}
 
 %There are rooms for improvements in {\tool}.
-{\color{blue}{First, it does not perform well in name prediction for
-the original code with the short and meaningless names,
-e.g., \code{i}, \code{j}, etc. In this case, the type of the variable
-could not help because the name and type are not in accordance. The
-relations among the variables do not help either because there does
-not exist the natural-language semantic connections among their
-names. Second, {\tool} does not produce well long variable names with
-several sub-tokens. One solution could be to replace the GRU decoder
-with a better model that can predict the length of the name and the
-name itself. Third, for the type prediction, {\tool} works not so well
-for the user-defined types with long names. Fourth, in some cases, the
-types did not help learn the variable name because the types are
-generic and any variable name could be used.}}
+{\color{blue}{First, {\tool} does not predict names well for the
+original code with the short and meaningless names,
+e.g., \code{i}, \code{j}, etc. In this case, the variable type could
+not help because the name and type are not in accordance. The
+relations among the variables in the context do not help either
+because there does not exist the natural-language semantic connections
+among their names. The following example shows such a case: the
+variable \code{r} at line 2 was minified into \code{e} at line 6.
+{\tool} failed this case and JSNeat predicted correctly as it has seen
+the code with the same names. %});
+\begin{lstlisting}[basicstyle=\footnotesize\sffamily, stepnumber=1, numbers=left, numbersep=-10pt, framexleftmargin=-2mm,
+    framexrightmargin=-2mm]
+    if (word.indexOf('G') === 0 || word.indexOf('M') === 0) {
+      r = _find(SMOOTHIE_MODAL_GROUPS, (group) => {
+        return _includes(group.modes, word); ...
+    // Minified code
+    if(s.indexOf("G")===0||s.indexOf("M")===0){
+      e =_find(SMOOTHIE_MODAL_GROUPS,t=>{
+        return _includes(t.modes,s); ...
+\end{lstlisting}
+Second, {\tool} does not produce well long variable names with several
+sub-tokens.The next example shows a case in which the variable
+\code{resetDocumentPropertyIsSet} (line 2) was minified
+into \code{t} (line 6). {\tool} predicted an incorrect
+name \code{resetDocumentOwnProperty} with its current decoder. JSNeat
+has seen the same name in the corpus, thus, predicted it correctly.
+For {\tool}, a solution could be to replace the GRU decoder with a
+better model that can predict the length of the name and the name
+itself.
+\begin{lstlisting}[basicstyle=\footnotesize\sffamily, stepnumber=1, numbers=left, numbersep=-10pt, framexleftmargin=-2mm,
+    framexrightmargin=-2mm]
+    function shouldResetDoc(config) {
+      var resetDocumentPropertyIsSet = config.hasOwnProperty("...");
+      return config.resetDocument || !resetDocumentPropertyIsSet; ...
+    // Minified code
+    function shouldResetDoc(e) {
+      var t=e.hasOwnProperty("...");
+      return e.resetDocument||!t; ...
+\end{lstlisting}
+Third, for the type prediction, {\tool} works not so well for
+the user-defined types with long names. Fourth, in some cases,
+generic types (e.g., String) did not help learn variable names.
+%the types did not help learn the variable name because the types are
+%generic and any variable name could be used.
 
-{\color{blue}{Yi: we could find two examples: 1) original names are
-meaningless, e.g., i, j. etc; 2) the long names with multiple
-subtokens.}}
+Finally, we currently implemented {\tool} for two languages: Python
+and JS. However, the approach is general for any language with a
+weak/strong type system in which it works better for a strong one. To
+expand for a new such language, one just needs to have a parser and a
+representation graph building module for that language. The graphs
+will fed to the same architecture model. }}
+
+%{\color{blue}{Yi: we could find two examples: 1) original names are
+%meaningless, e.g., i, j. etc; 2) the long names with multiple
+%subtokens.}}

@@ -47,7 +47,7 @@ def get(self, request):
   serialized = BirdNameSerializer(bn, many=False)
   self.save_general_statistics(client_ip, bn)
   return Response(serialized.data)
-
+// (*@{\color{green}{Minified code}@*)
 def get(self, r):
   (*@{\color{purple}{q = self.extract\_ip\_from(r)}@*)
   (*@{\color{violet}{p = self.check\_request\_limit(q)}@*)

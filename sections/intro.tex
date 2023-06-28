@@ -21,17 +21,30 @@ code~\cite{barr-codeconvention-fse14}.
 %In modern Web development, program understanding plays an equally
 %important role.
 
-In modern software development, some technologies require the exposure
-of source code, e.g., in the client-server paradigm, the client code
-need to executed in the client side. To avoid the exposure, the source
-code is obfuscated and/or minified such that the variable names are
-replaced with short, opaque, and meaningless names. The minification
-of the variable names hides the business logics from the readers while
-maintaining the essence of the code. {\color{blue}{Code minification
-    is a code protection mechanism that at least slows down those who
-    have bad intentions because program code is a valuable asset to
-    companies. In other cases, code minification improves rendering
-    times because of payload size.}}
+{\color{blue}{Code minification is the process in which the source
+    code is minified such that the variable names are replaced with
+    short, opaque, and meaningless names. Code minification is useful
+    in modern software development. It could improve rendering time
+    due to payload size, e.g., in Web technology. AWS Cloudformation
+    templates may have lambda function source code in Python embedded
+    in them, but only if the function is less than 4KB. In other
+    cases, it is a code protection mechanism that at least slows down
+    those who have bad intentions because program is a valuable asset
+    to companies. The minification of variable names hides the
+    business logics from the readers while maintaining the essence of
+    the code.  }}
+
+%In modern software development, some technologies require the exposure
+%of source code, e.g., in the client-server paradigm, the client code
+%need to executed in the client side. To avoid the exposure, the source
+%code is obfuscated and/or minified such that the variable names are
+%replaced with short, opaque, and meaningless names. The minification
+%of the variable names hides the business logics from the readers while
+%maintaining the essence of the code. {\color{blue}{Code minification
+%    is a code protection mechanism that at least slows down those who
+%    have bad intentions because program code is a valuable asset to
+%    companies. In other cases, code minification improves rendering
+%    times because of payload size.}}
 
 %For Web programming, the JS files are also more quickly loaded from
 %the servers for better performance.
