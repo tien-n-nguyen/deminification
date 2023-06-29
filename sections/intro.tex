@@ -186,24 +186,30 @@ We have conducted experiments to evaluate {\tool} in both name
 recovery and type prediction on a Python dataset with +180k methods
 and {\color{blue}{and a JavaScript (JS) dataset with 322k
     files}}. For variable name prediction, in 76.7\% and
-{\color{blue}{79.9\%}} of the cases {\color{blue}{in Python and JS
-    code respectively}}, {\tool} can predict correctly the variables'
-names with a single suggested name. In 82\% {\color{blue}{and 83.3\%}}
-of the cases in Python {\color{blue}{and JS code}}, the correct names of local variables are in the top-5 candidate suggested lists. For Python code, {\tool}
-relatively improves 40.7\%, 28.7\%, and 15.3\% top-1 accuracy over the
-state-of-the-art variable name recovery approaches
+%{\color{blue}{79.9\%}}
+{\color{blue}{81.6\%}}
+of the cases {\color{blue}{in Python and JS code respectively}},
+{\tool} can predict correctly the variables' names with a single
+suggested name. In 82\% {\color{blue}{and 83.3\%}} of the cases in
+Python {\color{blue}{and JS code}}, the correct names of local
+variables are in the top-5 candidate suggested lists. For Python code,
+{\tool} relatively improves 40.7\%, 28.7\%, and 15.3\% top-1 accuracy
+over the state-of-the-art variable name recovery approaches
 JSNice~\cite{JSNice2015}, JSNaughty~\cite{JSNaughty2017}, and
 JSNeat~\cite{icse19}, respectively.
 %
-{\color{blue}{For JS code, the relative improvements over those baselines are 46.6\%,
-    34.0\%, and 5.4\%, respectively.}} For variable type prediction
-in Python, in 79\% of the cases, {\tool} can predict correctly the
-types with a single predicted type. Top-5 accuracy for type prediction
-is 88\%. It relatively improves 14.5\%--51.9\% in top-1 accuracy and
-22.2\%--46.6\% in top-5 accuracy over the state-of-the-art type
-prediction approaches HiTyper~\cite{HiTyper-icse22},
-Type4Py~\cite{Type4Py-icse22}, Typilus~\cite{typilus-pldi20}, and
-TypeWriter~\cite{typewriter-fse20}.
+%{\color{blue}{For JS code, the relative improvements over those
+%    baselines are 46.6\%, 34.0\%, and 5.4\%, respectively.}}
+{\color{blue}{For JS code, the relative improvements over those
+    baselines are 49.7\%, 36.9\%, and 7.7\%, respectively.}}
+%
+For variable type prediction in Python, in 79\% of the cases, {\tool}
+can predict correctly the types with a single predicted type. Top-5
+accuracy for type prediction is 88\%. It relatively improves
+14.5\%--51.9\% in top-1 accuracy and 22.2\%--46.6\% in top-5 accuracy
+over the state-of-the-art type prediction approaches
+HiTyper~\cite{HiTyper-icse22}, Type4Py~\cite{Type4Py-icse22},
+Typilus~\cite{typilus-pldi20}, and TypeWriter~\cite{typewriter-fse20}.
 
 In brief, the contributions of this paper includes:
 
