@@ -1,0 +1,49 @@
+static parse(line) {
+  ......
+  for (let i = 0; i < words.length; ++i) {
+    const word = words[i];
+
+    // Gx, Mx
+    if (word.indexOf('G') === 0 || word.indexOf('M') === 0) {
+      const r = _find(SMOOTHIE_MODAL_GROUPS, (group) => {
+        return _includes(group.modes, word);
+      });
+
+      if (!r) {
+        continue;
+      }
+  ......
+}
+
+
+Minified Verision:
+
+static parse(line) {
+  ......
+  for(let t=0;t<o.length;++t){
+    const s=o[t];
+    if(s.indexOf("G")===0||s.indexOf("M")===0){
+      const e=_find(SMOOTHIE_MODAL_GROUPS,t=>{
+        return _includes(t.modes,s)
+      });
+
+    if(!e){
+      continue;
+    }
+  ......
+}
+
+Varible “e” here cannot be replaced to "r" in our approach. But JSNeat can do it beacause it seems to appear in other similar positions.
+
+
+function shouldResetDoc(config) {
+  var resetDocumentPropertyIsSet = config.hasOwnProperty("resetDocument");
+  return config.resetDocument || !resetDocumentPropertyIsSet;
+}
+
+function shouldResetDoc(e){
+  var t=e.hasOwnProperty("resetDocument");
+  return e.resetDocument||!t
+}
+
+Variable "t" is our model is predicted as "resetDocumentOwnProperty". The "IsSet" part cannot be predict correctly.
