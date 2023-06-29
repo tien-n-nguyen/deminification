@@ -39,15 +39,15 @@ the edge features.
 %
 A key characteristic of EE-GCN is that it has an edge-aware node
 update module and a node-aware edge update module, and two modules
-work in a mutual way by updating each other
-iteratively. Specifically, ``for each layer, the edge-aware node
-update module is first performed for aggregating information from
-neighbors of each node through specific edges. Then, a node-aware edge
-update module is used to dynamically refine the edge representation
-with its connected node representations, making the edge
-representation more informative.''}}  The output of the EE-GCN model
-includes the list of the representation vectors $V_n$ for all the
-nodes in $G$.
+work in a mutual way by updating each other iteratively. Specifically,
+``for each layer, the edge-aware node update module is first performed
+for aggregating information from neighbors of each node through
+specific edges. Then, a node-aware edge update module is used to
+dynamically refine the edge representation with its connected node
+representations, making the edge representation more
+informative.''~\cite{ee-gcn}}} The output of the EE-GCN model includes
+  the list of the representation vectors $V_n$ for all the nodes in
+  $G$.
 
 To further propagate the impact from variable name learning to type
 learning, we combine the above vectors $V_n$ with the vectors obtained
