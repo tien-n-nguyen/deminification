@@ -2,17 +2,17 @@
 \subsubsection{Limitations}
 \label{sec:limitations}
 
-%There are rooms for improvements in {\tool}.
-{\color{blue}{First, {\tool} does not predict names well for the
-original code with the short and meaningless names,
-e.g., \code{i}, \code{j}, etc. In this case, the variable type could
-not help because the name and type are not in accordance. The
-relations among the variables in the context do not help either
-because there does not exist the natural-language semantic connections
-among their names. The following example shows such a case: the
-variable \code{r} at line 2 was minified into \code{e} at line 6.
-{\tool} failed this case and JSNeat predicted correctly as it has seen
-the code with the same names. %});
+%{\color{blue}{
+
+First, {\tool} does not predict names well for the original code with
+the short and meaningless names, e.g., \code{i}, \code{j}, etc. In
+this case, the variable type could not help because the name and type
+are not in accordance. The relations among the variables in the
+context do not help either because there does not exist the
+natural-language semantic connections among their names. The following
+example shows such a case: the variable \code{r} at line 2 was
+minified into \code{e} at line 6.  {\tool} failed this case and JSNeat
+predicted correctly as it has seen the code with the same names. %});
 \begin{lstlisting}[basicstyle=\footnotesize\sffamily, stepnumber=1, numbers=left, numbersep=-10pt, framexleftmargin=-2mm,
     framexrightmargin=-2mm]
     if (word.indexOf('G') === 0 || word.indexOf('M') === 0) {
@@ -53,7 +53,8 @@ and JS. However, the approach is general for any language with a
 weak/strong type system in which it works better for a strong one. To
 expand for a new such language, one just needs to have a parser and a
 representation graph building module for that language. The graphs
-will be fed to the same architecture model. }}
+will be fed to the same architecture model.
+%}}
 
 %{\color{blue}{Yi: we could find two examples: 1) original names are
 %meaningless, e.g., i, j. etc; 2) the long names with multiple
