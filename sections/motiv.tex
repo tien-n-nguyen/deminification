@@ -128,41 +128,49 @@ code. Such process is not trivial and affected by multiple factors.
 Let us explain the following observations then to motivate our
 solution:
 
-\vspace{2pt} \textbf{Observation 1.} {\em The mutual impact between
-  variable name learning and variable type learning.} If a model
-learns correctly the type of a variable, it would help learn better
-the name of the variable and vice versa. Let us consider the name
-\code{emptyBlocksIndex} for the variable \code{y} at line 22 in
-Figure~\ref{example_sim}: \code{if y != -1:}. From that comparison, a
-model could learn that \code{y} is of the type \code{int}. Knowing
-that it is an integer, a model could combine that with the knowledge
-learned from line 21 (\code{y =
+%\vspace{2pt} \textbf{Observation 1.}
+
+\subsubsection*{\bf Observation 1}
+
+{\em The mutual impact between variable name learning and variable
+  type learning.} If a model learns correctly the type of a variable,
+it would help learn better the name of the variable and vice
+versa. Let us consider the name \code{emptyBlocksIndex} for the
+variable \code{y} at line 22 in Figure~\ref{example_sim}: \code{if y
+  != -1:}. From that comparison, a model could learn that \code{y} is
+of the type \code{int}. Knowing that it is an integer, a model could
+combine that with the knowledge learned from line 21 (\code{y =
   self.getIndexRelativeToAdjacentEmptyBlocks(...)}), and predict the
 name for \code{y} could be {\em ``Index''} or similar. On the other
 hand, correct learning of a variable name can also benefit for
 learning of its type. At line 17 of
 Figures~\ref{example_org}--\ref{example_sim}, if the name
-\code{trailingImageCount} is recovered for the variable \code{a},
-its type is likely to be \code{int} if the model could make sense of
-the sub-token \code{count} in that name \code{trailingImageCount}.
+\code{trailingImageCount} is recovered for the variable \code{a}, its
+type is likely to be \code{int} if the model could make sense of the
+sub-token \code{count} in that name \code{trailingImageCount}.
 
-\vspace{2pt} \noindent {\bf Key Idea 1.} [{\bf Dual-task Learning
-    between Name Prediction and Type Prediction}] {\em While focusing
-  on recovering variable names in minified code, we leverage the
+\vspace{2pt}
+{\bf \em Key Idea 1.} [{\bf Dual-task Learning
+    between Name Prediction and Type Prediction}] {\em While aiming
+  to recover variable names in minified code, we leverage the
   duality between the learning to predict the variable names and the
   learning to predict the variable types.} In the original code, the
 name of a variable should be natural (unsurprising) with respect to
 the type of that variable. We build a name prediction model and a type
-prediction one, and we apply a dual-task learning mechanism between
+prediction one, and we apply a dual-task learning mechanism connecting
 the two models.
 
-\vspace{2pt}
-\textbf{Observation 2}. {\em The name and type of a variable are
-  affected by the names and types of the surrounding variables in a
-  function.}  Intuitively, because multiple variables are used
-together to achieve the task in the function, their names are
-often consistent with one another. For example, at line 6, the choice
-of the name \code{range\_} in the recovery process could be derived
+%\vspace{2pt}
+%\textbf{Observation 2}.
+
+\vspace{-3pt}
+\subsubsection*{\bf Observation 2}
+{\em The name and type of a variable are affected by the names and
+  types of the surrounding variables in a function.}  Intuitively,
+because multiple variables are used together to achieve the task in
+the function, their names are often consistent with one another. For
+example, at line 6, the choice of the name \code{range\_} in the
+recovery process could be derived
 %influenced
 by the choice of the variable \code{selection} and the call to
 \code{getRangeAt} as it is made on that variable as in the statement
@@ -176,10 +184,9 @@ variables.
 %For example, the types of two sides of an assignment must be consistent.
 
 \vspace{2pt}
-\noindent {\bf Key Idea 2.} [{\bf {\em ``Tell Me Your Friends, I'll Tell
+{\bf \em Key Idea 2.} [{\bf {\em ``Tell Me Your Friends, I'll Tell
     You Who You Are''}}]
-%[{\bf Relations among Variables in a Function}]
-          {\em A variable name or type are influenced by the
+{\em A variable name or type are influenced by the
   names or the properties of the other variables having the relations
   with that variable} in the surrounding context. We {\em treat the
   problem of variable name generation as predicting the missing
@@ -198,28 +205,32 @@ variables and types in the function/method.
 %example, the variable names \code{selection}, \code{selectionState},
 %\code{range}, and \code{preSelectionRange}.
 
-\vspace{2pt} \textbf{Observation 3}. {\em The actual variable name
-  must also be in accordance with the names of the accessed fields and
-  called methods}. For example, in the original code in
-Figure~\ref{example_org}, the variable name \code{range\_} makes sense
-in \code{range\_.startOffset} and \code{range\_.endOffset} because a
-range could have a starting offset and an ending offset. The rationale
-is that in the original code, for easy comprehension, developers tend
-to follow naming conventions and use meaningful names with respect to
-the surrounding variable names in the code.~That is, the predicted
-name of a variable and names of its properties (fields and methods)
-are in accordance. As an example, \code{preSelectionRange} and
-\code{setEnd} are in accordance with each other in
-\code{preSelectionRange.setEnd} ({\em ``Setting the end of the
-  selected range''}). In fact, Pradel {\em et
+%\vspace{2pt} \textbf{Observation 3}.
+\vspace{-2pt}
+\subsubsection*{\bf Observation 3}
+{\em The actual variable name must also be in accordance with the
+  names of the accessed fields and called methods}. For example, in
+the original code in Figure~\ref{example_org}, the variable name
+\code{range\_} makes sense in \code{range\_.startOffset} and
+\code{range\_.endOffset} because a range could have a starting offset
+and an ending offset. The rationale is that in the original code, for
+easy comprehension, developers tend to follow naming conventions and
+use meaningful names with respect to the surrounding variable names in
+the code.~That is, the predicted name of a variable and the names of its
+properties (fields and methods) are in accordance. As an example,
+\code{preSelectionRange} and \code{setEnd} are in accordance with each
+other in \code{preSelectionRange.setEnd} ({\em ``Setting the end of
+  the selected range''}). In fact, Pradel {\em et
   al.}~\cite{deepbugs-oopsla18} explore the concordance between the
 method's name and the names of its arguments to detect name-based bugs
 in a program.
 
-% at line 9
 
-\vspace{2pt}
-\textbf{Observation 4}. {\em The fields and methods of a variable are
+%\vspace{2pt}
+%\textbf{Observation 4}.
+
+\subsubsection*{\bf Observation 4}
+{\em The fields and methods of a variable are
   kept intact after minification.} If the names of the fields and
 methods were minified, the corresponding field accesses and method
 calls would not be valid anymore. For example, \code{cloneRange()} in
@@ -230,7 +241,7 @@ on the names of those properties of a variable to predict the
 variable's name.
 
 \vspace{2pt}
-\noindent {\bf Key Idea 3.} [{\bf Properties of a Variable}] {\em The
+{\bf \em Key Idea 3.} [{\bf Properties of a Variable}] {\em The
   name of a variable~is in accordance with its own properties}
 including the names of its fields in field accesses and the names of
 its methods in the method calls on that variable. Moreover, the names
@@ -239,15 +250,15 @@ model can rely on those names to predict the variables' names. For
 example, a model can learn from the variables that have the field
 accesses to \code{start\-Container}, \code{end\-Container},
 \code{start\-Offset}, and \code{end\-Offset}, and have the method
-calls to \code{clone\-Range()}.  It then uses that knowledge to
+calls to \code{clone\-Range()}.  It can use that knowledge to
 predict the name \code{range\_}.
 
 %variable type and the name \code{range\_}.
 
-In brief, to recover the name of a variable, a model could examine the
-{\bf properties of the variable}, {\bf its relations} with other
-variables and their properties, and the relations among {\bf their
-  types}.
+In brief, to recover the name and type of a variable, a model could
+examine the {\bf properties of the variable}, {\bf its relations} with
+other variables and their properties, and the relations among {\bf
+  their~types}.
 
 
 
