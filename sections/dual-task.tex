@@ -4,7 +4,7 @@
 In {\tool}, to propagate the mutual learning between
 variable name learning and variable type learning,
 we leverage a dual-task learning framework to
-train both VNG and VTG tasks together.
+train both VNG and VTG models together.
 %In {\tool}, in order to process the variable name prediction and variable type prediction two tasks together, we use the dual-task learning framework to train the variable name generation model and variable type generation model together. 
 As for these two tasks, {\tool} regards them as the regression
 problem and multi-task loss~\cite{kendall2018multi} to learn both of
@@ -39,9 +39,9 @@ l_n^W = \left\{
 \begin{equation}\label{eq5}
 L(W, \sigma_1, \sigma_2) = \sum_i\frac{1}{2\sigma_i^2}L_i(W) + log \sigma^2_i
 \end{equation}
-Where $W$ is the weight adding to the input, $\sigma_i$ is the $i^{th}$ noise scalar, and $W$ and $\sigma_i$ are both trainable in the model.
+Where $W$ is the weight adding to the input, $\sigma_i$ is the $i^{th}$ noise scalar, and $W$ and $\sigma_i$ are both trainable parameters in the model.
 
-By combining all loss functions into one as in Formula~\ref{eq5},
-{\tool} trains the variable name task and the type prediction task
-together. We pick the smallest loss results to get the most suitable
+By combining all the loss functions into one as in Formula~\ref{eq5},
+{\tool} trains the variable name model and the type prediction model
+together. We choose the smallest loss results to get the most suitable
 model parameters for {\tool}.
