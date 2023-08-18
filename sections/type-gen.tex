@@ -14,7 +14,7 @@ This section presents the Variable Type Generation Model (VTG).  The
 input is the minified code with all the original variables' names and
 types during training, and without the types during
 prediction. Similar to VNG model, the combined graph $G$ is processed
-in which the names in the code sequence of each node $n$ is tokenzed
+in which the names in the code sequence of each node $n$ is tokenized
 and an embedding model is applied to build the vector for $n$
 considering each sequence of sub-tokens for $n$ as a sentence.
 
@@ -79,8 +79,8 @@ the static type inference rules for
     types and for lists, tuples, and dictionaries, etc.
 %}}
 %
-The final result include the types for all the nodes including the
-ones for variables.
+The final result contains the types for all the nodes including the
+the nodes for the variables.
 
 %6> When generating the type, we use some basic rule from parser to
 %reduce the possible candidates.
