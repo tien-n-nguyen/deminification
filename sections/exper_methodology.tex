@@ -1,18 +1,18 @@
 \subsection{Experimental Methodology}
 \label{empirical-method}
 
-\subsubsection{RQ1. Comparative Study on Variable Name Prediction (Python)\\}
+\subsubsection{Comparison on Variable Name Prediction in Python (RQ1).\\}
 {\em Baselines.} We compared {\tool} against the state-of-the-art
 variable name recovery approaches for minified code including
 JSNeat~\cite{icse19}, JSNice~\cite{JSNice2015}, and
 JSNaughty~\cite{JSNaughty2017}.
 
-\textit{Procedure.} We took all the methods in that Python dataset
+\textit{Procedure.} We took all the methods in the Python dataset
 and used Pyminifier to produce the minified code with variable name
 mininification. We randomly split all the methods into 80\%, 10\%,
 10\% in which 80\% of the methods as the training dataset, 10\% of the
 methods as the tuning dataset, and 10\% of the methods as the testing
-dataset for all baselines and {\tool}.
+dataset for all the baselines and {\tool}.
 
 %We took all the methods in the ManyTypes4Py dataset and ran the pyminifier \cite{pyminifier} tool that is used for variable name minification to minify all the variables in each method. Then we use 80\% of the methods as the training dataset, 10\% of the methods as the tuning dataset, and 10\% of the methods as the testing dataset for all baselines and {\tool}.
 
@@ -25,7 +25,7 @@ embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 
 %{\color{blue}{
     
-\subsubsection{RQ2. Comparative Study on Variable Name Prediction (JS)\\}
+\subsubsection{Comparison on Variable Name Prediction in JS (RQ2).\\}
 
 We build the JS representation graph and use the same model.
     
@@ -55,7 +55,7 @@ in the JS dataset. We used the same splitting and tuning as in RQ1.
 %embeddings and its output (32, 64, 128); (5) Number of GCN layers (4,
 %8, 16).
 
-\subsubsection{RQ3. Comparative Study on Variable Type Prediction\\}
+\subsubsection{Comparison on Variable Type Prediction (RQ3).\\}
 
 {\em Baselines.} We compared {\tool} against the state-of-the-art
   variable type prediction approaches: Ivanov {\em et
@@ -67,10 +67,10 @@ in the JS dataset. We used the same splitting and tuning as in RQ1.
 %Typilus~\cite{allamanis2020typilus}, Ivanov et
 %al.\cite{ivanov21predicting}, and TypeWriter~\cite{typewriter-fse20}.
 
-We did not compare our tool with Xu {\em et al.}~\cite{xu-fse16},
+We did not compare our approach with Xu {\em et al.}~\cite{xu-fse16},
 DeepTyper~\cite{DeepTyper-fse18}, NL2Type~\cite{nl2type-icse19},
 LAMBDANET~\cite{LambdaNet-iclr20}, OptTyper~\cite{optyper20}, and
-TypeBERT~\cite{typeBERT-fse21}, because in its paper, Type4Py has been
+TypeBERT \cite{typeBERT-fse21}, because in its paper, Type4Py has been
 shown to perform better than those tools.
 %, and we are comparing against Type4Py.
 We did not compare on JS code because JS variables must not always
@@ -78,13 +78,13 @@ have type declarations.
 
 
 \textit{Procedure.}  With all variable type information summarized in
-the ManyTypes4Py dataset, we directly used the type information for
+the ManyTypes4Py dataset, we directly used the types for
 the variables as the ground truth for all the approaches. We used the
 same data splitting for training, tuning, and testing as in RQ1. We
 ran the baselines on the original source code with the parameters in
 their documentation. We fed to {\tool} the minified code but with the
 original names and no types (i.e., the original code), and obtained
-the types from the variable type generation (VTG) model for all the
+the resulting types from the variable type generation (VTG) model for all the
 variables/expressions in the code.
 
 %Tien paid attention to this
@@ -103,11 +103,11 @@ autoML~\cite{NNI} as in RQ1.
 %tuned {\tool} with autoML~\cite{NNI} for the same key hyper-parameters
 %to have the best performance as in RQ1.
 
-\subsubsection{RQ4. Ablation Study}
+\subsubsection{Ablation Study (RQ4)}
 
 We built several variants of {\tool} to evaluate different factors in
 its components by measuring their accuracies and making comparisons.
-First, we evaluate our hypothesis that mutual impact between name
+First, we evaluated our hypothesis that mutual impact exists between name
 learning and type learning via dual-task learning. We built two
 variants VNG and VTG separately without connecting them via dual-task
 learning. Second, the graph representation for source code is
@@ -129,7 +129,7 @@ For the variable name prediction, we follow a prior work~\cite{icse19}
 to calculate the prediction accuracy on local~variables and all
 variables. We compared the resulting names from a tool against the
 original names. A tool is considered to correctly
-recover the name of a variable $v$ if the recovered name $vn$ is
+recover the name of a variable $v$ if the recovered name is
 matched exactly with its original name. For $v$, if matching, we count
 it as a hit, otherwise, it is a miss. Accuracy is measured by the
 ratio between the total number of hits over the total number of
