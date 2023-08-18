@@ -2,10 +2,10 @@
 \label{intro:sec}
 
 Understandability is an important software quality. Software
-developers have to spend a significant portion of their efforts in
+developers have to spend a significant portion of efforts in
 reading and comprehending source code. Beside the documentation,
 meaningful names for variables and types are crucial for developers in
-quickly grasping the essence of the code. Software organizations have
+quickly grasping the essence of the code. Thus, software organizations have
 much emphasized on naming conventions and coding standards to ensure
 meaningful variable names in source
 code~\cite{barr-codeconvention-fse14}.
@@ -71,8 +71,8 @@ For better code readability and understandability, especially when the
 original source code is unavailable, there is a natural need to
 automatically recover the minified code with meaningful variable
 names. With the recovered names and types, the source code will be
-more comprehensible and accessible for maintenance activities such
-as code review, analysis, enhancement, and reuse.
+more comprehensible and accessible for maintenance activities, e.g.,
+code review, analysis, enhancement, and reuse.
 
 %Due to those reasons, there is a natural need to automatically recover
 %the minified code with meaningful variable names. When the original
@@ -87,7 +87,7 @@ as code review, analysis, enhancement, and reuse.
 
 Several automated approaches have been proposed to automatically
 recover the names of the variables in the minified source code.  The
-approaches can be broadly classified into two directions: {\em
+approaches can be broadly classified into three directions: {\em
   information retrieval}, {\em statistical learning}, and {\em machine
   learning}.  JSNeat~\cite{icse19} follows an information retrieval
 (IR) approach to recover names by searching for them in a large corpus
@@ -116,11 +116,11 @@ low accuracy.
 %
 In contrast, JSNaughty~\cite{JSNaughty2017} formulates
 %the variable name recovery
-that problem as a {\em statistical machine translation} from
+that problem as a {\em statistical machine translation} (SMT) from
 minified code to the recovered code. However, its
 %JSNaughty~\cite{JSNaughty2017}'s
 phrase-based translation approach cannot capture well the relations
-among the variables that need to be recovered, leading to low
+among the variables to be recovered, leading to low
 effectiveness.
 
 %We use multi-tasking framework to do the name prediction and the type
@@ -132,11 +132,12 @@ effectiveness.
 %variables that need to be recovered => EGCN
 
 In this work, we present {\tool}, a deep learning (DL)-based variable
-name recovery approach. We focus mainly on variable name recovery and
-address it as part of the dual-task learning~between the variable name
-prediction model and the type prediction model. {\em Correct learning
-  of one model can benefit for the learning of the other and vice
-  versa} due to the naturalness of names in source
+name recovery and type inference approach.
+%We focus mainly on variable name recovery and
+We address both tasks as parts of the dual-task learning~between a variable
+name prediction model and a type prediction model. {\em Correct
+  learning of one model can benefit for the learning of the other and
+  vice versa} due to the naturalness of names in source
 code~\cite{hindle-icse12}.
 %
 Except for a few un-important variables (e.g., running variables in a
@@ -168,10 +169,8 @@ the variable names and their types.  To build the variable name
 prediction model and the type prediction model, we leverage Graph
 Convolution Network - Missing Features (GCNmf)~\cite{GCNmf} to model
 different kinds of {\em relations/dependencies among the variables and
-  among the types}. We formulate {\bf the name recovery problem as the
-  predicting the missing features} in GCNmf. To propagate the mutual
-impact of type learning and name learning, we apply a dual-task
-learning mechanism between the two models.
+  among the types}. We formulate {\em the name recovery problem as the
+  predicting the missing features} in GCNmf. 
 %
 With the philosophy that {\em ``Tell Me Your Friends, I'll Tell You Who
   You Are''}, {\tool} decides a variable's name by learning at once
@@ -181,9 +180,11 @@ the names of the variables connecting to one another.
 %learning loss function and use the maximum of the accuracy score from
 %two tasks as the training target.
 Our DL-based model is expected to have better predictive power than
-the CRF in JSNice and SMT in JSNaughty, especially in predicting the
-missing features when considering the relations among variables and
-types.
+CRF in JSNice and SMT in JSNaughty, especially in predicting the
+missing features when considering both relations among variables and
+types. To propagate the mutual
+impact of type learning and name learning, we apply a dual-task
+learning mechanism between the two models.
 
 We have conducted experiments to evaluate {\tool} in both name
 recovery and type prediction on a Python dataset with +180k methods
@@ -221,7 +222,7 @@ Typilus~\cite{typilus-pldi20}, and TypeWriter~\cite{typewriter-fse20}.
 In brief, the contributions of this paper includes:
 
 1. {\bf {\tool}}: a Deep Learning (DL)-based approach to recover
-variable names for minified code with type inference in dual-task
+variable names with type inference for minified code in dual-task
 learning. {\tool}'s type inference can be used for regular code.
 
 2. An extensive evaluation and analysis on {\tool}'s
@@ -235,5 +236,6 @@ accuracy.
 %accuracy (Data and code is available in a
 %website~\cite{deminify-website});
 
-3. A novel formulation of variable name and type recovery in
-minified code as a missing-feature, graph-based neural network.
+3. A novel formulation of variable name recovery and type inference in
+minified code as a missing-feature, graph-based neural network in
+a dual-task learning framework to benefit both tasks.

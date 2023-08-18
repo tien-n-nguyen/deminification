@@ -130,7 +130,7 @@ solution:
 
 \vspace{2pt} \textbf{Observation 1.} {\em The mutual impact between
   variable name learning and variable type learning.} If a model
-learns correctly the type of a variable, it would help to learn better
+learns correctly the type of a variable, it would help learn better
 the name of the variable and vice versa. Let us consider the name
 \code{emptyBlocksIndex} for the variable \code{y} at line 22 in
 Figure~\ref{example_sim}: \code{if y != -1:}. From that comparison, a
@@ -181,7 +181,7 @@ variables.
 %[{\bf Relations among Variables in a Function}]
           {\em A variable name or type are influenced by the
   names or the properties of the other variables having the relations
-  with that variable} in the surrounding context. We {\bf treat the
+  with that variable} in the surrounding context. We {\em treat the
   problem of variable name generation as predicting the missing
   features} in a graph neural network by leveraging Graph Convolutional
 Network - Missing Features (GCNmf)~\cite{GCNmf}.  We also use
@@ -205,10 +205,10 @@ Figure~\ref{example_org}, the variable name \code{range\_} makes sense
 in \code{range\_.startOffset} and \code{range\_.endOffset} because a
 range could have a starting offset and an ending offset. The rationale
 is that in the original code, for easy comprehension, developers tend
-to follow naming conventions and use meaningful names with respect to the
-surrounding names in the code. In other words, the predicted name of a
-variable and those of its properties (fields and methods) are in
-accordance. As another example, \code{preSelectionRange} and
+to follow naming conventions and use meaningful names with respect to
+the surrounding variable names in the code.~That is, the predicted
+name of a variable and names of its properties (fields and methods)
+are in accordance. As an example, \code{preSelectionRange} and
 \code{setEnd} are in accordance with each other in
 \code{preSelectionRange.setEnd} ({\em ``Setting the end of the
   selected range''}). In fact, Pradel {\em et
