@@ -18,8 +18,8 @@ In this section, we present the important concepts used in {\tool}.
 To identify the name of a variable, first, {\tool} examines its own
 {\bf attributes and behaviors} via field accesses and method calls,
 then the {\bf relations} of the variables to learn the concordance
-among the variables' names. At the same time, it examines {\bf
-relations among their types}.
+among the variables' names. At the same time, it examines {\bf the
+relations among the types of the variables}.
 
 %To identify the name of a variable, first, {\tool} examines
 %its own {\bf attributes and behaviors} via field accesses and method calls
@@ -48,8 +48,8 @@ relations among their types}.
 %harmony with one another. For example,
 
 In Figure~\ref{example_sim}, at lines 7--9, we explore the
-field accesses and method calls of the variable \code{r} in
-\code{r.cloneRange()}, \code{r.startOffset}, \code{r.startContainer}.
+field accesses and method calls of the variable \code{r} in the method calls and field accesses made to \code{r}, e.g.,
+\code{r.cloneRange()}, \code{r.startOffset}, and \code{r.startContainer}.
 
 We denote an instance of field access and method call as a triple $(v,
 p, t)$, where $v$ is the variable, $p$ is the name of the field or
@@ -85,14 +85,14 @@ startOffset, fieldAccess)$.
 
 The idea is that the name of the minified variable $v$ in the original
 code is often in accordance with the names of the method or the field
-in such an assignment or an argument. For example, \code{range\_} and
-\code{getRangeAt} are in accordance with each other in \code{range\_ =
-  selection.getRangeAt(0)}; or \code{selectNodeContents} and
-\code{root} are in accordance with each other in
-\code{preSelectionRange.selectNodeContents(root)}.  We will use the
-triple notations $(v, m, argument)$, $(v, m, assignment)$, and
-$(v, f, assignment)$ to denote those three cases, where $v$ is a
-variable, $m$ is a method name, and $f$ is a field name.
+in such an assignment or an argument. For example,
+\code{selectNodeContents} and \code{root} are in accordance with each
+other in \code{preSelectionRange.selectNodeContents(root)}; or
+\code{range\_} and \code{getRangeAt} are in accordance with each other
+in \code{range\_ = selection.getRangeAt(0)}.  We will use the triple
+notations $(v, m, argument)$, $(v, m, assignment)$, and $(v, f,
+assignment)$ to denote those three cases, where $v$ is a variable, $m$
+is a method name, and $f$ is a field name.
 
 %The rationale is that the names of $m$ and its argument are often in
 %conformance with each other, \eg
@@ -201,13 +201,12 @@ $assign$ edge from the variable \code{r} to the node
 \label{python-types}
 \end{figure}
 
-In this work, we focus on Python source code.
-%Regarding type inference,
-Figure~\ref{python-types} shows Python's
-type system~\cite{HiTyper-icse22}. To represent the dependencies among
-the types, we adopt Type Dependency Graph (TDG)~\cite{HiTyper-icse22},
-which aims to capture the type inference rules for
-variables/expressions.
+%In this work, we focus on Python source code.
+Regarding type inference, Figure~\ref{python-types} shows the type
+system in Python~\cite{HiTyper-icse22}. To represent the dependencies
+among the types, we adopt Type Dependency Graph
+(TDG)~\cite{HiTyper-icse22}, which aims to capture the type inference
+rules for variables/expressions.
 
 \begin{definition}{\bf [Type Dependency Graph]}~\cite{HiTyper-icse22}
     \label{tdg-def}
@@ -269,7 +268,7 @@ kept. All edges are combined including the type-dependency edges.
 
 Figure~\ref{tdg} displays the TDG for the running example. The
 type of the variable $m$ at line 10 (Figure~\ref{example_sim}) can be
-derived by the function call \code{len}. The subscript is used to to
+derived by the function call \code{len}. The subscript is used to 
 denote the same variable at different locations. At line 11
 (Figure~\ref{example_sim}), the type of the variable \code{p} is
 derived from the type of the left-hand-side of line 11
