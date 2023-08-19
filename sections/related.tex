@@ -4,9 +4,9 @@
 %The automated approaches for variable name recovery in the minified
 %source code can be broadly classified
 
-\noindent {\bf Variable name recovery approaches} in minified code
-follow the three categories: {\em information retrieval} (IR),
-statistical learning, and {\em machine learning} (ML).
+\noindent {\bf Variable Name Recovery approaches.} The approaches
+follow the three categories: {\em information retrieval} (IR), {\em
+  statistical learning}, and {\em machine learning} (ML).
 JSNeat~\cite{icse19} follows an IR approach to search for the names in
 large code corpus, but is not effective for un-seen names.
 %with the idea that the names of a minified variable could be found in
@@ -41,8 +41,8 @@ static/dynamic
 analyses~\cite{Christodorescu:2003:SAE:1251353.1251365,Moser:2007:EME:1263552.1264210,Udupa05deobfuscation:reverse}.
 
 
-
-\noindent {\bf ML-based Type Inference Approaches.}
+\vspace{1pt}
+\noindent {\bf ML-based Type Inference approaches.}
 HiTyper~\cite{HiTyper-icse22} is a hybrid approach between static
 inference and deep learning. It uses TDG to encode type inference
 rules to conduct type rejection to inspect the output predictions. It
@@ -59,17 +59,18 @@ Type4Py~\cite{Type4Py-icse22} is a deep similarity learning-based
 hierarchical neural network model. It learns to discriminate between
 similar and dissimilar types in a high-dimensional space.
 %Likely types are then inferred through the nearest neighbor search.
-We formulate the problem as missing feature recovery,
-avoiding finding similar types via embeddings.
+%Tien
+%We formulate the problem as missing feature recovery,
+{\tool} avoids finding similar types via embeddings.
 %rather than finding similar types in high-dimensional space.
-Similarly, Typilus~\cite{typilus-pldi20} proposes TypeSpace
+Typilus~\cite{typilus-pldi20} proposes TypeSpace
 containing the embeddings with type properties of a
 symbol. TypeWriter~\cite{typewriter-fse20} learns to infer the return
 and argument types for functions from partially annotated code bases
 by combining the natural language properties of code with programming
 languages. {\tool} does not use natural-language
-properties. Ivanov {\em et al.}~\cite{ivanov21predicting} demonstrate
-that graph-based embeddings could improve the quality of type
+properties. Ivanov {\em et al.}~\cite{ivanov21predicting} show
+that graph-based embeddings could improve type
 prediction. We use GCNmf to predict the missing features.
 
 %%
