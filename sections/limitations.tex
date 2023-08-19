@@ -24,14 +24,14 @@ predicted correctly as it has seen the code with the same names. %});
         return _includes(t.modes,s); ...
 \end{lstlisting}
 Second, {\tool} does not produce well long variable names with several
-sub-tokens.The next example shows a case in which the variable
-\code{resetDocumentPropertyIsSet} (line 2) was minified
+sub-tokens. In the next example, the variable
+\code{reset\-Document\-Pro\-perty\-Is\-Set} (line 2) was minified
 into \code{t} (line 6). {\tool} predicted an incorrect
-name \code{resetDocumentOwnProperty} with its current decoder. JSNeat
-has seen the same name in the corpus, thus, predicted it correctly.
-For {\tool}, a solution could be to replace the GRU decoder with a
-better model that can predict the length of the name and the name
-itself.
+name \code{resetDocumentOwnProperty} with its current decoder.
+%JSNeat has seen the same name in the corpus, thus, predicted it
+%correctly.  For {\tool},
+A solution could be to replace the GRU decoder with a better model
+that can predict the length of the name and the name itself.
 \begin{lstlisting}[basicstyle=\footnotesize\sffamily, stepnumber=1, numbers=left, numbersep=-10pt, framexleftmargin=-2mm,
     framexrightmargin=-2mm]
     function shouldResetDoc(config) {
