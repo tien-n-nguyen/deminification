@@ -1,25 +1,24 @@
 %{\color{blue}{
-\subsection{{\bf Comparison on Name Prediction (JS)}}
+\subsection{{\bf Comparison on Name Prediction in JS (RQ2)}}
 \label{empirical-rq-js}
 
 \begin{figure}[t] %[thbp]
 \begin{center}
 \includegraphics[width=3.2in]{figures/name-JS-prediction-result-2} %name-JS-prediction-result
 \vspace{-8pt}
-\caption{RQ2. Top-1 Accuracy on Name Prediction (JS)}
+\caption{Top-1 Accuracy on Name Prediction in JS (RQ2)}
 \label{name-JS-prediction-result}
 \end{center}
 \end{figure}
 
 As seen in Figure~\ref{name-JS-prediction-result}, for all variables in
-minified code, {\tool} achieves high top-1 accuracy of {\bf 81.6\%}:
-%{\bf 79.9\%}:
-in 4 out 5 cases, it can recover the correct variable names
+minified JS code, {\tool} achieves high top-1 accuracy of {\bf 81.6\%}:
+i.e., in 4 out 5 cases, it can recover the correct variable names
 with a single prediction. The relative improvements in top-1 accuracy
 for all variables over JSNice, JSNaughty, and JSNeat are
 %{\bf 46.6\%, 34.0\%}, and {\bf 5.4\%},
 {\bf 49.7\%, 36.9\%,} and {\bf 7.7\%},
-respectively.  The absolute improvements in top-1 accuracy over the
+respectively.  The absolute improvements in top-1 accuracy over those
 state-of-the-art approaches are from 5.8\%--27.1\%.
 %4.1\%--25.4\%.
 
@@ -30,13 +29,15 @@ with a single result. The relative improvements in top-1 accuracy in
 recovering local variables' names over JSNice, JSNaughty, and JSNeat
 are
 %{\bf 77.4\%, 52.7\%}, and {\bf 6.8\%},
-{\bf 84.6\%, 59.0\%}, and {\bf 11.1\%}, respectively. The absolute
-improvements in top-1 accuracy over the state-of-the-art approaches
-are from 7.7\%--35.2\%.
-%4.7\%--32.2\%.
+{\bf 84.6\%, 59.0\%}, and {\bf 11.1\%}, respectively.  As seen in
+Table~\ref{name-JS-result}, the comparison result is also consistent
+for top-1, top-3, and top-5 accuracies.
+%The absolute improvements in top-1 accuracy over those
+%state-of-the-art approaches are from 7.7\%--35.2\%.
+
 
 \begin{table}[t]%[thbp]
-  \caption{RQ2. Comparison on Name Prediction (JS)}
+  \caption{Comparison on Name Prediction in JS (RQ2)}
   \vspace{-8pt}
 	\begin{center}
 		\small
@@ -62,7 +63,7 @@ As seen in Figures~\ref{name-prediction-result}
 and~\ref{name-JS-prediction-result}, {\tool} improves over the
 baselines in both languages. However, its relative improvement over
 the top baseline, JSNeat~\cite{icse19}, for Python is higher than that
-for JS. The reason is that JS is a weakly typed language. In the JS
+for JS. The reason is that JS is a weakly typed language. In JS
 code, the types of variables do not need to be specified, and can be
 changed (that is, type information is not always available). {\tool}
 is less effective in those cases, while JSNeat~\cite{icse19}, an IR
