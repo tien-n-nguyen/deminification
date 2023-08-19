@@ -31,21 +31,21 @@ over those type prediction approaches are from
 \begin{center}
 \includegraphics[width=3.1in]{figures/type-prediction-result-2}
 \vspace{-8pt}
-\caption{RQ3. Top-1 Accuracy on Type Prediction}
+\caption{Top-1 Accuracy on Type Prediction (RQ3)}
 \label{type-prediction-result}
 \end{center}
 \end{figure}
 
 Regarding the parametric matches (disregarding the types of the
 parameters), {\tool} achieves higher top-1 accuracy. In 89\% of the
-cases, it can recover the correct variable types (discarding those of
-parameters) with a single prediction. The relative improvements in
-top-1 accuracy in parametric-matching over Ivanov {\em et
+cases, it can recover the correct variable types (regardless of
+parameters' types) with a single prediction. The relative improvements
+in top-1 accuracy in parametric-matching over Ivanov {\em et
   al.}~\cite{ivanov21predicting}, TypeWriter~\cite{typewriter-fse20},
 Typilus~\cite{typilus-pldi20}, Type4Py~\cite{Type4Py-icse22}, and
 HiTyper~\cite{HiTyper-icse22} are {\bf 53.4\%, 45.9\%}, {\bf 34.8\%},
 {\bf 34.8\%}, and {\bf 15.5\%}, respectively. The absolute
-improvements in top-1 accuracy with parametric matching over the
+improvements in top-1 accuracy with parametric matching over those
 state-of-the-art approaches are from 12\%--31\%.
 
 
@@ -78,14 +78,15 @@ In contrast, {\tool} also encodes the information on variable names
 into the embeddings in the high-dimensional space via two mechanisms:
 dual-task learning and cross-product of vectors. Thus, {\tool} could
 perform better in the cases in which the embeddings for types are not
-sufficiently distinguishable from one another, leading to low accuracy
+sufficiently distinguishable from one another, which poses challenges
+%leading to low accuracy
 for Type4Py. Regarding the used neural networks, it uses Recurrent
 Neural Network (RNN) operating on the code token embeddings built from
 the AST. In contrast, we use GCNmf that captures better the
 dependencies with different types of edges.
 
 \begin{table}[t]%[htbp]
-  \caption{RQ3. Comparison on Type Prediction}
+  \caption{Comparison on Type Prediction (RQ3)}
   \vspace{-7pt}
 	\begin{center}
 		\small
@@ -122,8 +123,8 @@ as the candidates. There are two key limitations in Typilus that
 encode the type dependencies. It encodes among the code tokens the
 next-lexical-token relation, structural/syntactical relations, and
 data dependencies. Second, it does not have the assistance of the
-learning of variable names as the above explanation in the comparative
-analysis with HiTyper.
+learning of variable names via dual-task learning as explained in the
+comparative analysis with HiTyper.
 
 TypeWriter~\cite{typewriter-fse20} builds token
 embeddings and uses two RNNs for identifiers and for code to merge
