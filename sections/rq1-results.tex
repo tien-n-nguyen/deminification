@@ -25,7 +25,7 @@
 \begin{center}
 \includegraphics[width=3.3in]{figures/name-prediction-result-3} %name-prediction-result-2
 \vspace{-8pt}
-\caption{RQ1. Top-1 Accuracy on Variable Name Prediction}
+\caption{Top-1 Accuracy on Variable Name Prediction (RQ1)}
 \label{name-prediction-result}
 \end{center}
 \end{figure}
@@ -40,11 +40,11 @@
 %In this study, we evaluate {\tool} in variable name prediction.
 As seen in Figure~\ref{name-prediction-result}, for all variables in
 minified code, {\tool} achieves high top-1 accuracy of {\bf 76.7\%}:
-in 76.7\% of the cases, it can recover the correct variable names with
-a single prediction. The relative improvements in top-1 accuracy for
-all variables over JSNice, JSNaughty, and JSNeat are {\bf 40.7\%,
+i.e., in 76.7\% of the cases, it can recover the correct variable names
+with a single prediction. The relative improvements in top-1 accuracy
+for all variables over JSNice, JSNaughty, and JSNeat are {\bf 40.7\%,
   28.7\%}, and {\bf 15.3\%}, respectively. The absolute improvements
-in top-1 accuracy over the state-of-the-art approaches are from
+in top-1 accuracy over those state-of-the-art approaches are from
 10.2\%--22.2\%.
 
 Considering only local variables, in {\bf 67.5\%} of them, {\tool}
@@ -52,10 +52,10 @@ correctly predicts their original names with a single result. The
 relative improvements in top-1 accuracy in recovering local variables'
 names over JSNice, JSNaughty, and JSNeat are {\bf 62.2\%, 39.8\%}, and
 {\bf 15.9\%}, respectively. The absolute improvements in top-1
-accuracy over the state-of-the-art approaches are from 9.3\%--25.9\%.
+accuracy over those state-of-the-art approaches are from 9.3\%--25.9\%.
 
 \begin{table}[t]%[thbp]
-  \caption{RQ1. Comparison on Variable Name Prediction}
+  \caption{Comparison on Variable Name Prediction (RQ1)}
   \vspace{-8pt}
 	\begin{center}
 		\small
@@ -111,7 +111,7 @@ the database. {\tool} can generate a new name with its decoder. Due to its
 explicitly setting of similarity thresholds, JSNeat faces two other
 issues. (2) The correct name was not returned since the relations
 and contexts are not similar enough with pre-defined thresholds.  (3)
-if two variables in the same function are assigned with the same name
+If two variables in the same function are assigned with the same name
 via the similarity measure, JSNeat cannot decide one, turning to a
 random selection. Avoiding feature matching and explicit similarity
 threshold, {\tool} with its neural network can implicitly do so
@@ -137,7 +137,7 @@ weights depending on their occurrences in the corpus. For example,
 \code{b} $\leftrightarrow$ \code{doc}, \code{b} $\leftrightarrow$
 \code{book}, etc. In contrast, {\tool} does not rely on the minified
 names themselves, by modeling them as the nodes with
-missing features (i.e., missing names and types) in the GCNmf
+missing features (i.e., missing names and types) in the graph-based GCNmf
 model~\cite{GCNmf}.
 
 {\tool} is similar in spirit to JSNice~\cite{JSNice2015} in which both
