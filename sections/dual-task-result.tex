@@ -6,7 +6,7 @@
 \begin{center}
 \includegraphics[width=2.1in]{figures/dual-task-result-111}
 \vspace{-8pt}
-\caption{RQ4. Dual-Task Learning on Name Prediction}
+\caption{Dual-Task Learning on Name Prediction (RQ4)}
 \label{dual-task-result-1}
 \end{center}
 \end{figure}
@@ -15,7 +15,7 @@
 \begin{center}
 \includegraphics[width=2.1in]{figures/dual-task-result-222}
 \vspace{-8pt}
-\caption{RQ4. Dual-Task Learning on Type Prediction}
+\caption{Dual-Task Learning on Type Prediction (RQ4)}
 \label{dual-task-result-2}
 \end{center}
 \end{figure}
@@ -26,10 +26,12 @@ measured only the accuracy of the variable name generation (VNG)
 model.  As seen, without the impact from variable type generation
 (VTG) via dual-task learning, VNG still performs better than the best
 baseline, JSNeat (69.4\% versus 66.5\%). The drop in Top-1 accuracy
-from {\tool} is 10.5\% (from 76.7\% downto 69.4\%). Similarly, as seen
+from {\tool} is 10.5\% (from 76.7\% down to 69.4\%). Similarly, as seen
 in Figure~\ref{dual-task-result-2}, without the impact from VNG due to
 the removal of the dual-task learning scheme, VTG performs slightly
 worse than the best baseline HiTyper. The drop in Top-1 accuracy from
-{\tool} is 14.4\%.  These results indicate the positive contribution to {\tool}
-from our key ideas on the mutual impact of VNG and VTG via dual-task
-learning.
+{\tool} is 14.4\%.  These results indicate the positive contribution
+to {\tool} from the dual-task learning for the mutual impact of VNG
+and VTG (Key Idea 1).
+%from our key ideas on the mutual impact of VNG and VTG via dual-task
+%learning.
