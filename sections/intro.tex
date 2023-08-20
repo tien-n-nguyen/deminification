@@ -1,39 +1,29 @@
 \section{Introduction}
 \label{intro:sec}
 
-Understandability is an important software quality. Software
-developers have to spend a significant portion of efforts in
-reading and comprehending source code. Beside the documentation,
-meaningful names for variables and types are crucial for developers in
-quickly grasping the essence of the code. Thus, software organizations have
-much emphasized on naming conventions and coding standards to ensure
-meaningful variable names in source
-code~\cite{barr-codeconvention-fse14}.
-
-%An important aspect of program understanding is the names of the
-%identifiers~used in the source code~\cite{sutton-fse15}. Meaningful
-%identifiers help developers tremendously in quickly grasping the
-%essence of the~code. Thus, naming conventions are strongly emphasized
-%on prescribing how to choose meaningful variable names in coding
-%standards~\cite{barr-codeconvention-fse14}.  These principles also
-%apply to Web development.
-
-%In modern Web development, program understanding plays an equally
-%important role.
+%Understandability is an important software quality. Software
+%developers have to spend a significant portion of efforts in
+%reading and comprehending source code. Beside the documentation,
+%meaningful names for variables and types are crucial for developers in
+%quickly grasping the essence of the code. Thus, software organizations have
+%much emphasized on naming conventions and coding standards to ensure
+%meaningful variable names in source
+%code~\cite{barr-codeconvention-fse14}.
 
 %{\color{blue} {
-    Code minification is the process in which the source
-    code is minified such that the variable names are replaced with
-    short, opaque, and meaningless names. Code minification is useful
-    in modern software development. It could improve rendering time
-    due to payload size, e.g., in Web technology. AWS Cloudformation
-    templates may have lambda function source code in Python embedded
-    in them, but only if the function is less than 4KB. In other
-    cases, it is a code protection mechanism that at least slows down
-    those who have bad intentions because program is a valuable asset
-    to companies. The minification of variable names hides the
-    business logics from the readers while maintaining the essence of
-    the code.
+
+
+Code minification is the process in which source code is minified such
+that the variable names are replaced with short, opaque, and
+meaningless names. It is useful in software development as it could
+improve rendering time due to payload size. E.g., in Web
+technology, AWS Cloudformation templates may have lambda function
+source code in Python embedded in them, but only if the function is
+less than 4KB. In other cases, it is a code protection scheme that
+slows down those who have bad intentions since program is a valuable
+asset to companies. Variable name minification hides the
+business logics from the readers while maintaining the essence of the
+code.
 
 % }}
 
@@ -67,12 +57,15 @@ code~\cite{barr-codeconvention-fse14}.
 %(mobile) device, JS code is normally minified to reduce its size. When being minified, the names are replaced ...}
 %
 
-For better code readability and understandability, especially when the
-original source code is unavailable, there is a natural need to
+For better code readability and
+understandability~\cite{barr-codeconvention-fse14}, especially when
+the original source code is unavailable, there is a natural need to
 automatically recover the minified code with meaningful variable
 names. With the recovered names and types, the source code will be
-more comprehensible and accessible for maintenance activities, e.g.,
-code review, analysis, enhancement, and reuse.
+%more comprehensible and
+accessible for
+%maintenance activities, e.g.,
+code review, analysis, enhancement, reuse, etc.
 
 %Due to those reasons, there is a natural need to automatically recover
 %the minified code with meaningful variable names. When the original
